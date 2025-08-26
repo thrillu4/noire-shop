@@ -1,18 +1,18 @@
-import prisma from "@/lib/prisma";
+import SearchBar from "@/components/Home/SearchBar";
+import { bagel } from "./fonts";
 
 export default async function Home() {
-  const products = await prisma.product.findMany();
   return (
-    <>
-      <div className="text-4xl">Hello Next Js and Prisma!</div>
-      <ul className="mb-[2000px]">
-        {products.map((product) => (
-          <li key={product.id}>
-            <h2>{product.title}</h2>
-            <div>{product.price}</div>
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className="px-4">
+      <div>
+        <SearchBar />
+      </div>
+      <h1 className={`${bagel.className} mt-12 text-5xl`}>New Collection</h1>
+      <div className="mt-5 flex w-full items-center justify-between rounded-2xl bg-black px-4 py-2 text-sm text-white">
+        <div>SUMMER</div>
+        <div>NOIRÉ</div>
+        <div>2025</div>
+      </div>
+    </div>
   );
 }

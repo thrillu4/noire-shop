@@ -54,9 +54,9 @@ const Hamburger = () => {
             <div className="flex-1">
               <X size={30} onClick={() => setIsOpen(false)} />
             </div>
-            <div className="flex flex-1 justify-center">
+            <Link href={ROUTES.HOME} className="flex flex-1 justify-center">
               <Image alt="logo " src="/logo.png" width={30} height={30} />
-            </div>
+            </Link>
             <div className="ck flex flex-1 justify-end">
               <div className="rounded-full border bg-black p-2">
                 <Heart className="h-auto w-4 text-white" />
@@ -232,11 +232,11 @@ const Hamburger = () => {
             </div>
             <div className="my-5">
               <a
-                href="mailto:kraya.work@gmail.com"
+                href="mailto:noire.shop.help@gmail.com"
                 className="flex items-center justify-center gap-3"
               >
                 <Mail />
-                kraya.work@gmail.com
+                noire.shop.help@gmail.com
               </a>
             </div>
           </div>

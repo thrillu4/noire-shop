@@ -16,7 +16,7 @@ const Footer = () => {
 
       <div className="mt-6 grid grid-cols-2 gap-4">
         <div className="mx-auto">
-          <div className="mb-2 flex items-center justify-center gap-1 text-sm opacity-65">
+          <div className="mb-4 flex items-center justify-center gap-1 text-sm opacity-65">
             <Library size={15} /> Catalog
           </div>
           <ul className="space-y-2 text-sm">
@@ -38,7 +38,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="mx-auto">
-          <div className="mb-2 flex items-center justify-center gap-1 text-sm opacity-65">
+          <div className="mb-4 flex items-center justify-center gap-1 text-sm opacity-65">
             <Info size={14} /> Info
           </div>
           <ul className="space-y-2 text-sm">

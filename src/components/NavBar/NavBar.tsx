@@ -9,13 +9,15 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ROUTES } from "@/routes";
-import { Handbag, User } from "lucide-react";
+import { Handbag } from "lucide-react";
 import Image from "next/image";
 import Hamburger from "./Hamburger";
+import UserDrawer from "./UserDrawer";
 
 export default function NavBar() {
   return (
     <>
+      {/* mobile  */}
       <div className="flex items-center justify-between px-3 py-8 sm:hidden">
         <div className="flex-1">
           <Hamburger />
@@ -31,10 +33,11 @@ export default function NavBar() {
           </div>
 
           <div className="rounded-full border bg-black p-2">
-            <User className="h-auto w-4 text-white" />
+            <UserDrawer />
           </div>
         </div>
       </div>
+      {/* mobile  */}
 
       <div className="hidden sm:block">
         <NavigationMenu viewport={false}>

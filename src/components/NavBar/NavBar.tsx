@@ -32,9 +32,7 @@ export default function NavBar() {
             <Handbag className="h-auto w-4 text-white" />
           </div>
 
-          <div className="rounded-full border bg-black p-2">
-            <UserDrawer />
-          </div>
+          <UserDrawer />
         </div>
       </div>
       {/* mobile  */}

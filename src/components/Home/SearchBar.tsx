@@ -6,7 +6,6 @@ import { useState } from "react";
 const SearchBar = () => {
   const [value, setValue] = useState("");
   const [loupe, setLoupe] = useState(true);
-  console.log(value);
   return (
     <form>
       <div className="relative">

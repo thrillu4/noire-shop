@@ -22,13 +22,23 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+import { FormState, signin, signup } from "@/app/actions/auth";
 import { Eye, EyeOff, User } from "lucide-react";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 
 const UserDrawer = () => {
   const [showPassword, setShoPassword] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
+  const [state, formAction, isPending] = useActionState<FormState, FormData>(
+    signup,
+    { success: false, errors: {}, fields: {} },
+  );
+  const signIn = useActionState<FormState, FormData>(signin, {
+    success: false,
+    errors: {},
+    fields: {},
+  });
   return (
     <>
       {!isSignIn ? (
@@ -48,32 +58,45 @@ const UserDrawer = () => {
                 </SheetDescription>
               </SheetHeader>
 
-              <form action="" className="flex flex-col gap-4 px-4">
+              <form action={formAction} className="flex flex-col gap-4 px-4">
                 <div className="w-full">
-                  <Label htmlFor="sheet-demo-username">Name</Label>
+                  <Label htmlFor="username">Name</Label>
                   <Input
                     className="mt-2"
-                    id="sheet-demo-username"
+                    id="username"
                     placeholder="Jane Doe"
+                    name="username"
+                    defaultValue={state.fields?.username || ""}
                   />
+                  {state?.errors?.name && (
+                    <p className="text-xs text-red-600">{state.errors.name}</p>
+                  )}
                 </div>
                 <div className="w-full">
-                  <Label htmlFor="sheet-demo-email">Email</Label>
+                  <Label htmlFor="reg-email">Email</Label>
                   <Input
                     className="mt-2"
-                    id="sheet-demo-email"
+                    id="reg-email"
                     placeholder="yourmail@email.com"
+                    name="email"
+                    defaultValue={state.fields?.email || ""}
                   />
+                  {state?.errors?.email && (
+                    <p className="text-xs text-red-600">{state.errors.email}</p>
+                  )}
                 </div>
                 <div className="w-full">
-                  <Label htmlFor="sheet-demo-password">Password</Label>
+                  <Label htmlFor="reg-password">Password</Label>
                   <div className="relative mt-2">
                     <Input
-                      id="sheet-demo-password"
+                      id="reg-password"
                       type={showPassword ? "text" : "password"}
                       placeholder="*******"
                       className="relative"
+                      name="password"
+                      defaultValue={state.fields?.password || ""}
                     />
+
                     {showPassword ? (
                       <EyeOff
                         size={17}
@@ -88,9 +111,20 @@ const UserDrawer = () => {
                       />
                     )}
                   </div>
+                  {state?.errors?.password && (
+                    <p className="text-xs text-red-600">
+                      {state.errors.password}
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-start gap-3">
-                  <Checkbox id="terms-2" />
+                  <Checkbox
+                    id="terms-2"
+                    name="checkbox"
+                    defaultChecked={
+                      state?.fields?.checkbox === "on" ? true : false
+                    }
+                  />
                   <div className="grid gap-2">
                     <Label htmlFor="terms-2" className="text-xs">
                       Accept terms and conditions
@@ -176,11 +210,20 @@ const UserDrawer = () => {
                         </DialogContent>
                       </Dialog>
                     </p>
+                    {state?.errors?.checkbox && (
+                      <p className="text-xs text-red-600">
+                        {state.errors.checkbox}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <SheetFooter>
-                  <Button type="submit" className="cursor-pointer">
-                    Create Account
+                  <Button
+                    disabled={isPending}
+                    type="submit"
+                    className="cursor-pointer"
+                  >
+                    {isPending ? "Signing up..." : "Create Account"}
                   </Button>
                 </SheetFooter>
               </form>
@@ -209,24 +252,33 @@ const UserDrawer = () => {
                 <SheetDescription>Explore fashion with NOIRÉ</SheetDescription>
               </SheetHeader>
 
-              <form action="" className="flex flex-col gap-4">
+              <form action={signIn[1]} className="flex flex-col gap-4">
                 <div className="w-full px-4">
-                  <Label htmlFor="sheet-demo-name">Email</Label>
+                  <Label htmlFor="sheet-demo-email">Email</Label>
                   <Input
                     className="mt-2"
-                    id="sheet-demo-name"
+                    id="sheet-demo-email"
                     placeholder="yourmail@email.com"
+                    name="email"
+                    defaultValue={signIn[0].fields?.email || ""}
                   />
+                  {signIn[0]?.errors?.email && (
+                    <p className="text-xs text-red-600">
+                      {signIn[0].errors.email}
+                    </p>
+                  )}
                 </div>
 
                 <div className="w-full px-4">
-                  <Label htmlFor="sheet-demo-username">Password</Label>
+                  <Label htmlFor="sheet-demo-password">Password</Label>
                   <div className="relative mt-2">
                     <Input
-                      id="sheet-demo-username"
+                      id="sheet-demo-password"
                       type={showPassword ? "text" : "password"}
                       placeholder="*******"
                       className="relative"
+                      name="password"
+                      defaultValue={signIn[0].fields?.password || ""}
                     />
                     {showPassword ? (
                       <EyeOff
@@ -242,6 +294,11 @@ const UserDrawer = () => {
                       />
                     )}
                   </div>
+                  {signIn[0]?.errors?.password && (
+                    <p className="text-xs text-red-600">
+                      {signIn[0].errors.password}
+                    </p>
+                  )}
                 </div>
                 <Dialog>
                   <DialogTrigger asChild>
@@ -265,6 +322,7 @@ const UserDrawer = () => {
                         <Input
                           id="Email"
                           placeholder="Enter your email address"
+                          name="email"
                         />
                       </div>
                     </div>
@@ -282,8 +340,12 @@ const UserDrawer = () => {
                 </Dialog>
 
                 <SheetFooter>
-                  <Button type="submit" className="cursor-pointer">
-                    Sign In
+                  <Button
+                    disabled={signIn[2]}
+                    type="submit"
+                    className="cursor-pointer"
+                  >
+                    {signIn[2] ? "Signing up..." : "Create Account"}
                   </Button>
                 </SheetFooter>
               </form>

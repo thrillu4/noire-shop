@@ -1,7 +1,10 @@
 "use server";
 import prisma from "@/lib/prisma";
+import { createSession, deleteSession } from "@/lib/sessions";
 import { SignInFormSchema, SignupFormSchema } from "@/lib/types";
+import { ROUTES } from "@/routes";
 import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
 
 export type FormState = {
   success?: boolean;
@@ -37,8 +40,8 @@ export async function signup(prevState: FormState, formData: FormData) {
   if (existingUser) {
     return {
       success: false,
-      errors: { server: "User already exist" },
-      fields: {},
+      errors: { server: "User with this email address already exist!" },
+      fields,
     };
   }
 
@@ -51,7 +54,16 @@ export async function signup(prevState: FormState, formData: FormData) {
     },
   });
 
-  return { success: true, errors: {}, fields: {} };
+  if (!user) {
+    return {
+      success: false,
+      errors: { server: "An error occurred while creating your account." },
+      fields,
+    };
+  }
+
+  await createSession(user.id);
+  redirect(ROUTES.HOME);
 }
 
 export async function signin(prevState: FormState, formData: FormData) {
@@ -70,5 +82,36 @@ export async function signin(prevState: FormState, formData: FormData) {
     });
     return { success: false, errors, fields };
   }
-  return { success: true, errors: {}, fields: {} };
+
+  const { email, password } = parsed.data;
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    return {
+      success: false,
+      errors: { server: "Invalid credentials!" },
+      fields,
+    };
+  }
+
+  const decryptedPassword = await bcrypt.compare(password, user.password);
+
+  if (!decryptedPassword) {
+    return {
+      success: false,
+      errors: { server: "Invalid credentials!" },
+      fields,
+    };
+  }
+
+  await createSession(user.id);
+  redirect(ROUTES.HOME);
+}
+
+export async function logout() {
+  await deleteSession();
+  redirect(ROUTES.HOME);
 }

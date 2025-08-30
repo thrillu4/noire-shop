@@ -13,14 +13,17 @@ import { Handbag } from "lucide-react";
 import Image from "next/image";
 import Hamburger from "./Hamburger";
 import UserDrawer from "./UserDrawer";
+import { verifySession } from "@/lib/sessions";
 
-export default function NavBar() {
+export default async function NavBar() {
+  const session = await verifySession();
+
   return (
     <>
       {/* mobile  */}
       <div className="flex items-center justify-between px-3 py-8 sm:hidden">
         <div className="flex-1">
-          <Hamburger />
+          <Hamburger isAuth={session.isAuth} />
         </div>
 
         <Link href={ROUTES.HOME} className="flex flex-1 justify-center">
@@ -32,7 +35,7 @@ export default function NavBar() {
             <Handbag className="h-auto w-4 text-white" />
           </div>
 
-          <UserDrawer />
+          <UserDrawer isAuth={session.isAuth} />
         </div>
       </div>
       {/* mobile  */}

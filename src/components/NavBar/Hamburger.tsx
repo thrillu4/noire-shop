@@ -1,4 +1,5 @@
 "use client";
+import { logout } from "@/app/actions/auth";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +13,7 @@ import {
   Heart,
   Info,
   Library,
+  LogIn,
   LogOut,
   Mail,
   Mars,
@@ -24,11 +26,12 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-const Hamburger = () => {
+const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -181,9 +184,21 @@ const Hamburger = () => {
                 </Link>
               </li>
               <li className="py-4">
-                <div className="flex items-center gap-2">
-                  <LogOut /> Log Out
-                </div>
+                {isAuth ? (
+                  <div
+                    onClick={() => logout()}
+                    className="flex cursor-pointer items-center gap-2"
+                  >
+                    <LogOut /> Log Out
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => router.push(ROUTES.SIGNIN)}
+                    className="flex cursor-pointer items-center gap-2"
+                  >
+                    <LogIn /> Sign In
+                  </div>
+                )}
               </li>
             </ul>
           </div>

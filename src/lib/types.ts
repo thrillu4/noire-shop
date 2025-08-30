@@ -26,3 +26,8 @@ export const SignInFormSchema = z.object({
     .trim(),
 });
 export type SignInType = z.infer<typeof SignInFormSchema>;
+
+export type SessionPayload = {
+  userId: string | number;
+  expiresAt: Date;
+};

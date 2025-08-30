@@ -1,5 +1,7 @@
 export const ROUTES = {
   HOME: "/",
+  SIGNIN: "/sign-in",
+  SIGNUP: "/sign-up",
   PRODUCTS: "/products",
   MEN: "/products/men",
   WOMEN: "/products/women",
@@ -20,8 +22,8 @@ export const ROUTES = {
   COLLECTIONS: "/products/collections",
   PROFILE: "/profile",
   WISHLIST: "/profile/wishlist",
-  CART: "/cart",
-  CHECKOUT: "/cart/checkout",
+  CART: "/profile/cart",
+  CHECKOUT: "/profile/cart/checkout",
   ABOUT: "/about",
   CONTACT: "/about/contacts",
   REVIEWS: "/about/reviews",

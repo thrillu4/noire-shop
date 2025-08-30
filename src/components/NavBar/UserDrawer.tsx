@@ -23,11 +23,14 @@ import {
 } from "@/components/ui/sheet";
 
 import { FormState, signin, signup } from "@/app/actions/auth";
+import { ROUTES } from "@/routes";
 import { Eye, EyeOff, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 
-const UserDrawer = () => {
+const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
+  const router = useRouter();
   const [showPassword, setShoPassword] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
   const [state, formAction, isPending] = useActionState<FormState, FormData>(
@@ -39,6 +42,18 @@ const UserDrawer = () => {
     errors: {},
     fields: {},
   });
+
+  if (isAuth) {
+    return (
+      <div
+        onClick={() => router.push(ROUTES.PROFILE)}
+        className="cursor-pointer rounded-full border bg-black p-2"
+      >
+        <User className="h-auto w-4 text-white" />
+      </div>
+    );
+  }
+
   return (
     <>
       {!isSignIn ? (
@@ -225,10 +240,15 @@ const UserDrawer = () => {
                   >
                     {isPending ? "Signing up..." : "Create Account"}
                   </Button>
+                  {state?.errors?.server && (
+                    <p className="text-xs text-red-600">
+                      {state.errors.server}
+                    </p>
+                  )}
                 </SheetFooter>
               </form>
               <div className="w-full border opacity-60" />
-              <div>Already have an account</div>
+              <div>Already have an account?</div>
               <Button
                 onClick={() => setIsSignIn(true)}
                 className="cursor-pointer border-2 border-black bg-white text-black hover:text-white"
@@ -345,8 +365,13 @@ const UserDrawer = () => {
                     type="submit"
                     className="cursor-pointer"
                   >
-                    {signIn[2] ? "Signing up..." : "Create Account"}
+                    {signIn[2] ? "Signing up..." : "Sign In"}
                   </Button>
+                  {signIn[0].errors?.server && (
+                    <p className="text-xs text-red-600">
+                      {signIn[0].errors.server}
+                    </p>
+                  )}
                 </SheetFooter>
               </form>
               <div className="w-full border opacity-60" />

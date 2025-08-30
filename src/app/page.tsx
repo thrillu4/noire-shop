@@ -1,12 +1,11 @@
 import { CarouselPlugin } from "@/components/Home/CarouselPlugin";
+import FilterBar from "@/components/Home/FilterBar";
+import GridCollection from "@/components/Home/GridCollection";
 import SearchBar from "@/components/Home/SearchBar";
 import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
-import { bagel } from "./fonts";
-import FilterBar from "@/components/Home/FilterBar";
-import GridCollection from "@/components/Home/GridCollection";
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import { bagel } from "./fonts";
 
 export default async function Home() {
   return (
@@ -105,7 +104,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

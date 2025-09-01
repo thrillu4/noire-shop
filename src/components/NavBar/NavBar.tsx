@@ -8,12 +8,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { verifySession } from "@/lib/sessions";
 import { ROUTES } from "@/routes";
-import { Handbag } from "lucide-react";
 import Image from "next/image";
+import CartDrawer from "./CartDrawer";
 import Hamburger from "./Hamburger";
 import UserDrawer from "./UserDrawer";
-import { verifySession } from "@/lib/sessions";
 
 export default async function NavBar() {
   const session = await verifySession();
@@ -31,9 +31,7 @@ export default async function NavBar() {
         </Link>
 
         <div className="flex flex-1 justify-end gap-1">
-          <div className="rounded-full border bg-black p-2">
-            <Handbag className="h-auto w-4 text-white" />
-          </div>
+          <CartDrawer userId={session.userId} />
 
           <UserDrawer isAuth={session.isAuth} />
         </div>

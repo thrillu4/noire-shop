@@ -29,4 +29,8 @@ export const ROUTES = {
   REVIEWS: "/about/reviews",
   FAQ: "/about/faq",
   DELIVERY: "/about/delivery",
+
+  // API ENDPOINTS
+  GET_CART: "/api/cart",
+  POST_CART_ADD: "/api/cart/add",
 };

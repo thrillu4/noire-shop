@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  CartItem as PrismaCartItem,
+  Product,
+} from "../../prisma/generated/prisma";
 
 export const SignupFormSchema = z.object({
   name: z
@@ -31,3 +35,31 @@ export type SessionPayload = {
   userId: string | number;
   expiresAt: Date;
 };
+
+export interface ProductWithRelations extends Product {
+  images: { id: number; url: string }[];
+  variants: { id: number; size: string; stock: number }[];
+}
+
+//// store
+
+export interface CartItem {
+  id: string;
+  product: Product & {
+    images: { id: number; url: string }[];
+    variants: { id: number; size: string; stock: number }[];
+    price: number;
+  };
+  quantity: number;
+  size: string;
+}
+
+export interface CartState {
+  items: CartItem[];
+  setItems: (items: CartItem[]) => void;
+  addItemToCart: (userId: string, item: Omit<CartItem, "id">) => void;
+  removeItemFromCart: (id: string) => void;
+  loadCart: (userId?: string | null) => Promise<void>;
+}
+
+////

@@ -50,7 +50,7 @@ export const verifySession = cache(async () => {
     return { isAuth: false, userId: null };
   }
 
-  return { isAuth: true, userId: session.userId };
+  return { isAuth: true, userId: session.userId as string };
 });
 
 export async function updateSession() {

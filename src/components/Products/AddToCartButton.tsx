@@ -1,27 +1,22 @@
-"use client";
+'use client'
 
-import { ProductWithRelations } from "@/lib/types";
-import { useCartStore } from "@/store/store";
+import { useCartStore } from '@/store/store'
 
-export function AddToCartButton({
-  userId,
-  product,
-}: {
-  userId: string;
-  product: ProductWithRelations;
-}) {
-  const addItemToCart = useCartStore((state) => state.addItemToCart);
-  const itemToAdd = {
-    product,
-    quantity: 1,
-    size: product.variants[0]?.size || "M",
-  };
+interface IProps {
+  productId: number
+  quantity: number
+  size?: string
+}
+
+export function AddToCartButton({ productId, quantity, size }: IProps) {
+  const { addItem, isLoading } = useCartStore()
   return (
     <button
-      onClick={() => addItemToCart(userId, itemToAdd)}
+      disabled={isLoading}
+      onClick={() => addItem(productId, quantity, size)}
       className="rounded bg-black px-4 py-2 text-white"
     >
-      Add to cart
+      {isLoading ? 'Loading...' : 'Add to cart'}
     </button>
-  );
+  )
 }

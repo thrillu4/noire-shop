@@ -1,58 +1,123 @@
-import { CartState } from "@/lib/types";
-import { ROUTES } from "@/routes";
-import { create } from "zustand";
+import { CartState } from '@/lib/types'
+import { ROUTES } from '@/routes'
+import { getLocalCart } from '@/services/getLocalCart'
+import { setLocalCart } from '@/services/setLocalCart'
+import { create } from 'zustand'
 
-export const useCartStore = create<CartState>((set) => ({
+export const useCartStore = create<CartState>((set, get) => ({
   items: [],
-  setItems: (items) => set({ items }),
-  addItemToCart: async (userId, item) => {
-    if (userId) {
-      const res = await fetch(ROUTES.POST_CART_ADD, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item),
-      });
-      const data = await res.json();
-      set((state) => {
-        const existingIndex = state.items.findIndex(
-          (i) => i.product.id === data.product.id && i.size === data.size,
-        );
-        if (existingIndex !== -1) {
-          const updatedItems = [...state.items];
-          updatedItems[existingIndex] = data;
-          return { items: updatedItems };
-        } else {
-          return { items: [...state.items, data] };
-        }
-      });
-    } else {
-      set((state) => {
-        const existingIndex = state.items.findIndex(
-          (i) => i.product.id === item.product.id && i.size === item.size,
-        );
-        let updatedItems = [...state.items];
-        if (existingIndex !== -1) {
-          updatedItems[existingIndex].quantity += item.quantity;
-        } else {
-          const newItem = { ...item, id: crypto.randomUUID() };
-          updatedItems = [...state.items, newItem];
-        }
-        localStorage.setItem("cart", JSON.stringify(updatedItems));
-        return { items: updatedItems };
-      });
-    }
+  isLoading: false,
+  isAuthenticated: null,
+  setAuthenticated: (auth, userId) => {
+    const prevAuth = get().isAuthenticated
+    set({ isAuthenticated: auth })
+
+    // migration TODO!!!!!!!!!!!
   },
-  removeItemFromCart: (id) => {},
-  loadCart: async (userId) => {
-    if (userId) {
-      const res = await fetch(ROUTES.GET_CART);
-      const data = await res.json();
-      set({ items: data.items });
-    } else if (typeof window !== "undefined") {
-      const local = localStorage.getItem("cart");
-      if (local) {
-        set({ items: JSON.parse(local) });
+  getItemKey: (productId, size?) => {
+    return size ? `${productId}-${size}` : `${productId}`
+  },
+  addItem: async (productId, quantity = 1, size?) => {
+    set({ isLoading: true })
+
+    try {
+      const { isAuthenticated } = get()
+
+      if (isAuthenticated) {
+        const response = await fetch(ROUTES.POST_CART_ADD, {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({ productId, quantity, size }),
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(error.message || 'Failed to add item')
+        }
+
+        const data = await response.json()
+        set({ items: data.items })
+      } else {
+        const localCart = getLocalCart()
+        const itemKey = get().getItemKey(productId, size)
+        const existingItemIndex = localCart.findIndex(
+          item => get().getItemKey(item.productId, item.size) === itemKey,
+        )
+
+        if (existingItemIndex !== -1) {
+          localCart[existingItemIndex].quantity += quantity
+        } else {
+          localCart.push({
+            productId,
+            quantity,
+            size,
+            addedAt: new Date().toISOString(),
+          })
+        }
+        setLocalCart(localCart)
+        await get().loadCart()
       }
+    } catch (error) {
+      console.log('Error adding item to cart', error)
+      throw error
+    } finally {
+      set({ isLoading: false })
     }
   },
-}));
+  removeItem: async (productId, size?) => {},
+  updateQuantity: async (productId, quantity = 1, size?) => {},
+  clearCart: async () => {},
+  loadCart: async () => {
+    set({ isLoading: true })
+    try {
+      const { isAuthenticated } = get()
+
+      if (isAuthenticated) {
+        const response = await fetch(ROUTES.GET_CART)
+        if (!response.ok) throw new Error('Failed to load cart')
+        const data = await response.json()
+        set({ items: data.items })
+      } else {
+        const localCart = getLocalCart()
+
+        if (localCart.length > 0) {
+          const productIds = localCart.map(item => item.productId)
+          const response = await fetch(ROUTES.POST_LOCAL_CART, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productIds }),
+          })
+
+          if (response.ok) {
+            const products = await response.json()
+
+            const itemsWithProducts = localCart
+              .map(item => ({
+                productId: item.productId,
+                quantity: item.quantity,
+                size: item.size,
+                product: products.find(
+                  (pr: { id: number }) => pr.id === item.productId,
+                ),
+              }))
+              .filter(item => item.product)
+
+            set({ items: itemsWithProducts })
+          } else {
+            set({ items: [] })
+          }
+        } else {
+          set({ items: [] })
+        }
+      }
+    } catch (error) {
+      console.log('Error loading cart', error)
+      set({ items: [] })
+    } finally {
+      set({ isLoading: false })
+    }
+  },
+  migrateLocalCart: async () => {},
+  totalItems: () => {},
+  totalPrice: () => {},
+}))

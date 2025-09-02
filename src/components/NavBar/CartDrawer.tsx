@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client'
+import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetClose,
@@ -9,19 +9,28 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { useCartStore } from "@/store/store";
-import { Handbag } from "lucide-react";
+} from '@/components/ui/sheet'
+import { useCartStore } from '@/store/store'
+import { Handbag } from 'lucide-react'
+import Image from 'next/image'
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-const CartDrawer = ({ userId }: { userId: string | null }) => {
-  const { items, loadCart } = useCartStore();
+const CartDrawer = ({
+  isAuth,
+  userId,
+}: {
+  isAuth: boolean
+  userId: string | null
+}) => {
+  const { items, loadCart, setAuthenticated } = useCartStore()
 
   useEffect(() => {
-    loadCart(userId);
-  }, [loadCart, userId]);
+    setAuthenticated(isAuth, userId)
+    loadCart()
+  }, [isAuth, userId, setAuthenticated, loadCart])
 
+  console.log(items)
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -37,19 +46,25 @@ const CartDrawer = ({ userId }: { userId: string | null }) => {
           </SheetDescription>
         </SheetHeader>
         <div>
-          {!items && <p> Cart is Empty</p>}
-          {items &&
-            items.map((item) => {
-              return (
-                <div key={item.id}>
-                  <img src={item.product.images[0].url} alt="" />
-                  <p>{item.product.title}</p>
-                  <p>Размер: {item.size}</p>
-                  <p>Кол-во: {item.quantity}</p>
-                  <p>{item.product.price}</p>
-                </div>
-              );
-            })}
+          {items.length > 0 ? (
+            items.map(item => (
+              <div key={item.product?.id}>
+                <div>{item.product?.title}</div>
+                {item.product?.images[0].url && (
+                  <Image
+                    src={item.product?.images[0].url}
+                    width={40}
+                    height={30}
+                    alt="image"
+                  />
+                )}
+
+                <div>{item.product?.price}</div>
+              </div>
+            ))
+          ) : (
+            <div>Cart is empty!</div>
+          )}
         </div>
         <SheetFooter>
           <Button type="submit">Save changes</Button>
@@ -59,7 +74,7 @@ const CartDrawer = ({ userId }: { userId: string | null }) => {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
-};
+  )
+}
 
-export default CartDrawer;
+export default CartDrawer

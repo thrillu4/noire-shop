@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 import {
   NavigationMenu,
@@ -7,16 +7,16 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { verifySession } from "@/lib/sessions";
-import { ROUTES } from "@/routes";
-import Image from "next/image";
-import CartDrawer from "./CartDrawer";
-import Hamburger from "./Hamburger";
-import UserDrawer from "./UserDrawer";
+} from '@/components/ui/navigation-menu'
+import { verifySession } from '@/lib/sessions'
+import { ROUTES } from '@/routes'
+import Image from 'next/image'
+import CartDrawer from './CartDrawer'
+import Hamburger from './Hamburger'
+import UserDrawer from './UserDrawer'
 
 export default async function NavBar() {
-  const session = await verifySession();
+  const session = await verifySession()
 
   return (
     <>
@@ -31,7 +31,7 @@ export default async function NavBar() {
         </Link>
 
         <div className="flex flex-1 justify-end gap-1">
-          <CartDrawer userId={session.userId} />
+          <CartDrawer isAuth={session.isAuth} userId={session.userId} />
 
           <UserDrawer isAuth={session.isAuth} />
         </div>
@@ -106,5 +106,5 @@ export default async function NavBar() {
         </NavigationMenu>
       </div>
     </>
-  );
+  )
 }

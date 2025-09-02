@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
 
 export const getUserCart = async (userId: string) => {
   return await prisma.cart.findFirst({
@@ -7,10 +7,10 @@ export const getUserCart = async (userId: string) => {
       items: {
         include: {
           product: {
-            include: { images: true, variants: true },
+            include: { images: { take: 1 }, variants: { take: 1 } },
           },
         },
       },
     },
-  });
-};
+  })
+}

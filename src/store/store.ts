@@ -12,7 +12,9 @@ export const useCartStore = create<CartState>((set, get) => ({
     const prevAuth = get().isAuthenticated
     set({ isAuthenticated: auth })
 
-    // migration TODO!!!!!!!!!!!
+    if (!prevAuth && auth) {
+      get().migrateLocalCart()
+    }
   },
   addItem: async (productId, quantity = 1, size?) => {
     set({ isLoading: true })
@@ -143,7 +145,30 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  migrateLocalCart: async () => {},
+  migrateLocalCart: async () => {
+    const localCart = getLocalCart()
+
+    if (localCart.length === 0) return
+
+    set({ isLoading: true })
+
+    try {
+      const response = await fetch(ROUTES.POST_CART_MIGRATE, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ items: localCart }),
+      })
+
+      if (!response.ok) throw new Error('Failed to migrate local cart')
+
+      setLocalCart([])
+      await get().loadCart()
+    } catch (error) {
+      console.log('Error migrating local cart', error)
+    } finally {
+      set({ isLoading: false })
+    }
+  },
   totalItems: () => {
     return get().items.reduce((total, item) => total + item.quantity, 0)
   },

@@ -1,12 +1,12 @@
-"use client";
-import { logout } from "@/app/actions/auth";
+'use client'
+import { logout } from '@/app/actions/auth'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ROUTES } from "@/routes";
+} from '@/components/ui/accordion'
+import { ROUTES } from '@/routes'
 import {
   BadgeDollarSign,
   Handbag,
@@ -23,30 +23,30 @@ import {
   User,
   Venus,
   X,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+} from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     if (isOpen) {
-      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overflow = 'hidden'
     } else {
-      document.documentElement.style.overflow = "";
+      document.documentElement.style.overflow = ''
     }
     return () => {
-      document.documentElement.style.overflow = "";
-    };
-  }, [isOpen]);
+      document.documentElement.style.overflow = ''
+    }
+  }, [isOpen])
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    setIsOpen(false)
+  }, [pathname])
 
   return (
     <>
@@ -186,7 +186,10 @@ const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
               <li className="py-4">
                 {isAuth ? (
                   <div
-                    onClick={() => logout()}
+                    onClick={() => {
+                      logout()
+                      setIsOpen(false)
+                    }}
                     className="flex cursor-pointer items-center gap-2"
                   >
                     <LogOut /> Log Out
@@ -258,7 +261,7 @@ const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Hamburger;
+export default Hamburger

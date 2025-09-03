@@ -32,6 +32,7 @@ import { Checkbox } from '../ui/checkbox'
 const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
   const router = useRouter()
   const [showPassword, setShoPassword] = useState(false)
+
   const [isSignIn, setIsSignIn] = useState(true)
   const [state, formAction, isPending] = useActionState<FormState, FormData>(
     signup,

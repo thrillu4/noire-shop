@@ -7,7 +7,7 @@ export const getUserCart = async (userId: string) => {
       items: {
         include: {
           product: {
-            include: { images: { take: 1 }, variants: { take: 1 } },
+            include: { images: { take: 1 }, variants: true },
           },
         },
       },

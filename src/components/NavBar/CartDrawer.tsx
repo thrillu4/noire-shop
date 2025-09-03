@@ -2,19 +2,20 @@
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/store'
-import { Handbag } from 'lucide-react'
+import { Handbag, ShoppingBag, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const CartDrawer = ({
   isAuth,
@@ -23,55 +24,93 @@ const CartDrawer = ({
   isAuth: boolean
   userId: string | null
 }) => {
-  const { items, loadCart, setAuthenticated } = useCartStore()
+  const {
+    items,
+    loadCart,
+    setAuthenticated,
+    removeItem,
+    totalPrice,
+    totalItems,
+  } = useCartStore()
+  const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setAuthenticated(isAuth, userId)
     loadCart()
   }, [isAuth, userId, setAuthenticated, loadCart])
 
-  console.log(items)
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <div className="rounded-full border bg-black p-2">
           <Handbag className="h-auto w-4 text-white" />
         </div>
       </SheetTrigger>
-      <SheetContent className="max-h-[100vh] overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription>
-        </SheetHeader>
-        <div>
-          {items.length > 0 ? (
-            items.map(item => (
-              <div key={item.product?.id}>
-                <div>{item.product?.title}</div>
-                {item.product?.images[0].url && (
+      <SheetContent className="overflow-y-auto pt-10 pb-5">
+        <div className="flex w-full flex-col items-center justify-center">
+          <SheetHeader>
+            <SheetTitle className="flex items-center">
+              Shopping Bag ({totalItems()})
+            </SheetTitle>
+          </SheetHeader>
+          <div className="mt-3">
+            {items.map(item => (
+              <div
+                key={item.product?.id}
+                className="flex gap-4 border bg-neutral-100 px-1 py-5"
+              >
+                <div className="min-w-28">
                   <Image
-                    src={item.product?.images[0].url}
-                    width={40}
-                    height={30}
-                    alt="image"
+                    src={item.product.images[0].url}
+                    alt="product-image"
+                    width={112}
+                    height={155}
+                    className="h-full w-full"
                   />
-                )}
+                </div>
+                <div className="flex w-full flex-col justify-between text-xs">
+                  <div className="font-bold">{item.product.title}</div>
 
-                <div>{item.product?.price}</div>
+                  <div className="flex items-center justify-between text-xs">
+                    <div>
+                      Size: <span className="font-bold">{item.size}</span>
+                    </div>
+                    <div>
+                      Qty: <span className="font-bold">{item.quantity}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>${item.product.price}</div>
+
+                    <Trash2
+                      onClick={() => removeItem(item.productId, item.size)}
+                      size={19}
+                    />
+                  </div>
+                </div>
               </div>
-            ))
-          ) : (
-            <div>Cart is empty!</div>
-          )}
+            ))}
+          </div>
+          <div className="my-4 flex w-full justify-between px-3 font-bold">
+            <div>Total (USD)</div>
+            <div>${totalPrice()}</div>
+          </div>
+          <SheetFooter>
+            <Link href={ROUTES.CART}>
+              <Button
+                type="submit"
+                className="flex cursor-pointer items-center gap-2"
+              >
+                <ShoppingBag /> Proceed to Purchase
+              </Button>
+            </Link>
+          </SheetFooter>
         </div>
-        <SheetFooter>
-          <Button type="submit">Save changes</Button>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   )

@@ -14,9 +14,6 @@ export const useCartStore = create<CartState>((set, get) => ({
 
     // migration TODO!!!!!!!!!!!
   },
-  getItemKey: (productId, size?) => {
-    return size ? `${productId}-${size}` : `${productId}`
-  },
   addItem: async (productId, quantity = 1, size?) => {
     set({ isLoading: true })
 
@@ -39,9 +36,8 @@ export const useCartStore = create<CartState>((set, get) => ({
         set({ items: data.items })
       } else {
         const localCart = getLocalCart()
-        const itemKey = get().getItemKey(productId, size)
         const existingItemIndex = localCart.findIndex(
-          item => get().getItemKey(item.productId, item.size) === itemKey,
+          item => item.productId === productId,
         )
 
         if (existingItemIndex !== -1) {
@@ -64,7 +60,37 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  removeItem: async (productId, size?) => {},
+  removeItem: async (productId, size?) => {
+    set({ isLoading: true })
+
+    try {
+      const { isAuthenticated } = get()
+
+      if (isAuthenticated) {
+        const response = await fetch(ROUTES.DELETE_CART_ITEM, {
+          method: 'DELETE',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({ productId, size }),
+        })
+
+        if (!response.ok) throw new Error('Failed to delete product')
+        const updatedCart = await response.json()
+        set({ items: updatedCart.items })
+      } else {
+        const localCart = getLocalCart()
+        const filteredCart = localCart.filter(
+          item => item.productId !== productId,
+        )
+        setLocalCart(filteredCart)
+        await get().loadCart()
+      }
+    } catch (error) {
+      console.log('Error with remove item', error)
+      throw error
+    } finally {
+      set({ isLoading: false })
+    }
+  },
   updateQuantity: async (productId, quantity = 1, size?) => {},
   clearCart: async () => {},
   loadCart: async () => {
@@ -118,6 +144,12 @@ export const useCartStore = create<CartState>((set, get) => ({
     }
   },
   migrateLocalCart: async () => {},
-  totalItems: () => {},
-  totalPrice: () => {},
+  totalItems: () => {
+    return get().items.reduce((total, item) => total + item.quantity, 0)
+  },
+  totalPrice: () => {
+    return get().items.reduce((total, item) => {
+      return total + (item.product.price || 0) * item.quantity
+    }, 0)
+  },
 }))

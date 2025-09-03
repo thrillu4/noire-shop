@@ -22,8 +22,8 @@ export const ROUTES = {
   COLLECTIONS: '/products/collections',
   PROFILE: '/profile',
   WISHLIST: '/profile/wishlist',
-  CART: '/profile/cart',
-  CHECKOUT: '/profile/cart/checkout',
+  CART: '/cart',
+  CHECKOUT: '/cart/checkout',
   ABOUT: '/about',
   CONTACT: '/about/contacts',
   REVIEWS: '/about/reviews',
@@ -34,4 +34,6 @@ export const ROUTES = {
   GET_CART: '/api/cart',
   POST_LOCAL_CART: '/api/local-cart',
   POST_CART_ADD: '/api/cart/add',
+  DELETE_CART_ITEM: '/api/cart/delete',
+  POST_CART_MIGRATE: '/api/cart/migrate',
 }

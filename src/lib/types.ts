@@ -45,7 +45,7 @@ export interface CartItemData {
   productId: number
   quantity: number
   size?: string
-  product?: {
+  product: {
     id: number
     title: string
     price: number
@@ -83,7 +83,6 @@ export interface CartState {
 
   totalItems: () => number
   totalPrice: () => number
-  getItemKey: (productId: number, size?: string) => string
 }
 
 ////

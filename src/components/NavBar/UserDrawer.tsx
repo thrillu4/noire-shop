@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetContent,
@@ -20,28 +20,28 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet'
 
-import { FormState, signin, signup } from "@/app/actions/auth";
-import { ROUTES } from "@/routes";
-import { Eye, EyeOff, User } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useActionState, useState } from "react";
-import { Checkbox } from "../ui/checkbox";
+import { FormState, signin, signup } from '@/app/actions/auth'
+import { ROUTES } from '@/routes'
+import { Eye, EyeOff, User } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useActionState, useState } from 'react'
+import { Checkbox } from '../ui/checkbox'
 
 const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
-  const router = useRouter();
-  const [showPassword, setShoPassword] = useState(false);
-  const [isSignIn, setIsSignIn] = useState(true);
+  const router = useRouter()
+  const [showPassword, setShoPassword] = useState(false)
+  const [isSignIn, setIsSignIn] = useState(true)
   const [state, formAction, isPending] = useActionState<FormState, FormData>(
     signup,
     { success: false, errors: {}, fields: {} },
-  );
+  )
   const signIn = useActionState<FormState, FormData>(signin, {
     success: false,
     errors: {},
     fields: {},
-  });
+  })
 
   if (isAuth) {
     return (
@@ -51,7 +51,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       >
         <User className="h-auto w-4 text-white" />
       </div>
-    );
+    )
   }
 
   return (
@@ -63,7 +63,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </div>
           </SheetTrigger>
-          <SheetContent className="flex max-h-[100vh] items-center justify-center overflow-y-auto">
+          <SheetContent className="overflow-y-auto pt-10 pb-5">
             <div className="flex w-full flex-col items-center justify-center gap-4">
               <SheetHeader>
                 <SheetTitle className="text-center">Register</SheetTitle>
@@ -81,7 +81,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     id="username"
                     placeholder="Jane Doe"
                     name="username"
-                    defaultValue={state.fields?.username || ""}
+                    defaultValue={state.fields?.username || ''}
                   />
                   {state?.errors?.name && (
                     <p className="text-xs text-red-600">{state.errors.name}</p>
@@ -94,7 +94,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     id="reg-email"
                     placeholder="yourmail@email.com"
                     name="email"
-                    defaultValue={state.fields?.email || ""}
+                    defaultValue={state.fields?.email || ''}
                   />
                   {state?.errors?.email && (
                     <p className="text-xs text-red-600">{state.errors.email}</p>
@@ -105,11 +105,11 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                   <div className="relative mt-2">
                     <Input
                       id="reg-password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       placeholder="*******"
                       className="relative"
                       name="password"
-                      defaultValue={state.fields?.password || ""}
+                      defaultValue={state.fields?.password || ''}
                     />
 
                     {showPassword ? (
@@ -137,7 +137,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     id="terms-2"
                     name="checkbox"
                     defaultChecked={
-                      state?.fields?.checkbox === "on" ? true : false
+                      state?.fields?.checkbox === 'on' ? true : false
                     }
                   />
                   <div className="grid gap-2">
@@ -145,7 +145,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                       Accept terms and conditions
                     </Label>
                     <p className="text-muted-foreground text-[10px]">
-                      By clicking this checkbox, you agree to the{" "}
+                      By clicking this checkbox, you agree to the{' '}
                       <Dialog>
                         <DialogTrigger asChild>
                           <span className="cursor-pointer underline">
@@ -238,7 +238,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     type="submit"
                     className="cursor-pointer"
                   >
-                    {isPending ? "Signing up..." : "Create Account"}
+                    {isPending ? 'Signing up...' : 'Create Account'}
                   </Button>
                   {state?.errors?.server && (
                     <p className="text-xs text-red-600">
@@ -265,7 +265,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </div>
           </SheetTrigger>
-          <SheetContent className="flex items-center justify-center">
+          <SheetContent className="overflow-y-auto pt-10 pb-5">
             <div className="flex w-full flex-col items-center justify-center gap-6">
               <SheetHeader>
                 <SheetTitle className="text-center">Sign In</SheetTitle>
@@ -280,7 +280,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     id="sheet-demo-email"
                     placeholder="yourmail@email.com"
                     name="email"
-                    defaultValue={signIn[0].fields?.email || ""}
+                    defaultValue={signIn[0].fields?.email || ''}
                   />
                   {signIn[0]?.errors?.email && (
                     <p className="text-xs text-red-600">
@@ -294,11 +294,11 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                   <div className="relative mt-2">
                     <Input
                       id="sheet-demo-password"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       placeholder="*******"
                       className="relative"
                       name="password"
-                      defaultValue={signIn[0].fields?.password || ""}
+                      defaultValue={signIn[0].fields?.password || ''}
                     />
                     {showPassword ? (
                       <EyeOff
@@ -365,7 +365,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     type="submit"
                     className="cursor-pointer"
                   >
-                    {signIn[2] ? "Signing up..." : "Sign In"}
+                    {signIn[2] ? 'Signing up...' : 'Sign In'}
                   </Button>
                   {signIn[0].errors?.server && (
                     <p className="text-xs text-red-600">
@@ -387,7 +387,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
         </Sheet>
       )}
     </>
-  );
-};
+  )
+}
 
-export default UserDrawer;
+export default UserDrawer

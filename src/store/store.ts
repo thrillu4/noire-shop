@@ -8,7 +8,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   items: [],
   isLoading: false,
   isAuthenticated: null,
-  setAuthenticated: (auth, userId) => {
+  setAuthenticated: auth => {
     const prevAuth = get().isAuthenticated
     set({ isAuthenticated: auth })
 

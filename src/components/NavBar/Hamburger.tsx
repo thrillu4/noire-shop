@@ -57,7 +57,11 @@ const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
             <div className="flex-1">
               <X size={30} onClick={() => setIsOpen(false)} />
             </div>
-            <Link href={ROUTES.HOME} className="flex flex-1 justify-center">
+            <Link
+              href={ROUTES.HOME}
+              onClick={() => setIsOpen(false)}
+              className="flex flex-1 justify-center"
+            >
               <Image alt="logo " src="/logo.png" width={30} height={30} />
             </Link>
             <div className="ck flex flex-1 justify-end">

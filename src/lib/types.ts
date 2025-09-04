@@ -48,6 +48,7 @@ export interface CartItemData {
   product: {
     id: number
     title: string
+    type: string
     price: number
     images: { url: string }[]
   }
@@ -65,7 +66,7 @@ export interface CartState {
   isLoading: boolean
   isAuthenticated: boolean | null
 
-  setAuthenticated: (auth: boolean, userId: string | null) => void
+  setAuthenticated: (auth: boolean) => void
   addItem: (
     productId: number,
     quantity?: number,

@@ -10,6 +10,9 @@ export const getUserCart = async (userId: string) => {
             include: { images: { take: 1 }, variants: true },
           },
         },
+        orderBy: {
+          createdAt: 'asc',
+        },
       },
     },
   })

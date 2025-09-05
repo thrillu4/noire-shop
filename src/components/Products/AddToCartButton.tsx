@@ -1,6 +1,6 @@
 'use client'
 
-import { useCartStore } from '@/store/store'
+import { useCartStore } from '@/store/cart'
 
 interface IProps {
   productId: number

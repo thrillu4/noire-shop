@@ -38,6 +38,24 @@ export interface ProductWithRelations extends Product {
   variants: { id: number; size: string; stock: number }[]
 }
 
+export const CheckoutFormSchema = z.object({
+  fullName: z
+    .string()
+    .min(3, {
+      message: 'Username must be at least 3 characters.',
+    })
+    .trim(),
+  phone: z
+    .string()
+    .min(1, 'Enter correct number')
+    .max(20)
+    .regex(/^\+?[\d\s\-\(\)]+$/, 'Please enter a valid phone number'),
+  country: z.string().min(2, 'Country must be at least 2 characters.'),
+  city: z.string().min(2, 'City name must be at least 2 characters.'),
+  address: z.string().min(2, 'Country must be at least 2 characters.'),
+  total: z.number(),
+})
+
 //// store
 
 export interface CartItemData {
@@ -58,7 +76,6 @@ export interface LocalCartItem {
   productId: number
   quantity: number
   size?: string
-  addedAt: string
 }
 
 export interface CartState {
@@ -74,6 +91,7 @@ export interface CartState {
   ) => Promise<void>
   removeItem: (productId: number, size?: string) => Promise<void>
   updateQuantity: (
+    cartItemId: number,
     productId: number,
     quantity: number,
     size?: string,
@@ -83,7 +101,7 @@ export interface CartState {
   migrateLocalCart: () => Promise<void>
 
   totalItems: () => number
-  totalPrice: () => number
+  totalPrice: () => string
 }
 
 ////

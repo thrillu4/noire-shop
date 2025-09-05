@@ -59,7 +59,7 @@ export async function POST(req: Request) {
           },
         })
       } else {
-        await prisma.cartItem.createMany({
+        await prisma.cartItem.create({
           data: {
             cartId: cart.id,
             productId,
@@ -79,6 +79,9 @@ export async function POST(req: Request) {
             variants: true,
           },
         },
+      },
+      orderBy: {
+        createdAt: 'asc',
       },
     })
 

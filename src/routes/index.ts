@@ -36,4 +36,5 @@ export const ROUTES = {
   POST_CART_ADD: '/api/cart/add',
   DELETE_CART_ITEM: '/api/cart/delete',
   POST_CART_MIGRATE: '/api/cart/migrate',
+  PATCH_CART_QUANT: 'api/cart/update',
 }

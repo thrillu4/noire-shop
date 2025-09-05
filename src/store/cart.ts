@@ -49,7 +49,6 @@ export const useCartStore = create<CartState>((set, get) => ({
             productId,
             quantity,
             size,
-            addedAt: new Date().toISOString(),
           })
         }
         setLocalCart(localCart)
@@ -93,7 +92,34 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  updateQuantity: async (productId, quantity = 1, size?) => {},
+  updateQuantity: async (cartItemId, productId, quantity, size?) => {
+    if (quantity <= 0) {
+      return get().removeItem(productId, size)
+    }
+
+    set({ isLoading: true })
+
+    try {
+      const { isAuthenticated } = get()
+
+      if (isAuthenticated) {
+        const response = await fetch(ROUTES.PATCH_CART_QUANT, {
+          method: 'PATCH',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({ cartItemId, productId, quantity, size }),
+        })
+        if (!response.ok) throw new Error('Failed to update quantity')
+
+        const updatedCart = await response.json()
+        set({ items: updatedCart.items })
+      } else {
+      }
+    } catch (error) {
+      console.log('Error with updating quantity', error)
+    } finally {
+      set({ isLoading: false })
+    }
+  },
   clearCart: async () => {},
   loadCart: async () => {
     set({ isLoading: true })
@@ -173,8 +199,10 @@ export const useCartStore = create<CartState>((set, get) => ({
     return get().items.reduce((total, item) => total + item.quantity, 0)
   },
   totalPrice: () => {
-    return get().items.reduce((total, item) => {
-      return total + (item.product.price || 0) * item.quantity
-    }, 0)
+    return get()
+      .items.reduce((total, item) => {
+        return total + (item.product.price || 0) * item.quantity
+      }, 0)
+      .toFixed(2)
   },
 }))

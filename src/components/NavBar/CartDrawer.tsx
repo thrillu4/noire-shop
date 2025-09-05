@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { ROUTES } from '@/routes'
-import { useCartStore } from '@/store/store'
+import { useCartStore } from '@/store/cart'
 import { Handbag, ShoppingBag, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'

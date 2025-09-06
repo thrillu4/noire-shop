@@ -108,4 +108,20 @@ export interface CartState {
   totalPrice: () => string
 }
 
+/// checkout
+
+// export interface CheckoutState {}
+
+///
+
 ////
+
+export const CardSchema = z.object({
+  cardNumber: z.string().regex(/^\d{16}$/, { message: '16 digits required' }),
+  expiry: z
+    .string()
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Format MM/YY' }),
+  cvv: z.string().regex(/^\d{3}$/, { message: '3 digits' }),
+})
+
+export type CardType = z.infer<typeof CardSchema>

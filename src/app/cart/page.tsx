@@ -56,7 +56,7 @@ const Cart = () => {
       {items.length > 0 && (
         <div className="mb-20 px-2">
           <Breadcrumbs />
-          <h2 className="mt-4 text-2xl font-bold">Shopping Bag</h2>
+          <h2 className="mt-4 text-2xl font-extrabold">Shopping Bag</h2>
           {items.map(item => (
             <div
               className="my-10 grid grid-cols-[1fr_auto] gap-3.5 px-2 text-sm"
@@ -75,7 +75,9 @@ const Cart = () => {
                     className="absolute top-1 left-1 rounded-2xl bg-white p-1"
                   />
                 </div>
-                <div className="mt-2.5 mb-1 text-xs">{item.product.type}</div>
+                <div className="mt-2.5 mb-1 text-xs">
+                  {item.product.type.toUpperCase()}
+                </div>
                 <div className="flex items-center justify-between font-bold">
                   {item.product.title}
                   <div>${item.product.price}</div>

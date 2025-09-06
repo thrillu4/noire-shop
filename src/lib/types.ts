@@ -53,8 +53,9 @@ export const CheckoutFormSchema = z.object({
   country: z.string().min(2, 'Country must be at least 2 characters.'),
   city: z.string().min(2, 'City name must be at least 2 characters.'),
   address: z.string().min(2, 'Country must be at least 2 characters.'),
-  total: z.number(),
 })
+
+export type CheckoutDatatype = z.infer<typeof CheckoutFormSchema>
 
 //// store
 
@@ -81,9 +82,12 @@ export interface LocalCartItem {
 export interface CartState {
   items: CartItemData[]
   isLoading: boolean
-  isAuthenticated: boolean | null
+  isAuthenticated: {
+    isAuth: boolean
+    userId: string | null
+  }
 
-  setAuthenticated: (auth: boolean) => void
+  setAuthenticated: (isAuth: boolean, userId: string | null) => void
   addItem: (
     productId: number,
     quantity?: number,

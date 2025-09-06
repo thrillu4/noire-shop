@@ -36,7 +36,7 @@ const CartDrawer = ({
   const pathname = usePathname()
 
   useEffect(() => {
-    setAuthenticated(isAuth)
+    setAuthenticated(isAuth, userId)
     loadCart()
   }, [isAuth, userId, setAuthenticated, loadCart])
 

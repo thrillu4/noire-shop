@@ -7,12 +7,12 @@ import { create } from 'zustand'
 export const useCartStore = create<CartState>((set, get) => ({
   items: [],
   isLoading: false,
-  isAuthenticated: null,
-  setAuthenticated: auth => {
-    const prevAuth = get().isAuthenticated
-    set({ isAuthenticated: auth })
+  isAuthenticated: { isAuth: false, userId: null },
+  setAuthenticated: (isAuth, userId) => {
+    const prevAuth = get().isAuthenticated.isAuth
+    set({ isAuthenticated: { isAuth, userId } })
 
-    if (!prevAuth && auth) {
+    if (!prevAuth && isAuth && userId) {
       get().migrateLocalCart()
     }
   },
@@ -22,7 +22,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const { isAuthenticated } = get()
 
-      if (isAuthenticated) {
+      if (isAuthenticated.isAuth && isAuthenticated.userId) {
         const response = await fetch(ROUTES.POST_CART_ADD, {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
@@ -67,7 +67,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const { isAuthenticated } = get()
 
-      if (isAuthenticated) {
+      if (isAuthenticated.isAuth && isAuthenticated.userId) {
         const response = await fetch(ROUTES.DELETE_CART_ITEM, {
           method: 'DELETE',
           headers: { 'Content-type': 'application/json' },
@@ -102,7 +102,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const { isAuthenticated } = get()
 
-      if (isAuthenticated) {
+      if (isAuthenticated.isAuth && isAuthenticated.userId) {
         const response = await fetch(ROUTES.PATCH_CART_QUANT, {
           method: 'PATCH',
           headers: { 'Content-type': 'application/json' },
@@ -126,7 +126,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const { isAuthenticated } = get()
 
-      if (isAuthenticated) {
+      if (isAuthenticated.isAuth && isAuthenticated.userId) {
         const response = await fetch(ROUTES.GET_CART)
         if (!response.ok) throw new Error('Failed to load cart')
         const data = await response.json()

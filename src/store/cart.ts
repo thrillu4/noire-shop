@@ -113,6 +113,18 @@ export const useCartStore = create<CartState>((set, get) => ({
         const updatedCart = await response.json()
         set({ items: updatedCart.items })
       } else {
+        const localCart = getLocalCart()
+        const existingItemIndex = localCart.findIndex(
+          item => item.productId === productId,
+        )
+
+        if (existingItemIndex !== -1) {
+          localCart[existingItemIndex].quantity = quantity
+        } else {
+          throw new Error('Product not found!')
+        }
+        setLocalCart(localCart)
+        await get().loadCart()
       }
     } catch (error) {
       console.log('Error with updating quantity', error)
@@ -120,7 +132,26 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  clearCart: async () => {},
+  clearCart: async () => {
+    set({ isLoading: true })
+    try {
+      const { isAuthenticated } = get()
+
+      if (isAuthenticated) {
+        const response = await fetch(ROUTES.DELETE_CART_CLEAR, {
+          method: 'DELETE',
+        })
+        if (!response.ok) throw new Error('Failed to clear cart')
+      } else {
+        setLocalCart([])
+      }
+      set({ items: [] })
+    } catch (error) {
+      console.log('Error with clearing cart', error)
+    } finally {
+      set({ isLoading: false })
+    }
+  },
   loadCart: async () => {
     set({ isLoading: true })
     try {

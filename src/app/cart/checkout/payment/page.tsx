@@ -48,11 +48,10 @@ const Payment = () => {
   })
 
   const onSubmit = async (data: CardType) => {
-    console.log('Payment Data', data)
     const success = await payment(currentOrder, data)
     if (success) {
       setCurrentOrder(success)
-      clearCart()
+      await clearCart()
       router.push(ROUTES.PAYMENT_SUCCESS)
     }
   }

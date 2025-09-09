@@ -44,7 +44,12 @@ const CartDrawer = ({
     setIsOpen(false)
   }, [pathname])
 
-  if (pathname === ROUTES.CART) return null
+  if (
+    pathname === ROUTES.CART ||
+    pathname === ROUTES.PAYMENT ||
+    pathname === ROUTES.CHECKOUT
+  )
+    return null
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>

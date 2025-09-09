@@ -25,6 +25,7 @@ export const ROUTES = {
   CART: '/cart',
   CHECKOUT: '/cart/checkout',
   PAYMENT: '/cart/checkout/payment',
+  PAYMENT_SUCCESS: '/cart/checkout/payment/success',
   ABOUT: '/about',
   CONTACT: '/about/contacts',
   REVIEWS: '/about/reviews',

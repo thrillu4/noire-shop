@@ -12,14 +12,18 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { CheckoutDatatype, CheckoutFormSchema } from '@/lib/types'
+import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/cart'
+import { useOrderStore } from '@/store/order'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreditCard } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 
 const Checkout = () => {
+  const router = useRouter()
   const form = useForm<CheckoutDatatype>({
     resolver: zodResolver(CheckoutFormSchema),
     defaultValues: {
@@ -32,11 +36,26 @@ const Checkout = () => {
   })
 
   const { items, isAuthenticated } = useCartStore()
+  const { setCurrentOrder } = useOrderStore()
 
   async function onSubmit(data: CheckoutDatatype) {
     try {
-      await checkout(data, items, isAuthenticated.userId)
-      form.reset()
+      const order = await checkout(data, items, isAuthenticated.userId)
+      setCurrentOrder({
+        address: order.address,
+        id: order.id,
+        total: order.total,
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt,
+        paymentMethod: order.paymentMethod,
+        status: order.status,
+        userId: order.userId,
+        fullName: order.fullName,
+        phone: order.phone,
+        country: order.country,
+        city: order.city,
+      })
+      router.push(ROUTES.PAYMENT)
     } catch (error) {
       console.log('Failed to submit data to database', error)
     }

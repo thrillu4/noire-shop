@@ -6490,6 +6490,7 @@ export namespace Prisma {
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    paymentMethod: string | null
     userId: string | null
     fullName: string | null
     phone: string | null
@@ -6504,6 +6505,7 @@ export namespace Prisma {
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    paymentMethod: string | null
     userId: string | null
     fullName: string | null
     phone: string | null
@@ -6518,6 +6520,7 @@ export namespace Prisma {
     status: number
     createdAt: number
     updatedAt: number
+    paymentMethod: number
     userId: number
     fullName: number
     phone: number
@@ -6542,6 +6545,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    paymentMethod?: true
     userId?: true
     fullName?: true
     phone?: true
@@ -6556,6 +6560,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    paymentMethod?: true
     userId?: true
     fullName?: true
     phone?: true
@@ -6570,6 +6575,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
+    paymentMethod?: true
     userId?: true
     fullName?: true
     phone?: true
@@ -6671,6 +6677,7 @@ export namespace Prisma {
     status: string
     createdAt: Date
     updatedAt: Date
+    paymentMethod: string
     userId: string | null
     fullName: string
     phone: string
@@ -6704,6 +6711,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    paymentMethod?: boolean
     userId?: boolean
     fullName?: boolean
     phone?: boolean
@@ -6721,6 +6729,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    paymentMethod?: boolean
     userId?: boolean
     fullName?: boolean
     phone?: boolean
@@ -6736,6 +6745,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    paymentMethod?: boolean
     userId?: boolean
     fullName?: boolean
     phone?: boolean
@@ -6751,6 +6761,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    paymentMethod?: boolean
     userId?: boolean
     fullName?: boolean
     phone?: boolean
@@ -6759,7 +6770,7 @@ export namespace Prisma {
     address?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total" | "status" | "createdAt" | "updatedAt" | "userId" | "fullName" | "phone" | "country" | "city" | "address", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total" | "status" | "createdAt" | "updatedAt" | "paymentMethod" | "userId" | "fullName" | "phone" | "country" | "city" | "address", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
@@ -6784,6 +6795,7 @@ export namespace Prisma {
       status: string
       createdAt: Date
       updatedAt: Date
+      paymentMethod: string
       userId: string | null
       fullName: string
       phone: string
@@ -7220,6 +7232,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
+    readonly paymentMethod: FieldRef<"Order", 'String'>
     readonly userId: FieldRef<"Order", 'String'>
     readonly fullName: FieldRef<"Order", 'String'>
     readonly phone: FieldRef<"Order", 'String'>
@@ -13237,6 +13250,7 @@ export namespace Prisma {
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    paymentMethod: 'paymentMethod',
     userId: 'userId',
     fullName: 'fullName',
     phone: 'phone',
@@ -13658,6 +13672,7 @@ export namespace Prisma {
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    paymentMethod?: StringFilter<"Order"> | string
     userId?: StringNullableFilter<"Order"> | string | null
     fullName?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
@@ -13674,6 +13689,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    paymentMethod?: SortOrder
     userId?: SortOrderInput | SortOrder
     fullName?: SortOrder
     phone?: SortOrder
@@ -13693,6 +13709,7 @@ export namespace Prisma {
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    paymentMethod?: StringFilter<"Order"> | string
     userId?: StringNullableFilter<"Order"> | string | null
     fullName?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
@@ -13709,6 +13726,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    paymentMethod?: SortOrder
     userId?: SortOrderInput | SortOrder
     fullName?: SortOrder
     phone?: SortOrder
@@ -13731,6 +13749,7 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Order"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
+    paymentMethod?: StringWithAggregatesFilter<"Order"> | string
     userId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     fullName?: StringWithAggregatesFilter<"Order"> | string
     phone?: StringWithAggregatesFilter<"Order"> | string
@@ -14302,6 +14321,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     fullName: string
     phone: string
     country: string
@@ -14317,6 +14337,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     userId?: string | null
     fullName: string
     phone: string
@@ -14332,6 +14353,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
@@ -14347,6 +14369,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -14362,6 +14385,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     userId?: string | null
     fullName: string
     phone: string
@@ -14376,6 +14400,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
@@ -14389,6 +14414,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -15045,6 +15071,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    paymentMethod?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
@@ -15063,6 +15090,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    paymentMethod?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
@@ -15077,6 +15105,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    paymentMethod?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
     phone?: SortOrder
@@ -16466,6 +16495,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     fullName: string
     phone: string
     country: string
@@ -16480,6 +16510,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     fullName: string
     phone: string
     country: string
@@ -16571,6 +16602,7 @@ export namespace Prisma {
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    paymentMethod?: StringFilter<"Order"> | string
     userId?: StringNullableFilter<"Order"> | string | null
     fullName?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
@@ -16778,6 +16810,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     fullName: string
     phone: string
     country: string
@@ -16792,6 +16825,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     userId?: string | null
     fullName: string
     phone: string
@@ -16864,6 +16898,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
@@ -16878,6 +16913,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -17469,6 +17505,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    paymentMethod: string
     fullName: string
     phone: string
     country: string
@@ -17494,6 +17531,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
@@ -17508,6 +17546,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
@@ -17522,6 +17561,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string

@@ -1,9 +1,12 @@
 import { useCartStore } from '@/store/cart'
 import Image from 'next/image'
-import React from 'react'
 
-const YourOrder = () => {
+const YourOrder = ({ cod }: { cod?: boolean }) => {
   const { totalItems, items, totalPrice } = useCartStore()
+
+  const totalOrderPrice = (+totalPrice() + 10).toFixed(2)
+  const totalOrderPriceWithCod = (+totalOrderPrice + 2.5).toFixed(2)
+
   return (
     <div className="rounded-2xl border px-5 py-8">
       <div className="mb-7 flex items-center justify-between font-bold">
@@ -46,10 +49,16 @@ const YourOrder = () => {
           <div>Shipping:</div>
           <div>$10</div>
         </div>
+        {cod && (
+          <div className="flex items-center justify-between">
+            <div>Cash on delivery: </div>
+            <div>$2.5</div>
+          </div>
+        )}
       </div>
       <div className="mt-10 flex items-center justify-between font-extrabold">
         <div>Total Price: </div>
-        <div>${(+totalPrice() + 10).toFixed(2)}</div>
+        <div>${cod ? totalOrderPriceWithCod : totalOrderPrice}</div>
       </div>
     </div>
   )

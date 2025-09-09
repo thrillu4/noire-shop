@@ -37,6 +37,7 @@ export async function checkout(
       fullName: parsed.fullName,
       phone: parsed.phone,
       country: parsed.country,
+      paymentMethod: '',
       city: parsed.city,
       address: parsed.address,
       orderItems: {

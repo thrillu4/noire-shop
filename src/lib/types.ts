@@ -110,18 +110,63 @@ export interface CartState {
 
 /// checkout
 
-// export interface CheckoutState {}
+export interface OrderItemData {
+  id: string
+  total: number
+  status: string
+  createdAt: Date
+  updatedAt: Date
+  paymentMethod: string
+  userId?: string | null
+  fullName: string
+  phone: string
+  country: string
+  city: string
+  address: string
+}
+
+export interface OrderState {
+  orders: OrderItemData[]
+  isLoading: boolean
+  currentOrder: OrderItemData | null
+  setCurrentOrder: (data: OrderItemData) => void
+}
 
 ///
 
 ////
-
-export const CardSchema = z.object({
-  cardNumber: z.string().regex(/^\d{16}$/, { message: '16 digits required' }),
-  expiry: z
-    .string()
-    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Format MM/YY' }),
-  cvv: z.string().regex(/^\d{3}$/, { message: '3 digits' }),
-})
+export const CardSchema = z.discriminatedUnion('paymentMethod', [
+  z.object({
+    paymentMethod: z.literal('card'),
+    cardNumber: z.string().min(16, 'Card number is required'),
+    expiry: z.string().min(5, 'Expiry date is required'),
+    cvv: z.string().min(3, 'CVV is required'),
+    checkbox: z.boolean().refine(v => v, 'You must accept terms'),
+  }),
+  z.object({
+    paymentMethod: z.literal('delivery'),
+    checkbox: z.boolean().refine(v => v, 'You must accept terms'),
+  }),
+])
+// export const CardSchema = z.object({
+//   cardNumber: z
+//     .string()
+//     .trim()
+//     .transform(val => val.replace(/\s/g, ''))
+//     .refine(val => /^\d{16}$/.test(val), { message: '16 digits required' }),
+//   expiry: z
+//     .string()
+//     .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Format MM/YY' })
+//     .trim(),
+//   cvv: z
+//     .string()
+//     .regex(/^\d{3}$/, { message: '3 digits' })
+//     .trim(),
+//   checkbox: z.literal(true, {
+//     error: () => ({
+//       message: 'You must accept Terms & Conditions and Privacy Policy',
+//     }),
+//   }),
+// })
 
 export type CardType = z.infer<typeof CardSchema>

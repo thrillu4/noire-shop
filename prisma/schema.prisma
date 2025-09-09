@@ -62,11 +62,12 @@ model User {
 }
 
 model Order {
-  id        String   @id @default(cuid())
-  total     Float
-  status    String   @default("pending") // pending | paid | shipped | delivered | cancelled
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(cuid())
+  total         Float
+  status        String   @default("pending") // pending | paid | shipped | delivered | cancelled
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  paymentMethod String
 
   userId String?
   user   User?   @relation(fields: [userId], references: [id])

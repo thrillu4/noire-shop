@@ -148,25 +148,29 @@ export const CardSchema = z.discriminatedUnion('paymentMethod', [
     checkbox: z.boolean().refine(v => v, 'You must accept terms'),
   }),
 ])
-// export const CardSchema = z.object({
-//   cardNumber: z
-//     .string()
-//     .trim()
-//     .transform(val => val.replace(/\s/g, ''))
-//     .refine(val => /^\d{16}$/.test(val), { message: '16 digits required' }),
-//   expiry: z
-//     .string()
-//     .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'Format MM/YY' })
-//     .trim(),
-//   cvv: z
-//     .string()
-//     .regex(/^\d{3}$/, { message: '3 digits' })
-//     .trim(),
-//   checkbox: z.literal(true, {
-//     error: () => ({
-//       message: 'You must accept Terms & Conditions and Privacy Policy',
-//     }),
-//   }),
-// })
 
 export type CardType = z.infer<typeof CardSchema>
+
+export const ProfileEditSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: 'Name must be at least 2 characters long.' })
+    .trim(),
+  email: z.email({ message: 'Please enter a valid email.' }).trim(),
+})
+
+export type ProfileEditType = z.infer<typeof ProfileEditSchema>
+
+export interface UserData {
+  id: string
+  email: string
+  password: string
+  name: string
+}
+
+export interface UserProfileState {
+  currentUser: UserData | null
+  isLoading: boolean
+  setCurrentUser: (data: UserData) => void
+  getUser: () => Promise<void | UserData>
+}

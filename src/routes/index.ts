@@ -40,4 +40,5 @@ export const ROUTES = {
   POST_CART_MIGRATE: '/api/cart/migrate',
   PATCH_CART_QUANT: '/api/cart/update',
   DELETE_CART_CLEAR: '/api/cart/clear',
+  GET_USER: 'api/user',
 }

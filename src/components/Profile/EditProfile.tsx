@@ -1,4 +1,5 @@
 'use client'
+import { updateProfileInfo } from '@/app/actions/updateProfileInfo'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -14,8 +15,9 @@ import { useUserState } from '@/store/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 const EditProfile = () => {
-  const { currentUser, getUser } = useUserState()
+  const { currentUser, getUser, setCurrentUser } = useUserState()
 
   useEffect(() => {
     getUser()
@@ -29,9 +31,14 @@ const EditProfile = () => {
     },
   })
 
-  function onSubmit(values: ProfileEditType) {
-    console.log(values)
+  async function onSubmit(values: ProfileEditType) {
+    const updatedUser = await updateProfileInfo(currentUser, values)
+    setCurrentUser(updatedUser)
+    toast.success('User profile updated successfully', {
+      description: new Date().toLocaleString(),
+    })
   }
+
   return (
     <div className="mt-10 mb-20 px-3">
       <Form {...form}>
@@ -67,7 +74,11 @@ const EditProfile = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full">
+          <Button
+            disabled={!form.formState.isDirty}
+            type="submit"
+            className="w-full"
+          >
             Edit Profile
           </Button>
         </form>

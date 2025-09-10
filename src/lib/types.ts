@@ -161,6 +161,27 @@ export const ProfileEditSchema = z.object({
 
 export type ProfileEditType = z.infer<typeof ProfileEditSchema>
 
+export const PasswordEditSchema = z
+  .object({
+    currentPassword: z
+      .string()
+      .min(6, {
+        message: 'Current password must be at least 6 characters long.',
+      })
+      .trim(),
+    newPassword: z
+      .string()
+      .min(6, { message: 'New password must be at least 6 characters long.' })
+      .trim(),
+    confirmPassword: z.string().trim(),
+  })
+  .refine(data => data.newPassword === data.confirmPassword, {
+    message: 'Passwords do not match.',
+    path: ['confirmPassword'],
+  })
+
+export type PasswordEditType = z.infer<typeof PasswordEditSchema>
+
 export interface UserData {
   id: string
   email: string

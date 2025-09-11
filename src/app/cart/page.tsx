@@ -20,10 +20,12 @@ import { Label } from '@/components/ui/label'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useWishListState } from '@/store/wishlist'
 
 const Cart = () => {
   const { items, totalPrice, totalItems, removeItem, updateQuantity } =
     useCartStore()
+  const { addWishItem } = useWishListState()
   const router = useRouter()
   const [isChecked, setIsChecked] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -73,6 +75,7 @@ const Cart = () => {
                   <Heart
                     size={29}
                     className="absolute top-1 left-1 rounded-2xl bg-white p-1"
+                    onClick={() => addWishItem(item.productId)}
                   />
                 </div>
                 <div className="mt-2.5 mb-1 text-xs">

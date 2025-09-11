@@ -28,7 +28,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
+import WishListDrawer from './WishListDrawer'
+const Hamburger = ({
+  isAuth,
+  userId,
+}: {
+  isAuth: boolean
+  userId: string | null
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
@@ -64,10 +71,8 @@ const Hamburger = ({ isAuth }: { isAuth: boolean }) => {
             >
               <Image alt="logo " src="/logo.png" width={30} height={30} />
             </Link>
-            <div className="ck flex flex-1 justify-end">
-              <div className="rounded-full border bg-black p-2">
-                <Heart className="h-auto w-4 text-white" />
-              </div>
+            <div className="flex flex-1 justify-end">
+              <WishListDrawer open={isOpen} userId={userId} />
             </div>
           </div>
           <ul className="flex flex-col gap-1 text-lg font-semibold">

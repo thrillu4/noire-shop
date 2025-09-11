@@ -43,4 +43,6 @@ export const ROUTES = {
   GET_USER: '/api/user',
   GET_ORDERS_ARCHIVE: '/api/user/orders/archive',
   GET_ORDERS_ACTIVE: '/api/user/orders/active',
+  GET_WISHLIST: '/api/wishlist',
+  POST_WISHLIST_ADD: '/api/wishlist/add',
 }

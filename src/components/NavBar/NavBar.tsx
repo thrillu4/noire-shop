@@ -23,7 +23,7 @@ export default async function NavBar() {
       {/* mobile  */}
       <div className="flex items-center justify-between px-3 py-8 sm:hidden">
         <div className="flex-1">
-          <Hamburger isAuth={session.isAuth} />
+          <Hamburger isAuth={session.isAuth} userId={session.userId} />
         </div>
 
         <Link href={ROUTES.HOME} className="flex flex-1 justify-center">
@@ -32,7 +32,6 @@ export default async function NavBar() {
 
         <div className="flex flex-1 justify-end gap-1">
           <CartDrawer isAuth={session.isAuth} userId={session.userId} />
-
           <UserDrawer isAuth={session.isAuth} />
         </div>
       </div>

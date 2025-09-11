@@ -57,8 +57,6 @@ export const CheckoutFormSchema = z.object({
 
 export type CheckoutDatatype = z.infer<typeof CheckoutFormSchema>
 
-//// store
-
 export interface CartItemData {
   id?: number
   productId: number
@@ -108,8 +106,6 @@ export interface CartState {
   totalPrice: () => string
 }
 
-/// checkout
-
 export interface OrderItemData {
   id: string
   total: number
@@ -132,9 +128,6 @@ export interface OrderState {
   setCurrentOrder: (data: OrderItemData) => void
 }
 
-///
-
-////
 export const CardSchema = z.discriminatedUnion('paymentMethod', [
   z.object({
     paymentMethod: z.literal('card'),
@@ -194,4 +187,34 @@ export interface UserProfileState {
   isLoading: boolean
   setCurrentUser: (data: UserData) => void
   getUser: () => Promise<void | UserData>
+}
+
+export interface WishListItem {
+  id: number
+  productId: number
+  product: {
+    id: number
+    title: string
+    type: string
+    price: number
+    variants: { size: string }[]
+    images: { url: string }[]
+  }
+}
+
+export interface LocalWishListItem {
+  id: number
+  productId: number
+}
+
+export interface WishListState {
+  items: WishListItem[]
+  isLoading: boolean
+  isAuthenticated: string | null
+  setAuthenticated: (userId: string | null) => void
+  addWishItem: (productId: number) => Promise<void>
+  removeWishItem: (productId: number) => Promise<void>
+  loadWishList: () => Promise<void>
+  migrateLocalWishList: () => Promise<void>
+  totalItems: () => number
 }

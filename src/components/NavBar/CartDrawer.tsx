@@ -112,7 +112,7 @@ const CartDrawer = ({
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div>${item.product.price}</div>
+                      <div className="font-bold">${item.product.price}</div>
 
                       <Trash2
                         onClick={() => removeItem(item.productId, item.size)}

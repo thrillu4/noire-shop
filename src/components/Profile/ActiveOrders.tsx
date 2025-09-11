@@ -9,9 +9,11 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ROUTES } from '@/routes'
+import { TriangleAlert } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Order } from '../../../prisma/generated/prisma'
-import { FileWarning, TriangleAlert } from 'lucide-react'
+import { Button } from '../ui/button'
+import Link from 'next/link'
 
 const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
   const [orders, setOrders] = useState<Order[]>([])
@@ -67,25 +69,29 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
       <div className="block sm:hidden">
         <div className="flex flex-col space-y-7">
           {orders.map(order => (
-            <div
-              key={order.id}
-              className="grid grid-cols-2 items-center gap-x-5 border-y py-5"
-            >
-              <div className="grid gap-y-2">
-                <div>Order №: </div>
-                <div>Date: </div>
-                <div>Status: </div>
-                <div>Total price:</div>
-              </div>
-
-              <div className="grid gap-y-2 font-bold">
-                <div className="text-xs break-all">{order.id}</div>
-                <div>{new Date(order.createdAt).toLocaleDateString()}</div>
-                <div className="text-green-600">
-                  {order.status.toUpperCase()}
+            <div key={order.id} className="border-y">
+              <div className="grid grid-cols-2 gap-x-5 py-5">
+                <div className="grid gap-y-2">
+                  <div>Order №: </div>
+                  <div>Date: </div>
+                  <div>Status: </div>
+                  <div>Total price:</div>
                 </div>
-                <div>{order.total.toFixed(2)}</div>
+
+                <div className="grid gap-y-2 font-bold">
+                  <div className="text-xs break-all">{order.id}</div>
+                  <div>{new Date(order.createdAt).toLocaleDateString()}</div>
+                  <div className="text-green-600">
+                    {order.status.toUpperCase()}
+                  </div>
+                  <div>{order.total.toFixed(2)}</div>
+                </div>
               </div>
+              <Link href={ROUTES.PROFILE + `/${order.id}`}>
+                <Button variant="outline" className="w-full">
+                  Show Details
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

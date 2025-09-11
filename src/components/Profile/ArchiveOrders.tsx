@@ -11,6 +11,9 @@ import {
 import { ROUTES } from '@/routes'
 import { useEffect, useState } from 'react'
 import { Order } from '../../../prisma/generated/prisma'
+import { TriangleAlert } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '../ui/button'
 
 const ArchiveOrders = ({ userId }: { userId: string | undefined }) => {
   const [orders, setOrders] = useState<Order[]>([])
@@ -27,6 +30,14 @@ const ArchiveOrders = ({ userId }: { userId: string | undefined }) => {
     }
     fetchOrders()
   }, [userId])
+
+  if (orders.length < 1)
+    return (
+      <div className="flex items-center gap-2 bg-yellow-100 p-3">
+        <TriangleAlert />
+        You have no archive orders.
+      </div>
+    )
 
   return (
     <>
@@ -58,31 +69,35 @@ const ArchiveOrders = ({ userId }: { userId: string | undefined }) => {
       <div className="block sm:hidden">
         <div className="flex flex-col space-y-7">
           {orders.map(order => (
-            <div
-              key={order.id}
-              className="grid grid-cols-2 items-center gap-x-5 border-y py-5"
-            >
-              <div className="grid gap-y-2">
-                <div>Order №: </div>
-                <div>Date: </div>
-                <div>Status: </div>
-                <div>Total price:</div>
-              </div>
-
-              <div className="grid gap-y-2 font-bold">
-                <div className="text-xs break-all">{order.id}</div>
-                <div>{new Date(order.createdAt).toLocaleDateString()}</div>
-                <div
-                  className={
-                    order.status === 'cancelled'
-                      ? 'text-red-600'
-                      : 'text-cyan-500'
-                  }
-                >
-                  {order.status.toUpperCase()}
+            <div key={order.id} className="border-y">
+              <div className="grid grid-cols-2 items-center gap-x-5 py-5">
+                <div className="grid gap-y-2">
+                  <div>Order №: </div>
+                  <div>Date: </div>
+                  <div>Status: </div>
+                  <div>Total price:</div>
                 </div>
-                <div>{order.total.toFixed(2)}</div>
+
+                <div className="grid gap-y-2 font-bold">
+                  <div className="text-xs break-all">{order.id}</div>
+                  <div>{new Date(order.createdAt).toLocaleDateString()}</div>
+                  <div
+                    className={
+                      order.status === 'cancelled'
+                        ? 'text-red-600'
+                        : 'text-cyan-500'
+                    }
+                  >
+                    {order.status.toUpperCase()}
+                  </div>
+                  <div>{order.total.toFixed(2)}</div>
+                </div>
               </div>
+              <Link href={ROUTES.PROFILE + `/${order.id}`}>
+                <Button variant="outline" className="w-full">
+                  Show Details
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

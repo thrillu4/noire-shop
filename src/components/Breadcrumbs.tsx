@@ -43,9 +43,18 @@ export function Breadcrumbs() {
             <div key={href} className="flex items-center">
               <BreadcrumbItem>
                 {isLast ? (
-                  <BreadcrumbPage>{label}</BreadcrumbPage>
+                  <BreadcrumbPage
+                    className="max-w-[100px] truncate"
+                    title={label}
+                  >
+                    {label}
+                  </BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink asChild>
+                  <BreadcrumbLink
+                    asChild
+                    className="max-w-[100px] truncate"
+                    title={label}
+                  >
                     <Link href={href}>{label}</Link>
                   </BreadcrumbLink>
                 )}

@@ -29,6 +29,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import WishListDrawer from './WishListDrawer'
+import ContactUsLink from '../ContactUsLink'
 const Hamburger = ({
   isAuth,
   userId,
@@ -310,22 +311,7 @@ const Hamburger = ({
             </li>
           </ul>
 
-          <div className="my-4 w-full border"></div>
-
-          <div className="my-7">
-            <div className="text-center text-sm font-semibold text-neutral-500">
-              Help / Support
-            </div>
-            <div className="my-5">
-              <a
-                href="mailto:noire.shop.help@gmail.com"
-                className="flex items-center justify-center gap-3"
-              >
-                <Mail />
-                noire.shop.help@gmail.com
-              </a>
-            </div>
-          </div>
+          <ContactUsLink>Help / Support</ContactUsLink>
         </div>
       )}
     </>

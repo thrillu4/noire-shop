@@ -12,18 +12,18 @@ import { useWishListState } from '@/store/wishlist'
 import { BaggageClaim, Heart, HeartOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { Button } from '../ui/button'
 
 const WishListDrawer = ({
   open,
   userId,
+  setIsOpen,
 }: {
   open?: boolean
   userId: string | null
+  setIsOpen?: (open: boolean) => void
 }) => {
-  const pathname = usePathname()
   const { items, setAuthenticated, loadWishList, totalItems, removeWishItem } =
     useWishListState()
   const { addItem } = useCartStore()
@@ -34,7 +34,6 @@ const WishListDrawer = ({
   }, [loadWishList, setAuthenticated, userId])
 
   if (!open) return null
-  console.log(items)
   return (
     <Sheet>
       <SheetTrigger>
@@ -58,6 +57,7 @@ const WishListDrawer = ({
             </SheetHeader>
             <Link
               href={ROUTES.NEW}
+              onClick={() => setIsOpen && setIsOpen(false)}
               className="text-center underline opacity-60"
             >
               Shop What&apos;s New
@@ -69,7 +69,10 @@ const WishListDrawer = ({
             <SheetTitle>Wish List ({totalItems()})</SheetTitle>
             <div className="mt-3 space-y-5">
               {items.map(item => (
-                <div key={item.id} className="flex justify-between gap-3">
+                <div
+                  key={item.productId}
+                  className="flex justify-between gap-3"
+                >
                   <div className="relative">
                     <Image
                       src={item.product.images[0].url}
@@ -109,11 +112,14 @@ const WishListDrawer = ({
                 </div>
               ))}
             </div>
+            <Button
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className="mx-auto"
+            >
+              <Link href={ROUTES.WISHLIST}>View Wish List</Link>
+            </Button>
           </SheetHeader>
         )}
-        <Button className="mx-auto">
-          <Link href={ROUTES.WISHLIST}>View Wish List</Link>
-        </Button>
       </SheetContent>
     </Sheet>
   )

@@ -14,6 +14,7 @@ import Image from 'next/image'
 import CartDrawer from './CartDrawer'
 import Hamburger from './Hamburger'
 import UserDrawer from './UserDrawer'
+import WishListDrawer from './WishListDrawer'
 
 export default async function NavBar() {
   const session = await verifySession()
@@ -31,6 +32,7 @@ export default async function NavBar() {
         </Link>
 
         <div className="flex flex-1 justify-end gap-1">
+          <WishListDrawer userId={session.userId} open={false} />
           <CartDrawer isAuth={session.isAuth} userId={session.userId} />
           <UserDrawer isAuth={session.isAuth} />
         </div>

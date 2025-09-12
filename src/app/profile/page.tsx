@@ -40,7 +40,7 @@ const Profile = () => {
   return (
     <div className="px-3">
       <Breadcrumbs />
-      <h1 className="mt-2 font-extrabold">My Profile</h1>
+      <h1 className="mt-3 text-2xl font-extrabold">My Profile</h1>
       <div className="my-4 grid grid-cols-2 gap-2">
         {tabs.map(tab => (
           <div

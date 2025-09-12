@@ -45,4 +45,7 @@ export const ROUTES = {
   GET_ORDERS_ACTIVE: '/api/user/orders/active',
   GET_WISHLIST: '/api/wishlist',
   POST_WISHLIST_ADD: '/api/wishlist/add',
+  DELETE_WISHLIST_ITEM: '/api/wishlist/remove',
+  POST_LOCAL_WISHLIST: '/api/wishlist/local',
+  POST_WISHLIST_MIGRATE: '/api/wishlist/migrate',
 }

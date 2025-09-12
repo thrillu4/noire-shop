@@ -190,7 +190,7 @@ export interface UserProfileState {
 }
 
 export interface WishListItem {
-  id: number
+  id?: number
   productId: number
   product: {
     id: number
@@ -203,7 +203,6 @@ export interface WishListItem {
 }
 
 export interface LocalWishListItem {
-  id: number
   productId: number
 }
 

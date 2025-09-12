@@ -26,7 +26,7 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import WishListDrawer from './WishListDrawer'
 const Hamburger = ({
@@ -37,7 +37,6 @@ const Hamburger = ({
   userId: string | null
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
   const router = useRouter()
 
   useEffect(() => {
@@ -50,10 +49,6 @@ const Hamburger = ({
       document.documentElement.style.overflow = ''
     }
   }, [isOpen])
-
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
 
   return (
     <>
@@ -72,7 +67,11 @@ const Hamburger = ({
               <Image alt="logo " src="/logo.png" width={30} height={30} />
             </Link>
             <div className="flex flex-1 justify-end">
-              <WishListDrawer open={isOpen} userId={userId} />
+              <WishListDrawer
+                open={isOpen}
+                userId={userId}
+                setIsOpen={setIsOpen}
+              />
             </div>
           </div>
           <ul className="flex flex-col gap-1 text-lg font-semibold">
@@ -84,19 +83,31 @@ const Hamburger = ({
                       <Mars /> Men
                     </div>
                   </AccordionTrigger>
-                  <Link href={ROUTES.MEN_T_SHIRT}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.MEN_T_SHIRT}
+                  >
                     <AccordionContent>T-Shirts</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.MEN_HOODIES}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.MEN_HOODIES}
+                  >
                     <AccordionContent>Hoodies & Sweatshirts</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.MEN_JACKETS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.MEN_JACKETS}
+                  >
                     <AccordionContent>Jackets & Coats</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.MEN_JEANS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.MEN_JEANS}
+                  >
                     <AccordionContent>Jeans</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.MEN}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>View All</AccordionContent>
                   </Link>
                 </AccordionItem>
@@ -110,19 +121,31 @@ const Hamburger = ({
                       <Venus /> Women
                     </div>
                   </AccordionTrigger>
-                  <Link href={ROUTES.WOMEN_DRESSES}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.WOMEN_DRESSES}
+                  >
                     <AccordionContent>Dresses</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.WOMEN_TOPS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.WOMEN_TOPS}
+                  >
                     <AccordionContent>Tops & T-Shirts</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.WOMEN_BLOUSES}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.WOMEN_BLOUSES}
+                  >
                     <AccordionContent>Blouses & Shirts</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.WOMEN_JEANS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.WOMEN_JEANS}
+                  >
                     <AccordionContent>Jeans & Pants</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.WOMEN}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>View All</AccordionContent>
                   </Link>
                 </AccordionItem>
@@ -137,31 +160,54 @@ const Hamburger = ({
                     </div>
                   </AccordionTrigger>
 
-                  <Link href={ROUTES.COLLECTIONS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.COLLECTIONS}
+                  >
                     <AccordionContent>Adidas</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.COLLECTIONS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.COLLECTIONS}
+                  >
                     <AccordionContent>Nike</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.COLLECTIONS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.COLLECTIONS}
+                  >
                     <AccordionContent>Puma</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.COLLECTIONS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.COLLECTIONS}
+                  >
                     <AccordionContent>Zara</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.COLLECTIONS}>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href={ROUTES.COLLECTIONS}
+                  >
                     <AccordionContent>View All</AccordionContent>
                   </Link>
                 </AccordionItem>
               </Accordion>
             </li>
             <li className="py-4">
-              <Link href={ROUTES.NEW} className="flex items-center gap-2">
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={ROUTES.NEW}
+                className="flex items-center gap-2"
+              >
                 <Shirt /> New
               </Link>
             </li>
             <li className="py-4">
-              <Link href={ROUTES.SALE} className="flex items-center gap-2">
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={ROUTES.SALE}
+                className="flex items-center gap-2"
+              >
                 <BadgeDollarSign /> Sale
               </Link>
             </li>
@@ -175,17 +221,26 @@ const Hamburger = ({
             </div>
             <ul className="flex flex-col gap-1 text-lg font-semibold">
               <li className="py-4">
-                <Link className="flex items-center gap-2" href={ROUTES.PROFILE}>
+                <Link
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2"
+                  href={ROUTES.PROFILE}
+                >
                   <User /> Profile
                 </Link>
               </li>
               <li className="py-4">
-                <Link className="flex items-center gap-2" href={ROUTES.CART}>
+                <Link
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2"
+                  href={ROUTES.CART}
+                >
                   <Handbag /> Cart
                 </Link>
               </li>
               <li className="py-4">
                 <Link
+                  onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2"
                   href={ROUTES.WISHLIST}
                 >
@@ -222,7 +277,11 @@ const Hamburger = ({
               Info
             </div>
             <li className="py-4">
-              <Link href={ROUTES.DELIVERY} className="flex items-center gap-2">
+              <Link
+                onClick={() => setIsOpen(false)}
+                href={ROUTES.DELIVERY}
+                className="flex items-center gap-2"
+              >
                 <Package /> Delivery & Returns
               </Link>
             </li>
@@ -234,16 +293,16 @@ const Hamburger = ({
                       <Info /> About Us
                     </div>
                   </AccordionTrigger>
-                  <Link href={ROUTES.ABOUT}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.ABOUT}>
                     <AccordionContent>About Us</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.CONTACT}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.CONTACT}>
                     <AccordionContent>Contact Us</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.REVIEWS}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.REVIEWS}>
                     <AccordionContent>Customer Reviews</AccordionContent>
                   </Link>
-                  <Link href={ROUTES.FAQ}>
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.FAQ}>
                     <AccordionContent>FAQ</AccordionContent>
                   </Link>
                 </AccordionItem>

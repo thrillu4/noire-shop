@@ -15,7 +15,6 @@ import {
   Library,
   LogIn,
   LogOut,
-  Mail,
   Mars,
   Menu,
   Package,
@@ -28,8 +27,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import WishListDrawer from './WishListDrawer'
 import ContactUsLink from '../ContactUsLink'
+import WishListDrawer from './WishListDrawer'
 const Hamburger = ({
   isAuth,
   userId,
@@ -261,7 +260,10 @@ const Hamburger = ({
                   </div>
                 ) : (
                   <div
-                    onClick={() => router.push(ROUTES.SIGNIN)}
+                    onClick={() => {
+                      setIsOpen(false)
+                      router.push(ROUTES.SIGNIN)
+                    }}
                     className="flex cursor-pointer items-center gap-2"
                   >
                     <LogIn /> Sign In

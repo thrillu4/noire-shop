@@ -235,3 +235,18 @@ export const ReviewFormSchema = z.object({
 })
 
 export type ReviewType = z.infer<typeof ReviewFormSchema>
+
+export const ContactUsFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 character')
+    .regex(/^[a-zA-Z]+$/, 'String must contain only latin letters.'),
+  email: z.email({ message: 'Please enter a valid email.' }).trim(),
+  message: z
+    .string()
+    .max(1000, 'The message is too long.')
+    .min(5, 'The message is too short'),
+  checkbox: z.boolean().refine(v => v, 'You must accept terms.'),
+})
+
+export type ContactUsType = z.infer<typeof ContactUsFormSchema>

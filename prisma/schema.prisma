@@ -137,3 +137,12 @@ model WishlistItem {
   wishlistId String
   wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
 }
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  country   String
+  rating    Int
+  text      String
+  createdAt DateTime @default(now())
+}

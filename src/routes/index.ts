@@ -48,4 +48,6 @@ export const ROUTES = {
   DELETE_WISHLIST_ITEM: '/api/wishlist/remove',
   POST_LOCAL_WISHLIST: '/api/wishlist/local',
   POST_WISHLIST_MIGRATE: '/api/wishlist/migrate',
+  GET_REVIEWS: '/api/review',
+  POST_REVIEWS_ADD: '/api/review/add',
 }

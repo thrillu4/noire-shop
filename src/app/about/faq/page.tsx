@@ -45,10 +45,10 @@ export default function FAQPage() {
           <AccordionContent>
             Contact us at{' '}
             <a
-              href="mailto:support@yourstore.com"
+              href="mailto:noire.shop.help@gmail.com"
               className="text-blue-600 hover:underline"
             >
-              support@yourstore.com
+              noire.shop.help@gmail.com
             </a>{' '}
             to request a return.
           </AccordionContent>

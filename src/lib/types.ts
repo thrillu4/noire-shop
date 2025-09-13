@@ -217,3 +217,21 @@ export interface WishListState {
   migrateLocalWishList: () => Promise<void>
   totalItems: () => number
 }
+
+export const ReviewFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 character')
+    .regex(/^[a-zA-Z]+$/, 'String must contain only latin letters.'),
+  country: z
+    .string()
+    .min(2, 'Country must be at least 2 character')
+    .regex(/^[a-zA-Z]+$/, 'String must contain only latin letters.'),
+  rating: z
+    .number()
+    .min(1, 'Minimal value 1 star')
+    .max(5, 'Maximum value 5 star'),
+  text: z.string().max(100, 'The review is too long.'),
+})
+
+export type ReviewType = z.infer<typeof ReviewFormSchema>

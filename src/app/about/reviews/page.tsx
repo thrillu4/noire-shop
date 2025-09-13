@@ -1,24 +1,49 @@
+'use client'
+
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import AddReviewForm from '@/components/Reviews/AddReviewForm'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { reviewsData } from '@/lib/reviews-data'
-import { Star } from 'lucide-react'
+import { ROUTES } from '@/routes'
+import { ListRestart, Star } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Review } from '../../../../prisma/generated/prisma'
 
 export default function CustomerReviewsPage() {
+  const [take, setTake] = useState(4)
+  const [end, setEnd] = useState(false)
+  const [reviews, setReviews] = useState<Omit<Review, 'id' | 'createdAt'>[]>([])
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const response = await fetch(`${ROUTES.GET_REVIEWS}?take=${take}`)
+      if (!response.ok) throw new Error('Failed to load reviews')
+      const reviews = await response.json()
+      setReviews(reviews.reviews)
+      if (take > reviews.reviews.length) {
+        setEnd(true)
+      }
+    }
+    fetchReviews()
+    console.log('fetch......')
+  }, [take])
+
   return (
     <div className="mb-20 px-2">
       <Breadcrumbs />
-      <h1 className="mt-3 mb-10 text-2xl font-bold">Customer Reviews</h1>
+      <h1 className="mt-5 mb-5 text-center text-2xl font-bold">
+        Customer Reviews
+      </h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {reviewsData.map((review, index) => (
+        {reviews.map((review, index) => (
           <Card
             key={index}
             className="px-2 py-5 shadow-sm transition hover:shadow-md"
           >
             <CardHeader className="flex flex-row items-center gap-4">
               <Avatar>
-                <AvatarImage src={review.avatar} alt={review.name} />
                 <AvatarFallback>{review.name[0]}</AvatarFallback>
               </Avatar>
               <div>
@@ -44,11 +69,17 @@ export default function CustomerReviewsPage() {
           </Card>
         ))}
       </div>
-
+      {!end && (
+        <Button
+          onClick={() => setTake(state => state + 4)}
+          variant={'outline'}
+          className="mt-4 w-full"
+        >
+          <ListRestart /> Show More
+        </Button>
+      )}
       <div className="mt-12 text-center">
-        <button className="rounded-xl bg-black px-6 py-3 text-white shadow transition hover:bg-gray-800">
-          Leave a Review
-        </button>
+        <AddReviewForm setTake={setTake} />
       </div>
     </div>
   )

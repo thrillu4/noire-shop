@@ -1,11 +1,13 @@
-import { CarouselPlugin } from "@/components/Home/CarouselPlugin";
-import FilterBar from "@/components/Home/FilterBar";
-import GridCollection from "@/components/Home/GridCollection";
-import SearchBar from "@/components/Home/SearchBar";
-import { Button } from "@/components/ui/button";
-import { MoveRight } from "lucide-react";
-import Image from "next/image";
-import { bagel } from "./fonts";
+import { CarouselPlugin } from '@/components/Home/CarouselPlugin'
+import FilterBar from '@/components/Home/FilterBar'
+import GridCollection from '@/components/Home/GridCollection'
+import SearchBar from '@/components/Home/SearchBar'
+import { Button } from '@/components/ui/button'
+import { MoveRight } from 'lucide-react'
+import Image from 'next/image'
+import { bagel } from './fonts'
+import Link from 'next/link'
+import { ROUTES } from '@/routes'
 
 export default async function Home() {
   return (
@@ -24,9 +26,11 @@ export default async function Home() {
             <div>2025</div>
           </div>
           <CarouselPlugin />
-          <Button className="mt-6 gap-5 bg-[#d9d9d9] text-black">
-            Go To Shop <MoveRight />
-          </Button>
+          <Link href={ROUTES.PRODUCTS}>
+            <Button className="mt-6 gap-5 bg-[#d9d9d9] text-black hover:text-white">
+              Go To Shop <MoveRight />
+            </Button>
+          </Link>
         </div>
 
         <div className="mb-25">
@@ -67,7 +71,7 @@ export default async function Home() {
           <div className="mb-24 flex h-[200px] gap-2 overflow-hidden">
             <div className="flex">
               <Image
-                src={"/z.png"}
+                src={'/z.png'}
                 width={120}
                 height={160}
                 alt=""
@@ -76,7 +80,7 @@ export default async function Home() {
             </div>
             <div className="flex items-end">
               <Image
-                src={"/x.png"}
+                src={'/x.png'}
                 width={120}
                 height={160}
                 alt=""
@@ -85,7 +89,7 @@ export default async function Home() {
             </div>
             <div className="flex">
               <Image
-                src={"/c.png"}
+                src={'/c.png'}
                 width={120}
                 height={160}
                 alt=""
@@ -94,7 +98,7 @@ export default async function Home() {
             </div>
             <div className="flex items-end">
               <Image
-                src={"/v.png"}
+                src={'/v.png'}
                 width={120}
                 height={160}
                 alt=""
@@ -105,5 +109,5 @@ export default async function Home() {
         </div>
       </div>
     </>
-  );
+  )
 }

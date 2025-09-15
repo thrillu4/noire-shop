@@ -50,4 +50,6 @@ export const ROUTES = {
   POST_WISHLIST_MIGRATE: '/api/wishlist/migrate',
   GET_REVIEWS: '/api/review',
   POST_REVIEWS_ADD: '/api/review/add',
+  GET_PRODUCTS_TYPE: '/api/products/type',
+  GET_PRODUCTS_COLLECTION: '/api/products/collection',
 }

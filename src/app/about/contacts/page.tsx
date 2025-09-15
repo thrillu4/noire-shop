@@ -14,7 +14,7 @@ const Contacts = () => {
           We’d love to hear from you. Fill out the form below or reach us at…
         </h3>
       </div>
-      <div className="mt-10 flex flex-col justify-center gap-7">
+      <div className="mt-10 flex flex-col justify-center gap-12">
         <div>
           <ContactUsForm />
         </div>

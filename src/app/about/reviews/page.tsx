@@ -26,7 +26,6 @@ export default function CustomerReviewsPage() {
       }
     }
     fetchReviews()
-    console.log('fetch......')
   }, [take])
 
   return (

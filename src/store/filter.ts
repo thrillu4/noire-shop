@@ -3,13 +3,12 @@ import { create } from 'zustand'
 
 export const useFilterState = create<FilterState>(set => ({
   filter: {
-    gender: null,
-    type: null,
-    size: null,
-    minPrice: null,
-    maxPrice: null,
-    collection: null,
-    available: false,
+    gender: 'all',
+    types: [],
+    sizes: [],
+    priceRange: [0, 100],
+    collections: [],
+    available: 'all',
   },
   totalProducts: 0,
   setFilterSettings: values => {
@@ -17,5 +16,17 @@ export const useFilterState = create<FilterState>(set => ({
   },
   setTotalProducts: total => {
     set({ totalProducts: total })
+  },
+  clearFilter: () => {
+    set({
+      filter: {
+        gender: 'all',
+        types: [],
+        sizes: [],
+        priceRange: [0, 100],
+        collections: [],
+        available: 'all',
+      },
+    })
   },
 }))

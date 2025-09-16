@@ -15,25 +15,40 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Slider } from '@/components/ui/slider'
+import { ProductType } from '@/lib/types'
 import { ROUTES } from '@/routes'
+import { useFilterState } from '@/store/filter'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
-import { FilterSettings, ProductType } from '@/lib/types'
 
 const FilterDrawer = ({
-  setFilterSettings,
-  filter,
+  setPage,
 }: {
-  setFilterSettings: (values: FilterSettings) => void
-  filter: FilterSettings
+  setPage: Dispatch<SetStateAction<number>>
 }) => {
   const [open, setOpen] = useState(false)
   const [types, setTypes] = useState<ProductType[]>([])
   const [collections, setCollections] = useState<string[]>([])
-  const [range, setRange] = useState([0, 100])
+  const { filter, setFilterSettings, clearFilter } = useFilterState()
+  const [gender, setGender] = useState<'all' | 'male' | 'female'>(
+    filter.gender || 'all',
+  )
+  const [selectedTypes, setSelectedTypes] = useState<string[]>(
+    filter.types || [],
+  )
+  const [priceRange, setPriceRange] = useState<number[]>(
+    filter.priceRange || [0, 100],
+  )
+  const [selectedCollections, setSelectedCollections] = useState<string[]>(
+    filter.collections || [],
+  )
+  const [sizes, setSizes] = useState<string[]>(filter.sizes || [])
+  const [available, setAvailable] = useState<
+    'available' | 'unavailable' | 'all'
+  >(filter.available || 'all')
 
   useEffect(() => {
     fetch(ROUTES.GET_PRODUCTS_TYPE)
@@ -43,6 +58,44 @@ const FilterDrawer = ({
       .then(data => data.json())
       .then(data => setCollections(data.res))
   }, [])
+
+  const toggleArrayValue = (
+    arr: string[],
+    value: string,
+    set: (value: string[]) => void,
+  ) => {
+    if (arr.includes(value)) {
+      set(arr.filter(params => params !== value))
+    } else {
+      set([...arr, value])
+    }
+  }
+
+  const applyFilter = () => {
+    setFilterSettings({
+      gender,
+      types: selectedTypes,
+      priceRange,
+      collections: selectedCollections,
+      sizes,
+      available,
+    })
+    setPage(0)
+    setOpen(false)
+  }
+
+  const resetFilter = () => {
+    setPage(0)
+    clearFilter()
+    setGender('all')
+    setSelectedTypes([])
+    setPriceRange([0, 100])
+    setSelectedCollections([])
+    setSizes([])
+    setAvailable('all')
+    setOpen(false)
+  }
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -66,31 +119,34 @@ const FilterDrawer = ({
             <AccordionItem value="size">
               <AccordionTrigger>Size</AccordionTrigger>
               <AccordionContent className="flex gap-1">
-                <div className="border px-2 py-1 text-xs">XS</div>
-                <div className="border px-2 py-1 text-xs">S</div>
-                <div className="border px-2 py-1 text-xs">M</div>
-                <div className="border px-2 py-1 text-xs">L</div>
-                <div className="border px-2 py-1 text-xs">XL</div>
-                <div className="border px-2 py-1 text-xs">2XL</div>
+                {['XS', 'S', 'M', 'L', 'XL', '2XL'].map(size => (
+                  <div
+                    onClick={() => toggleArrayValue(sizes, size, setSizes)}
+                    key={size}
+                    className={`cursor-pointer border px-2 py-1 text-xs ${sizes.includes(size) && 'border-black'}`}
+                  >
+                    {size}
+                  </div>
+                ))}
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="gender">
               <AccordionTrigger>Gender</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
-                <RadioGroup defaultValue="all">
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="all" id="all" />
-                    <Label htmlFor="all">All</Label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="male" id="male" />
-                    <Label htmlFor="male">Male</Label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="female" id="female" />
-                    <Label htmlFor="female">Female</Label>
-                  </div>
+                <RadioGroup
+                  defaultValue="all"
+                  value={gender}
+                  onValueChange={val =>
+                    setGender(val as 'all' | 'male' | 'female')
+                  }
+                >
+                  {['all', 'male', 'female'].map(val => (
+                    <div className="flex items-center gap-3" key={val}>
+                      <RadioGroupItem value={val} id={val} />
+                      <Label htmlFor={val}>{val}</Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </AccordionContent>
             </AccordionItem>
@@ -98,17 +154,16 @@ const FilterDrawer = ({
               <AccordionTrigger>Price Range</AccordionTrigger>
               <AccordionContent>
                 <Slider
-                  defaultValue={[0, 100]}
                   min={0}
                   max={100}
                   step={1}
-                  value={range}
-                  onValueChange={val => setRange(val)}
+                  value={priceRange}
+                  onValueChange={val => setPriceRange(val)}
                   className="my-4"
                 />
                 <div className="text-muted-foreground flex justify-between text-sm">
-                  <span>${range[0]}</span>
-                  <span>${range[1]}</span>
+                  <span>${priceRange[0]}</span>
+                  <span>${priceRange[1]}</span>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -117,7 +172,17 @@ const FilterDrawer = ({
               <AccordionContent className="flex flex-col gap-4">
                 {types.map(obj => (
                   <div className="flex items-center gap-2" key={obj.type}>
-                    <Checkbox id={obj.type} />
+                    <Checkbox
+                      checked={selectedTypes.includes(obj.type)}
+                      onCheckedChange={() =>
+                        toggleArrayValue(
+                          selectedTypes,
+                          obj.type,
+                          setSelectedTypes,
+                        )
+                      }
+                      id={obj.type}
+                    />
                     <Label htmlFor={obj.type}>
                       {obj.type} ({obj.count})
                     </Label>
@@ -131,7 +196,17 @@ const FilterDrawer = ({
               <AccordionContent className="flex flex-col gap-4">
                 {collections.map(col => (
                   <div className="flex items-center gap-2" key={col}>
-                    <Checkbox id={col} />
+                    <Checkbox
+                      checked={selectedCollections.includes(col)}
+                      onCheckedChange={() =>
+                        toggleArrayValue(
+                          selectedCollections,
+                          col,
+                          setSelectedCollections,
+                        )
+                      }
+                      id={col}
+                    />
                     <Label htmlFor={col}>{col}</Label>
                   </div>
                 ))}
@@ -140,27 +215,29 @@ const FilterDrawer = ({
             <AccordionItem value="available">
               <AccordionTrigger>Availability</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">
-                <RadioGroup defaultValue="all">
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="all" id="all" />
-                    <Label htmlFor="all">All</Label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="avail" id="avail" />
-                    <Label htmlFor="avail">Available</Label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <RadioGroupItem value="unavail" id="unavail" />
-                    <Label htmlFor="unavail">Out of stack</Label>
-                  </div>
+                <RadioGroup
+                  defaultValue="all"
+                  value={available}
+                  onValueChange={val =>
+                    setAvailable(val as 'all' | 'available' | 'unavailable')
+                  }
+                >
+                  {['all', 'available', 'unavailable'].map(variants => (
+                    <div key={variants} className="flex items-center gap-3">
+                      <RadioGroupItem value={variants} id={variants} />
+                      <Label htmlFor={variants}>{variants}</Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
         <SheetFooter>
-          <Button>Apply Filter</Button>
-          <Button variant="outline">Reset Filter</Button>
+          <Button onClick={() => applyFilter()}>Apply Filter</Button>
+          <Button variant="outline" onClick={() => resetFilter()}>
+            Reset Filter
+          </Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

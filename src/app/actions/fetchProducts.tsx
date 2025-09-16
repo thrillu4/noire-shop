@@ -9,17 +9,24 @@ export async function fetchProducts(
 ): Promise<{ products: FilteredProduct[]; total: number }> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const where: any = {}
-  const { available, collection, gender, maxPrice, minPrice, size, type } =
-    filter
+  const { available, collections, gender, priceRange, sizes, types } = filter
 
-  if (gender) where.gender = gender
-  if (type) where.type = type
-  if (minPrice) where.price = { gte: minPrice }
-  if (maxPrice) where.price = { ...where.price, lte: maxPrice }
-  if (collection) where.collection = collection
-  if (size) where.variants = { some: { size } }
-  if (available) where.variants = { some: { stock: { gt: 0 } } }
-
+  if (gender !== 'all') where.gender = gender
+  if (types?.length) where.type = { in: types }
+  if (priceRange?.length === 2) {
+    where.price = {
+      gte: priceRange[0],
+      lte: priceRange[1],
+    }
+  }
+  if (collections?.length) where.collection = { in: collections }
+  if (sizes?.length) where.variants = { some: { size: { in: sizes } } }
+  if (available !== 'all') {
+    if (available === 'available')
+      where.variants = { some: { stock: { gt: 0 } } }
+    if (available === 'unavailable')
+      where.variants = { some: { stock: { lte: 0 } } }
+  }
   try {
     const [products, total] = await Promise.all([
       prisma.product.findMany({
@@ -31,12 +38,13 @@ export async function fetchProducts(
           variants: { select: { size: true, stock: true } },
         },
       }),
-      prisma.product.count({
+      prisma.product.findMany({
+        distinct: ['id'],
         where,
       }),
     ])
 
-    return { products, total }
+    return { products, total: total.length }
   } catch (error) {
     console.log('Server error', error)
     return { products: [], total: 0 }

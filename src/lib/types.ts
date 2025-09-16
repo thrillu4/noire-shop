@@ -253,13 +253,12 @@ export interface WishListState {
 }
 
 export interface FilterSettings {
-  gender: null | 'male' | 'female'
-  type: null | string
-  minPrice: null | number
-  maxPrice: null | number
-  collection: null | string
-  size: null | string
-  available: boolean
+  gender: 'all' | 'male' | 'female'
+  types: string[]
+  priceRange: number[]
+  collections: string[]
+  sizes: string[]
+  available: 'all' | 'available' | 'unavailable'
 }
 
 export interface FilterState {
@@ -267,6 +266,7 @@ export interface FilterState {
   totalProducts: number
   setFilterSettings: (values: FilterSettings) => void
   setTotalProducts: (total: number) => void
+  clearFilter: () => void
 }
 
 export interface FilteredProduct {

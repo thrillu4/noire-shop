@@ -84,28 +84,16 @@ const Hamburger = ({
                       <Mars /> Men
                     </div>
                   </AccordionTrigger>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.MEN_T_SHIRT}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>T-Shirts</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.MEN_HOODIES}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>Hoodies & Sweatshirts</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.MEN_JACKETS}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>Jackets & Coats</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.MEN_JEANS}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>Jeans</AccordionContent>
                   </Link>
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
@@ -122,28 +110,16 @@ const Hamburger = ({
                       <Venus /> Women
                     </div>
                   </AccordionTrigger>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.WOMEN_DRESSES}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>Dresses</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.WOMEN_TOPS}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>Tops & T-Shirts</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.WOMEN_BLOUSES}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>Blouses & Shirts</AccordionContent>
                   </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.WOMEN_JEANS}
-                  >
+                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>Jeans & Pants</AccordionContent>
                   </Link>
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>

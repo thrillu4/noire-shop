@@ -52,7 +52,7 @@ export default async function NavBar() {
               <NavigationMenuContent>
                 <div className="grid min-w-max grid-cols-2 gap-2 p-4">
                   <NavigationMenuLink>
-                    <Link href={ROUTES.MEN_SALE}>Jackets</Link>
+                    <Link href={ROUTES.MEN}>Jackets</Link>
                   </NavigationMenuLink>
                   <NavigationMenuLink>T-Shirts</NavigationMenuLink>
                   <NavigationMenuLink>Hoodies</NavigationMenuLink>

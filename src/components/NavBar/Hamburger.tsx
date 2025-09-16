@@ -19,6 +19,7 @@ import {
   Menu,
   Package,
   Shirt,
+  Store,
   User,
   Venus,
   X,
@@ -205,10 +206,10 @@ const Hamburger = ({
             <li className="py-4">
               <Link
                 onClick={() => setIsOpen(false)}
-                href={ROUTES.SALE}
+                href={ROUTES.PRODUCTS}
                 className="flex items-center gap-2"
               >
-                <BadgeDollarSign /> Sale
+                <Store /> All Products
               </Link>
             </li>
           </ul>
@@ -219,8 +220,8 @@ const Hamburger = ({
             <div className="mb-2 text-center text-sm text-neutral-500">
               My Account
             </div>
-            <ul className="flex flex-col gap-1 text-lg font-semibold">
-              <li className="py-4">
+            <ul className="flex flex-col gap-1 space-y-8 py-4 text-lg font-semibold">
+              <li>
                 <Link
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2"
@@ -229,7 +230,7 @@ const Hamburger = ({
                   <User /> Profile
                 </Link>
               </li>
-              <li className="py-4">
+              <li>
                 <Link
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2"
@@ -238,7 +239,7 @@ const Hamburger = ({
                   <Handbag /> Cart
                 </Link>
               </li>
-              <li className="py-4">
+              <li>
                 <Link
                   onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2"
@@ -247,7 +248,7 @@ const Hamburger = ({
                   <Heart /> Wishlist
                 </Link>
               </li>
-              <li className="py-4">
+              <li>
                 {isAuth ? (
                   <div
                     onClick={() => {

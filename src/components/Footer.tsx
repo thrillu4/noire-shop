@@ -1,13 +1,13 @@
-import { ROUTES } from "@/routes";
-import { Copyright, Info, Library } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { ROUTES } from '@/routes'
+import { Copyright, Info, Library } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Footer = () => {
   return (
     <footer className="bg-[#f5f5f5] pt-14 pb-3">
       <Image
-        src={"/logo.png"}
+        src={'/logo.png'}
         width={40}
         height={40}
         alt="logo"
@@ -33,7 +33,7 @@ const Footer = () => {
               <Link href={ROUTES.NEW}>New</Link>
             </li>
             <li>
-              <Link href={ROUTES.SALE}>Sale</Link>
+              <Link href={ROUTES.PRODUCTS}>All Products</Link>
             </li>
           </ul>
         </div>
@@ -64,7 +64,7 @@ const Footer = () => {
         <Copyright size={15} /> 2025 NOIRÉ
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

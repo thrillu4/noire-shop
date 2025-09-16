@@ -1,7 +1,89 @@
-import React from "react";
+import { Breadcrumbs } from '@/components/Breadcrumbs'
+import SearchBar from '@/components/Home/SearchBar'
+import prisma from '@/lib/prisma'
+import { verifySession } from '@/lib/sessions'
+import { ROUTES } from '@/routes'
+import { Shirt, ShoppingBag } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-const page = () => {
-  return <div>page</div>;
-};
+const New = async () => {
+  const session = await verifySession()
+  const newProducts = await prisma.product.findMany({
+    take: 16,
+    orderBy: {
+      updatedAt: 'desc',
+    },
+    include: {
+      images: { select: { url: true } },
+    },
+  })
 
-export default page;
+  return (
+    <div className="mb-20 px-3">
+      <Breadcrumbs />
+      <div className="my-5">
+        <SearchBar />
+      </div>
+      <h1 className="mt-3 mb-2 text-center text-2xl font-bold">New In</h1>
+      <h2 className="text-center text-sm opacity-65">
+        Discover the latest and greatest arrivals,{' '}
+        <Link href={ROUTES.COLLECTIONS} className="underline opacity-100">
+          new collections
+        </Link>{' '}
+        to know, exclusive{' '}
+        <Link href={ROUTES.PRODUCTS} className="underline opacity-100">
+          products
+        </Link>{' '}
+        and more style inspiration.
+        {!session.userId && (
+          <span>
+            Want to stay in the know?{' '}
+            <Link href={ROUTES.SIGNUP} className="underline opacity-100">
+              Sign up
+            </Link>{' '}
+            for updates.
+          </span>
+        )}
+      </h2>
+      <div className="mt-10 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
+        {newProducts.length === 0 && (
+          <div className="col-start-1 col-end-10 mt-10 text-center font-bold">
+            New In is empty check out all our{' '}
+            <Link
+              href={ROUTES.PRODUCTS}
+              className="inline-flex gap-3 underline"
+            >
+              <Shirt /> products
+            </Link>
+          </div>
+        )}
+        {newProducts.map(product => (
+          <div key={product.id}>
+            <div className="flex justify-center">
+              <Image
+                src={product.images[0]?.url}
+                alt={product.title}
+                width={144}
+                height={240}
+              />
+            </div>
+            <div className="text-xs">{product.type.toUpperCase()}</div>
+            <div className="flex items-center justify-between text-xs font-bold">
+              <h3>{product.title}</h3>
+              <p> ${product.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Link
+        href={ROUTES.PRODUCTS}
+        className="mt-15 flex items-center justify-center gap-3 rounded-2xl border py-4 transition duration-200 hover:scale-105"
+      >
+        View All Products <ShoppingBag className="w-5" />
+      </Link>
+    </div>
+  )
+}
+
+export default New

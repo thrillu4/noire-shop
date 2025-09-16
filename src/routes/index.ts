@@ -8,7 +8,6 @@ export const ROUTES = {
   NEW: '/products/new',
   MEN_NEW: '/products/men/new',
   WOMEN_NEW: '/products/women/new',
-  SALE: '/products/sale',
   MEN_SALE: '/products/men/sale',
   WOMEN_SALE: '/products/men/sale',
   MEN_T_SHIRT: '/products/men/t-shirt',

@@ -82,9 +82,6 @@ export default async function NavBar() {
               <Link href={ROUTES.NEW}>New</Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href={ROUTES.SALE}>Sale</Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
               <NavigationMenuTrigger>Collections</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid min-w-max grid-cols-2 gap-2 p-4">

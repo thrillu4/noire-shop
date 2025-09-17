@@ -9,8 +9,10 @@ import { useFilterState } from '@/store/filter'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const FilterByTypeProduct = ({
+  propGender,
   setPage,
 }: {
+  propGender: 'all' | 'male' | 'female'
   setPage: Dispatch<SetStateAction<number>>
 }) => {
   const { setFilterSettings, filter, clearFilter } = useFilterState()
@@ -18,10 +20,20 @@ const FilterByTypeProduct = ({
   const [types, setTypes] = useState<ProductType[]>([])
 
   useEffect(() => {
-    fetch(ROUTES.GET_PRODUCTS_TYPE)
-      .then(data => data.json())
-      .then(data => setTypes(data.res))
-  }, [])
+    if (propGender === 'all') {
+      fetch(ROUTES.GET_PRODUCTS_TYPE)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+    } else if (propGender === 'male') {
+      fetch(ROUTES.GET_PRODUCTS_TYPE_MEN)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+    } else if (propGender === 'female') {
+      fetch(ROUTES.GET_PRODUCTS_TYPE_WOMEN)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+    }
+  }, [propGender])
 
   useEffect(() => {
     setIsActive('')

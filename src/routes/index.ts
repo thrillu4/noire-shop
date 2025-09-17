@@ -39,5 +39,9 @@ export const ROUTES = {
   POST_REVIEWS_ADD: '/api/review/add',
   GET_PRODUCTS_TYPE: '/api/products/type',
   GET_PRODUCTS_COLLECTION: '/api/products/collection',
+  GET_PRODUCTS_TYPE_MEN: '/api/products/men/type',
+  GET_PRODUCTS_COLLECTION_MEN: '/api/products/men/collection',
+  GET_PRODUCTS_TYPE_WOMEN: '/api/products/women/type',
+  GET_PRODUCTS_COLLECTION_WOMEN: '/api/products/women/collection',
   GET_SEARCH: '/api/search',
 }

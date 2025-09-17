@@ -3,7 +3,6 @@
 import { fetchProducts } from '@/app/actions/fetchProducts'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import SearchBar from '@/components/Home/SearchBar'
-import FilterByTypeProduct from '@/components/Products/FilterByTypeProduct'
 import FilterDrawer from '@/components/Products/FilterDrawer'
 import ProductsSkeleton from '@/components/Products/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
@@ -11,10 +10,11 @@ import { FilteredProduct } from '@/lib/types'
 import { useFilterState } from '@/store/filter'
 import { BrushCleaning } from 'lucide-react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-const Men = () => {
+const Types = ({ params }: { params: Promise<{ type: string }> }) => {
+  const { type } = use(params)
   const [products, setProducts] = useState<FilteredProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(0)
@@ -28,6 +28,7 @@ const Men = () => {
       const newProducts = await fetchProducts(page * 8, 8, {
         ...filter,
         gender: 'male',
+        types: [type],
       })
       if (newProducts.products.length < 8) {
         setHasMore(false)
@@ -41,7 +42,7 @@ const Men = () => {
       setLoading(false)
     }
     loadProducts()
-  }, [filter, page, setTotalProducts])
+  }, [filter, page, setTotalProducts, type])
 
   useEffect(() => {
     if (inView && hasMore) {
@@ -52,15 +53,14 @@ const Men = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="my-3 text-2xl font-bold">For Men</h1>
+      <h1 className="my-3 text-2xl font-bold">{type}</h1>
       <SearchBar />
-      <div className="mt-5 flex items-center justify-between">
-        <FilterDrawer propGender="male" setPage={setPage} />
+      <div className="my-5 flex items-center justify-between">
+        <FilterDrawer propType={type} propGender="female" setPage={setPage} />
         <div className="text-sm">
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
-      <FilterByTypeProduct propGender="male" setPage={setPage} />
       <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
@@ -97,4 +97,4 @@ const Men = () => {
   )
 }
 
-export default Men
+export default Types

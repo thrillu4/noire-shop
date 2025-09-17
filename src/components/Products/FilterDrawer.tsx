@@ -25,8 +25,12 @@ import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
 
 const FilterDrawer = ({
+  propType,
+  propGender,
   setPage,
 }: {
+  propType?: string
+  propGender: 'all' | 'male' | 'female'
   setPage: Dispatch<SetStateAction<number>>
 }) => {
   const [open, setOpen] = useState(false)
@@ -51,13 +55,31 @@ const FilterDrawer = ({
   >(filter.available || 'all')
 
   useEffect(() => {
-    fetch(ROUTES.GET_PRODUCTS_TYPE)
-      .then(data => data.json())
-      .then(data => setTypes(data.res))
-    fetch(ROUTES.GET_PRODUCTS_COLLECTION)
-      .then(data => data.json())
-      .then(data => setCollections(data.res))
-  }, [])
+    if (propGender === 'all') {
+      fetch(ROUTES.GET_PRODUCTS_TYPE)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+      fetch(ROUTES.GET_PRODUCTS_COLLECTION)
+        .then(data => data.json())
+        .then(data => setCollections(data.res))
+    } else if (propGender === 'male') {
+      setGender('male')
+      fetch(ROUTES.GET_PRODUCTS_TYPE_MEN)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+      fetch(ROUTES.GET_PRODUCTS_COLLECTION_MEN)
+        .then(data => data.json())
+        .then(data => setCollections(data.res))
+    } else if (propGender === 'female') {
+      setGender('female')
+      fetch(ROUTES.GET_PRODUCTS_TYPE_WOMEN)
+        .then(data => data.json())
+        .then(data => setTypes(data.res))
+      fetch(ROUTES.GET_PRODUCTS_COLLECTION_WOMEN)
+        .then(data => data.json())
+        .then(data => setCollections(data.res))
+    }
+  }, [propGender])
 
   const toggleArrayValue = (
     arr: string[],
@@ -131,25 +153,28 @@ const FilterDrawer = ({
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="gender">
-              <AccordionTrigger>Gender</AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4">
-                <RadioGroup
-                  defaultValue="all"
-                  value={gender}
-                  onValueChange={val =>
-                    setGender(val as 'all' | 'male' | 'female')
-                  }
-                >
-                  {['all', 'male', 'female'].map(val => (
-                    <div className="flex items-center gap-3" key={val}>
-                      <RadioGroupItem value={val} id={val} />
-                      <Label htmlFor={val}>{val}</Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </AccordionContent>
-            </AccordionItem>
+            {propGender === 'all' && (
+              <AccordionItem value="gender">
+                <AccordionTrigger>Gender</AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4">
+                  <RadioGroup
+                    defaultValue="all"
+                    value={gender}
+                    onValueChange={val =>
+                      setGender(val as 'all' | 'male' | 'female')
+                    }
+                  >
+                    {['all', 'male', 'female'].map(val => (
+                      <div className="flex items-center gap-3" key={val}>
+                        <RadioGroupItem value={val} id={val} />
+                        <Label htmlFor={val}>{val}</Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </AccordionContent>
+              </AccordionItem>
+            )}
+
             <AccordionItem value="price">
               <AccordionTrigger>Price Range</AccordionTrigger>
               <AccordionContent>
@@ -167,29 +192,31 @@ const FilterDrawer = ({
                 </div>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="type">
-              <AccordionTrigger>Product type</AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4">
-                {types.map(obj => (
-                  <div className="flex items-center gap-2" key={obj.type}>
-                    <Checkbox
-                      checked={selectedTypes.includes(obj.type)}
-                      onCheckedChange={() =>
-                        toggleArrayValue(
-                          selectedTypes,
-                          obj.type,
-                          setSelectedTypes,
-                        )
-                      }
-                      id={obj.type}
-                    />
-                    <Label htmlFor={obj.type}>
-                      {obj.type} ({obj.count})
-                    </Label>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+            {!propType && (
+              <AccordionItem value="type">
+                <AccordionTrigger>Product type</AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4">
+                  {types.map(obj => (
+                    <div className="flex items-center gap-2" key={obj.type}>
+                      <Checkbox
+                        checked={selectedTypes.includes(obj.type)}
+                        onCheckedChange={() =>
+                          toggleArrayValue(
+                            selectedTypes,
+                            obj.type,
+                            setSelectedTypes,
+                          )
+                        }
+                        id={obj.type}
+                      />
+                      <Label htmlFor={obj.type}>
+                        {obj.type} ({obj.count})
+                      </Label>
+                    </div>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            )}
 
             <AccordionItem value="collection">
               <AccordionTrigger>Collection</AccordionTrigger>

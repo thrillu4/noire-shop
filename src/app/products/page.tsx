@@ -51,12 +51,12 @@ const Products = () => {
       <h1 className="my-3 text-2xl font-bold">Products</h1>
       <SearchBar />
       <div className="mt-5 flex items-center justify-between">
-        <FilterDrawer setPage={setPage} />
+        <FilterDrawer propGender="all" setPage={setPage} />
         <div className="text-sm">
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
-      <FilterByTypeProduct setPage={setPage} />
+      <FilterByTypeProduct setPage={setPage} propGender="all" />
       <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (

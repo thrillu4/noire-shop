@@ -1,4 +1,5 @@
 'use client'
+
 import { logout } from '@/app/actions/auth'
 import {
   Accordion,
@@ -6,9 +7,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { ProductType } from '@/lib/types'
 import { ROUTES } from '@/routes'
 import {
-  BadgeDollarSign,
   Handbag,
   Heart,
   Info,
@@ -30,6 +31,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import ContactUsLink from '../ContactUsLink'
 import WishListDrawer from './WishListDrawer'
+
 const Hamburger = ({
   isAuth,
   userId,
@@ -38,6 +40,8 @@ const Hamburger = ({
   userId: string | null
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [menTypes, setMenTypes] = useState<ProductType[]>([])
+  const [womenTypes, setWomenTypes] = useState<ProductType[]>([])
   const router = useRouter()
 
   useEffect(() => {
@@ -50,6 +54,15 @@ const Hamburger = ({
       document.documentElement.style.overflow = ''
     }
   }, [isOpen])
+
+  useEffect(() => {
+    fetch(ROUTES.GET_PRODUCTS_TYPE_MEN)
+      .then(data => data.json())
+      .then(data => setMenTypes(data.res))
+    fetch(ROUTES.GET_PRODUCTS_TYPE_WOMEN)
+      .then(data => data.json())
+      .then(data => setWomenTypes(data.res))
+  }, [])
 
   return (
     <>
@@ -84,18 +97,15 @@ const Hamburger = ({
                       <Mars /> Men
                     </div>
                   </AccordionTrigger>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
-                    <AccordionContent>T-Shirts</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
-                    <AccordionContent>Hoodies & Sweatshirts</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
-                    <AccordionContent>Jackets & Coats</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
-                    <AccordionContent>Jeans</AccordionContent>
-                  </Link>
+                  {menTypes.map(res => (
+                    <Link
+                      key={res.type}
+                      onClick={() => setIsOpen(false)}
+                      href={`${ROUTES.MEN}/${res.type}`}
+                    >
+                      <AccordionContent>{res.type}</AccordionContent>
+                    </Link>
+                  ))}
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
                     <AccordionContent>View All</AccordionContent>
                   </Link>
@@ -110,18 +120,15 @@ const Hamburger = ({
                       <Venus /> Women
                     </div>
                   </AccordionTrigger>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
-                    <AccordionContent>Dresses</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
-                    <AccordionContent>Tops & T-Shirts</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
-                    <AccordionContent>Blouses & Shirts</AccordionContent>
-                  </Link>
-                  <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
-                    <AccordionContent>Jeans & Pants</AccordionContent>
-                  </Link>
+                  {womenTypes.map(res => (
+                    <Link
+                      key={res.type}
+                      onClick={() => setIsOpen(false)}
+                      href={`${ROUTES.WOMEN}/${res.type}`}
+                    >
+                      <AccordionContent>{res.type}</AccordionContent>
+                    </Link>
+                  ))}
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>
                     <AccordionContent>View All</AccordionContent>
                   </Link>

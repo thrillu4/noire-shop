@@ -42,6 +42,7 @@ const Hamburger = ({
   const [isOpen, setIsOpen] = useState(false)
   const [menTypes, setMenTypes] = useState<ProductType[]>([])
   const [womenTypes, setWomenTypes] = useState<ProductType[]>([])
+  const [collections, setCollections] = useState<string[]>([])
   const router = useRouter()
 
   useEffect(() => {
@@ -62,6 +63,9 @@ const Hamburger = ({
     fetch(ROUTES.GET_PRODUCTS_TYPE_WOMEN)
       .then(data => data.json())
       .then(data => setWomenTypes(data.res))
+    fetch(ROUTES.GET_PRODUCTS_COLLECTION)
+      .then(data => data.json())
+      .then(data => setCollections(data.res))
   }, [])
 
   return (
@@ -143,31 +147,16 @@ const Hamburger = ({
                       <Library /> Collections
                     </div>
                   </AccordionTrigger>
+                  {collections.slice(0, 4).map(col => (
+                    <Link
+                      key={col}
+                      onClick={() => setIsOpen(false)}
+                      href={`${ROUTES.COLLECTIONS}/${col.charAt(0).toLowerCase() + col.slice(1)}`}
+                    >
+                      <AccordionContent>{col}</AccordionContent>
+                    </Link>
+                  ))}
 
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.COLLECTIONS}
-                  >
-                    <AccordionContent>Adidas</AccordionContent>
-                  </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.COLLECTIONS}
-                  >
-                    <AccordionContent>Nike</AccordionContent>
-                  </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.COLLECTIONS}
-                  >
-                    <AccordionContent>Puma</AccordionContent>
-                  </Link>
-                  <Link
-                    onClick={() => setIsOpen(false)}
-                    href={ROUTES.COLLECTIONS}
-                  >
-                    <AccordionContent>Zara</AccordionContent>
-                  </Link>
                   <Link
                     onClick={() => setIsOpen(false)}
                     href={ROUTES.COLLECTIONS}

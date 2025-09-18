@@ -61,7 +61,7 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
-      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
+      <div className="mt-5 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 font-bold">

@@ -11,16 +11,18 @@ export async function fetchProducts(
   const where: any = {}
   const { available, collections, gender, priceRange, sizes, types } = filter
 
-  if (gender !== 'all') where.gender = gender
-  if (types?.length) where.type = { in: types }
+  if (gender !== 'all') where.gender = { equals: gender, mode: 'insensitive' }
+  if (types?.length) where.type = { in: types, mode: 'insensitive' }
   if (priceRange?.length === 2) {
     where.price = {
       gte: priceRange[0],
       lte: priceRange[1],
     }
   }
-  if (collections?.length) where.collection = { in: collections }
-  if (sizes?.length) where.variants = { some: { size: { in: sizes } } }
+  if (collections?.length)
+    where.collection = { in: collections, mode: 'insensitive' }
+  if (sizes?.length)
+    where.variants = { some: { size: { in: sizes, mode: 'insensitive' } } }
   if (available !== 'all') {
     if (available === 'available')
       where.variants = { some: { stock: { gt: 0 } } }

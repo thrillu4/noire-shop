@@ -1,6 +1,7 @@
 'use client'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import ContactUsLink from '@/components/ContactUsLink'
 import SearchBar from '@/components/Home/SearchBar'
 import { ROUTES } from '@/routes'
 import Image from 'next/image'
@@ -24,17 +25,17 @@ const Collections = () => {
       .then(data => data.json())
       .then(data => setCollections(data.res))
   }, [])
-  console.log(collections)
+
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
       <h1 className="mt-3 text-2xl font-bold">Explore Collections</h1>
-      <h3 className="mt-1 mb-4 text-xs opacity-70">
+      <h3 className="mt-3 mb-5 text-xs opacity-70">
         From timeless classics to modern essentials — find the collection that
         fits your lifestyle.
       </h3>
       <SearchBar />
-      <div className="mt-7 grid grid-cols-2 gap-x-2 gap-y-5">
+      <div className="mt-7 mb-20 grid grid-cols-2 gap-x-2 gap-y-5">
         {collections.map(col => (
           <Link
             href={`${ROUTES.COLLECTIONS}/${col.collections.charAt(0).toLowerCase() + col.collections.slice(1)}`}
@@ -54,6 +55,7 @@ const Collections = () => {
           </Link>
         ))}
       </div>
+      <ContactUsLink>Contact Us / Help</ContactUsLink>
     </div>
   )
 }

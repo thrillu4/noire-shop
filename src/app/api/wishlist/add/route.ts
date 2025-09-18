@@ -47,26 +47,14 @@ export async function POST(req: Request) {
         { status: 400 },
       )
 
-    await prisma.wishlistItem.create({
+    const newItem = await prisma.wishlistItem.create({
       data: {
         productId,
         wishlistId: wishlist.id,
       },
     })
 
-    const allWishListItems = await prisma.wishlistItem.findMany({
-      where: { productId, wishlistId: wishlist.id },
-      include: {
-        product: {
-          include: {
-            images: { take: 1 },
-            variants: true,
-          },
-        },
-      },
-    })
-
-    return NextResponse.json({ items: allWishListItems })
+    return NextResponse.json({ newItem })
   } catch (error) {
     console.log(error)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })

@@ -8,17 +8,11 @@ import { useWishListState } from '@/store/wishlist'
 import { Heart, HeartOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
 
 const WishList = () => {
-  const { items, removeWishItem, setAuthenticated, loadWishList } =
-    useWishListState()
+  const { items, removeWishItem } = useWishListState()
   const { addItem } = useCartStore()
 
-  // useEffect(() => {
-  //   setAuthenticated(userId)
-  //   loadWishList()
-  // }, [loadWishList, setAuthenticated, userId])
   return (
     <div className="min-h-screen px-3">
       <Breadcrumbs />

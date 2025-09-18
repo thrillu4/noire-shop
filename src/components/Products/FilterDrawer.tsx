@@ -25,10 +25,12 @@ import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
 
 const FilterDrawer = ({
+  propCollection,
   propType,
   propGender,
   setPage,
 }: {
+  propCollection?: string
   propType?: string
   propGender: 'all' | 'male' | 'female'
   setPage: Dispatch<SetStateAction<number>>
@@ -152,7 +154,6 @@ const FilterDrawer = ({
                 ))}
               </AccordionContent>
             </AccordionItem>
-
             {propGender === 'all' && (
               <AccordionItem value="gender">
                 <AccordionTrigger>Gender</AccordionTrigger>
@@ -174,7 +175,6 @@ const FilterDrawer = ({
                 </AccordionContent>
               </AccordionItem>
             )}
-
             <AccordionItem value="price">
               <AccordionTrigger>Price Range</AccordionTrigger>
               <AccordionContent>
@@ -218,27 +218,30 @@ const FilterDrawer = ({
               </AccordionItem>
             )}
 
-            <AccordionItem value="collection">
-              <AccordionTrigger>Collection</AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4">
-                {collections.map(col => (
-                  <div className="flex items-center gap-2" key={col}>
-                    <Checkbox
-                      checked={selectedCollections.includes(col)}
-                      onCheckedChange={() =>
-                        toggleArrayValue(
-                          selectedCollections,
-                          col,
-                          setSelectedCollections,
-                        )
-                      }
-                      id={col}
-                    />
-                    <Label htmlFor={col}>{col}</Label>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+            {!propCollection && (
+              <AccordionItem value="collection">
+                <AccordionTrigger>Collection</AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4">
+                  {collections.map(col => (
+                    <div className="flex items-center gap-2" key={col}>
+                      <Checkbox
+                        checked={selectedCollections.includes(col)}
+                        onCheckedChange={() =>
+                          toggleArrayValue(
+                            selectedCollections,
+                            col,
+                            setSelectedCollections,
+                          )
+                        }
+                        id={col}
+                      />
+                      <Label htmlFor={col}>{col}</Label>
+                    </div>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            )}
+
             <AccordionItem value="available">
               <AccordionTrigger>Availability</AccordionTrigger>
               <AccordionContent className="flex flex-col gap-4">

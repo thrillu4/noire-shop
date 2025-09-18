@@ -6,9 +6,11 @@ import FilterDrawer from '@/components/Products/FilterDrawer'
 import ProductsSkeleton from '@/components/Products/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
 import { FilteredProduct } from '@/lib/types'
+import { ROUTES } from '@/routes'
 import { useFilterState } from '@/store/filter'
 import { BrushCleaning } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { fetchProducts } from '../actions/fetchProducts'
@@ -49,7 +51,7 @@ const Products = () => {
     <div className="mb-20 px-3">
       <Breadcrumbs />
       <h1 className="mt-3 text-2xl font-bold">Products</h1>
-      <h2 className="mt-1 mb-3 text-xs opacity-90">
+      <h2 className="mt-3 mb-5 text-xs opacity-90">
         From accent accessories to wardrobe heroes – these are the most-wanted
         pieces you can’t get enough of.
       </h2>
@@ -75,7 +77,10 @@ const Products = () => {
           </div>
         )}
         {products.map(product => (
-          <div key={product.id}>
+          <Link
+            href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
+            key={product.id}
+          >
             <div className="flex justify-center">
               <Image
                 src={product.images[0]?.url}
@@ -89,7 +94,7 @@ const Products = () => {
               <h3>{product.title}</h3>
               <p> ${product.price}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {hasMore && <div ref={ref}>Loading more...</div>}

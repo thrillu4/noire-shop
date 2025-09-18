@@ -88,7 +88,7 @@ const CartDrawer = ({
             <div className="mt-3">
               {items.map(item => (
                 <div
-                  key={item.product?.id}
+                  key={item.id}
                   className="flex gap-4 border bg-neutral-100 px-1 py-5"
                 >
                   <div className="min-w-28">

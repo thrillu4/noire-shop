@@ -1,7 +1,6 @@
 'use server'
 import { orderDetails } from '@/app/actions/orderDetails'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { Trash2 } from 'lucide-react'
 import Image from 'next/image'
 
 const OrderDetails = async ({

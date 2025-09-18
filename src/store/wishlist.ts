@@ -19,7 +19,7 @@ export const useWishListState = create<WishListState>((set, get) => ({
   addWishItem: async productId => {
     set({ isLoading: true })
     try {
-      const { isAuthenticated } = get()
+      const { isAuthenticated, items } = get()
       if (isAuthenticated) {
         const response = await fetch(ROUTES.POST_WISHLIST_ADD, {
           method: 'POST',
@@ -29,7 +29,7 @@ export const useWishListState = create<WishListState>((set, get) => ({
         if (!response.ok) throw new Error('Failed to add product to wish list')
 
         const data = await response.json()
-        set({ items: data.items })
+        set({ items: [...items, data.newItem] })
       } else {
         const localWishList = getLocalWishList()
         const existingItem = localWishList.find(

@@ -14,6 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { Button } from '../ui/button'
+import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
 
 const WishListDrawer = ({
   open,
@@ -24,10 +25,15 @@ const WishListDrawer = ({
   userId: string | null
   setIsOpen?: (open: boolean) => void
 }) => {
-  const { items, setAuthenticated, loadWishList, totalItems, removeWishItem } =
-    useWishListState()
+  const {
+    items,
+    setAuthenticated,
+    loadWishList,
+    totalItems,
+    removeWishItem,
+    isLoading,
+  } = useWishListState()
   const { addItem } = useCartStore()
-
   useEffect(() => {
     setAuthenticated(userId)
     loadWishList()
@@ -42,6 +48,7 @@ const WishListDrawer = ({
         </div>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto px-1 pt-10 pb-5">
+        {isLoading && <LoadingSkeletonSpinner />}
         {items.length === 0 && (
           <div className="flex flex-col gap-1 text-center">
             <SheetHeader className="flex flex-col items-center gap-7">
@@ -87,7 +94,12 @@ const WishListDrawer = ({
                     />
                   </div>
                   <div className="flex flex-col justify-between text-xs">
-                    <div className="font-bold">{item.product.title}</div>
+                    <Link
+                      href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
+                      className="font-bold"
+                    >
+                      {item.product.title}
+                    </Link>
                     <div className="flex items-center justify-between">
                       <div className="opacity-60">
                         {item.product.type.toUpperCase()}

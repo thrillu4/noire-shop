@@ -3,12 +3,13 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import SearchBar from '@/components/Home/SearchBar'
 import FilterByTypeProduct from '@/components/Products/FilterByTypeProduct'
 import FilterDrawer from '@/components/Products/FilterDrawer'
-import ProductsSkeleton from '@/components/Products/ProductsSkeleton'
+import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
+import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
 import { FilteredProduct } from '@/lib/types'
 import { ROUTES } from '@/routes'
 import { useFilterState } from '@/store/filter'
-import { BrushCleaning } from 'lucide-react'
+import { BrushCleaning, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -23,6 +24,15 @@ const Products = () => {
   const { filter, totalProducts, clearFilter, setTotalProducts } =
     useFilterState()
   const { ref, inView } = useInView()
+
+  const defaultFilter = {
+    gender: 'all',
+    types: [],
+    sizes: [],
+    priceRange: [0, 100],
+    collections: [],
+    available: 'all',
+  }
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -57,13 +67,24 @@ const Products = () => {
       </h2>
       <SearchBar />
       <div className="mt-5 flex items-center justify-between">
-        <FilterDrawer propGender="all" setPage={setPage} />
+        <div className="flex items-center gap-2">
+          <FilterDrawer propGender="all" setPage={setPage} />
+          {JSON.stringify(filter) != JSON.stringify(defaultFilter) && (
+            <div
+              onClick={() => clearFilter()}
+              className="flex items-center gap-1 border-2 p-1 text-sm"
+            >
+              Clear filter <X className="size-4" />
+            </div>
+          )}
+        </div>
         <div className="text-sm">
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
       <FilterByTypeProduct setPage={setPage} propGender="all" />
       <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
+        {loading && <LoadingSkeletonSpinner />}
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 font-bold">
@@ -97,7 +118,12 @@ const Products = () => {
           </Link>
         ))}
       </div>
-      {hasMore && <div ref={ref}>Loading more...</div>}
+      {hasMore && (
+        <div
+          ref={ref}
+          className="mx-auto my-5 h-15 w-15 animate-spin rounded-full border-t-2 border-b-2 border-gray-900"
+        />
+      )}
     </div>
   )
 }

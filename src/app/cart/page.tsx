@@ -12,9 +12,10 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import CartPageSkeleton from '@/components/Skeletons/LoadingSkeletonSpinner'
 
 const Cart = () => {
-  const { items, totalPrice, totalItems } = useCartStore()
+  const { items, totalPrice, totalItems, isLoading } = useCartStore()
   const router = useRouter()
   const [isChecked, setIsChecked] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -30,7 +31,8 @@ const Cart = () => {
   }
   return (
     <div className="min-h-[60vh]">
-      {items.length === 0 && (
+      {isLoading && <CartPageSkeleton />}
+      {!isLoading && items.length === 0 && (
         <div className="mt-30 flex flex-col gap-3">
           <div className="flex flex-col items-center gap-7">
             <div>
@@ -43,13 +45,12 @@ const Cart = () => {
           </Link>
         </div>
       )}
-
       {items.length > 0 && (
         <div className="mb-20 px-2">
           <Breadcrumbs />
           <h2 className="mt-4 text-2xl font-extrabold">Shopping Bag</h2>
-          {items.map(item => (
-            <ItemGrid key={item.id} cartItem={item} />
+          {items.map((item, i) => (
+            <ItemGrid key={i} cartItem={item} />
           ))}
           <div className="flex flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold">
             <div>Order Summary</div>

@@ -56,7 +56,7 @@ const OrderDetails = async ({
           <div className="mb-2 text-base font-bold">Products:</div>
           {orderItems.map(item => (
             <div
-              key={item.product?.id}
+              key={item.id}
               className="flex gap-4 border bg-neutral-100 px-1 py-5"
             >
               <div className="min-w-28">

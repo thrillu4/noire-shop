@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { useEffect, useState } from 'react'
+import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
 
 const CartDrawer = ({
   isAuth,
@@ -31,6 +32,7 @@ const CartDrawer = ({
     removeItem,
     totalPrice,
     totalItems,
+    isLoading,
   } = useCartStore()
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -50,7 +52,6 @@ const CartDrawer = ({
     pathname === ROUTES.CHECKOUT
   )
     return null
-
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
@@ -77,7 +78,7 @@ const CartDrawer = ({
             </Link>
           </div>
         )}
-
+        {isLoading && <LoadingSkeletonSpinner />}
         {items.length > 0 && (
           <div className="flex w-full flex-col items-center justify-center">
             <SheetHeader>
@@ -86,9 +87,9 @@ const CartDrawer = ({
               </SheetTitle>
             </SheetHeader>
             <div className="mt-3">
-              {items.map(item => (
+              {items.map((item, i) => (
                 <div
-                  key={item.id}
+                  key={i}
                   className="flex gap-4 border bg-neutral-100 px-1 py-5"
                 >
                   <div className="min-w-28">
@@ -101,7 +102,12 @@ const CartDrawer = ({
                     />
                   </div>
                   <div className="flex w-full flex-col justify-between text-xs">
-                    <div className="font-bold">{item.product.title}</div>
+                    <Link
+                      href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
+                      className="font-bold"
+                    >
+                      {item.product.title}
+                    </Link>
 
                     <div className="flex items-center justify-between text-xs">
                       <div>

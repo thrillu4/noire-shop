@@ -2,7 +2,6 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import ClientSingleProduct from '@/components/Products/ClientSingleProduct'
 import prisma from '@/lib/prisma'
-import { verifySession } from '@/lib/sessions'
 
 const SingleProduct = async ({
   searchParams,
@@ -10,7 +9,6 @@ const SingleProduct = async ({
   searchParams: Promise<{ productId: string }>
 }) => {
   const { productId } = await searchParams
-  const session = await verifySession()
 
   const product = await prisma.product.findUnique({
     where: { id: Number(productId) },

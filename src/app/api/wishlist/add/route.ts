@@ -52,6 +52,14 @@ export async function POST(req: Request) {
         productId,
         wishlistId: wishlist.id,
       },
+      include: {
+        product: {
+          include: {
+            images: { take: 1 },
+            variants: true,
+          },
+        },
+      },
     })
 
     return NextResponse.json({ newItem })

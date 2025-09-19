@@ -3,6 +3,8 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import ContactUsLink from '@/components/ContactUsLink'
 import SearchBar from '@/components/Home/SearchBar'
+import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
+import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { ROUTES } from '@/routes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,11 +21,15 @@ interface CollectionsWithImages {
 
 const Collections = () => {
   const [collections, setCollections] = useState<CollectionsWithImages[]>([])
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
+    setLoading(true)
     fetch(ROUTES.GET_PRODUCTS_COLLECTION_WITH_IMAGE)
       .then(data => data.json())
-      .then(data => setCollections(data.res))
+      .then(data => {
+        setCollections(data.res)
+        setLoading(false)
+      })
   }, [])
 
   return (
@@ -35,7 +41,9 @@ const Collections = () => {
         fits your lifestyle.
       </h3>
       <SearchBar />
+      {loading && <LoadingSkeletonSpinner />}
       <div className="mt-7 mb-20 grid grid-cols-2 gap-x-2 gap-y-5">
+        {loading && <ProductsSkeleton />}
         {collections.map(col => (
           <Link
             href={`${ROUTES.COLLECTIONS}/${col.collections.charAt(0).toLowerCase() + col.collections.slice(1)}`}

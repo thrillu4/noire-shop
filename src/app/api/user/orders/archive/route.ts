@@ -13,6 +13,9 @@ export async function GET() {
       userId: session.userId,
       status: { in: ['delivered', 'cancelled'] },
     },
+    orderBy: {
+      updatedAt: 'desc',
+    },
   })
 
   return NextResponse.json({ orders })

@@ -131,7 +131,7 @@ const SearchBar = () => {
                 <div className="grid grid-cols-2 gap-3 space-y-1">
                   {collections.map((col, i) => (
                     <Link
-                      href={'/'}
+                      href={`${ROUTES.COLLECTIONS}/${col.collection.charAt(0).toLowerCase() + col.collection.slice(1)}`}
                       key={col.collection + i}
                       className="rounded-sm border px-3 py-1 text-sm"
                     >
@@ -148,7 +148,7 @@ const SearchBar = () => {
                 {results.map(product => (
                   <Link
                     key={product.id}
-                    href={`/product/${product.id}`}
+                    href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
                     className="flex items-center gap-3 px-3 py-2 text-sm hover:bg-gray-100"
                   >
                     {product.images[0] && (

@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 interface IProps {
   productId: number
   quantity: number
-  size?: string
+  size: string
 }
 
 export function AddToCartButton({ productId, quantity, size }: IProps) {

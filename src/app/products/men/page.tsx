@@ -5,12 +5,14 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import SearchBar from '@/components/Home/SearchBar'
 import FilterByTypeProduct from '@/components/Products/FilterByTypeProduct'
 import FilterDrawer from '@/components/Products/FilterDrawer'
-import ProductsSkeleton from '@/components/Products/ProductsSkeleton'
+import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
 import { FilteredProduct } from '@/lib/types'
+import { ROUTES } from '@/routes'
 import { useFilterState } from '@/store/filter'
 import { BrushCleaning } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
@@ -75,7 +77,10 @@ const Men = () => {
           </div>
         )}
         {products.map(product => (
-          <div key={product.id}>
+          <Link
+            href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
+            key={product.id}
+          >
             <div className="flex justify-center">
               <Image
                 src={product.images[0]?.url}
@@ -89,7 +94,7 @@ const Men = () => {
               <h3>{product.title}</h3>
               <p> ${product.price}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {hasMore && <div ref={ref}>Loading more...</div>}

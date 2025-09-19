@@ -16,7 +16,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       get().migrateLocalCart()
     }
   },
-  addItem: async (productId, quantity = 1, size?) => {
+  addItem: async (productId, quantity = 1, size) => {
     set({ isLoading: true })
 
     try {
@@ -39,7 +39,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       } else {
         const localCart = getLocalCart()
         const existingItemIndex = localCart.findIndex(
-          item => item.productId === productId,
+          item => item.productId === productId && item.size === size,
         )
 
         if (existingItemIndex !== -1) {
@@ -61,7 +61,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  removeItem: async (productId, size?) => {
+  removeItem: async (productId, size) => {
     set({ isLoading: true })
 
     try {
@@ -80,7 +80,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       } else {
         const localCart = getLocalCart()
         const filteredCart = localCart.filter(
-          item => item.productId !== productId,
+          item => (item.productId && item.size) !== (productId && size),
         )
         setLocalCart(filteredCart)
         await get().loadCart()
@@ -92,7 +92,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ isLoading: false })
     }
   },
-  updateQuantity: async (cartItemId, productId, quantity, size?) => {
+  updateQuantity: async (cartItemId, productId, quantity, size) => {
     if (quantity <= 0) {
       return get().removeItem(productId, size)
     }
@@ -115,7 +115,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       } else {
         const localCart = getLocalCart()
         const existingItemIndex = localCart.findIndex(
-          item => item.productId === productId,
+          item => item.productId === productId && item.size === size,
         )
 
         if (existingItemIndex !== -1) {
@@ -137,7 +137,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const { isAuthenticated } = get()
 
-      if (isAuthenticated) {
+      if (isAuthenticated.isAuth && isAuthenticated.userId) {
         const response = await fetch(ROUTES.DELETE_CART_CLEAR, {
           method: 'DELETE',
         })

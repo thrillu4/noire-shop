@@ -59,13 +59,16 @@ const New = async () => {
           </div>
         )}
         {newProducts.map(product => (
-          <div key={product.id}>
-            <div className="flex justify-center">
+          <Link
+            href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
+            key={product.id}
+          >
+            <div className="relative h-48 w-full md:h-96 md:w-auto">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}
-                width={144}
-                height={240}
+                fill
+                className="object-cover"
               />
             </div>
             <div className="text-xs">{product.type.toUpperCase()}</div>
@@ -73,7 +76,7 @@ const New = async () => {
               <h3>{product.title}</h3>
               <p> ${product.price}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <Link

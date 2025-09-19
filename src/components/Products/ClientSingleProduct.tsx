@@ -47,21 +47,20 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
   const handleToggleWishList = () => {
     if (inWishList) {
       removeWishItem(product.id)
-      toast.message(`${product.title} removed from wish list`)
+      toast.success(`${product.title} removed from wish list`)
     } else {
       addWishItem(product.id)
       toast.success(`${product.title} added to wish list`)
     }
   }
-
   return (
     <div className="mt-5">
       <div>
         <Image
           src={mainImageUrl}
           alt={product.title}
-          width={320}
-          height={400}
+          width={305}
+          height={305}
         />
       </div>
       <Carousel className="mt-7">

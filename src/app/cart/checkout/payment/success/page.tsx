@@ -4,6 +4,7 @@ import { ROUTES } from '@/routes'
 import { useOrderStore } from '@/store/order'
 import { ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -32,9 +33,11 @@ const Success = () => {
       </div>
       <h1 className="font-extrabold">🎉 Your payment was successful!</h1>
       <h2 className="font-bold">We will contact you soon. 🤗</h2>
-      <Button>
-        <ShoppingBag /> Continue Shopping
-      </Button>
+      <Link href={ROUTES.PRODUCTS}>
+        <Button>
+          <ShoppingBag /> Continue Shopping
+        </Button>
+      </Link>
       <div className="mt-3 space-y-2 rounded-2xl border-2 p-5 text-sm">
         <div className="flex items-center justify-between">
           <div className="font-bold">Details: </div>

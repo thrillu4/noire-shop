@@ -2,6 +2,7 @@
 import { checkout } from '@/app/actions/checkout'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import YourOrder from '@/components/Checkout/YourOrder'
+import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -35,7 +36,7 @@ const Checkout = () => {
     },
   })
 
-  const { items, isAuthenticated } = useCartStore()
+  const { items, isAuthenticated, isLoading } = useCartStore()
   const { setCurrentOrder } = useOrderStore()
 
   async function onSubmit(data: CheckoutDatatype) {
@@ -65,6 +66,7 @@ const Checkout = () => {
     <div className="px-2">
       <Breadcrumbs />
       <h2 className="mt-4 text-2xl font-extrabold">Checkout</h2>
+      {isLoading && <LoadingSkeletonSpinner />}
 
       <Form {...form}>
         <form

@@ -142,7 +142,7 @@ export interface CartItemData {
   id?: number
   productId: number
   quantity: number
-  size?: string
+  size: string
   product: {
     id: number
     title: string
@@ -155,7 +155,7 @@ export interface CartItemData {
 export interface LocalCartItem {
   productId: number
   quantity: number
-  size?: string
+  size: string
 }
 
 export interface CartState {
@@ -167,17 +167,13 @@ export interface CartState {
   }
 
   setAuthenticated: (isAuth: boolean, userId: string | null) => void
-  addItem: (
-    productId: number,
-    quantity?: number,
-    size?: string,
-  ) => Promise<void>
-  removeItem: (productId: number, size?: string) => Promise<void>
+  addItem: (productId: number, quantity: number, size: string) => Promise<void>
+  removeItem: (productId: number, size: string) => Promise<void>
   updateQuantity: (
     cartItemId: number,
     productId: number,
     quantity: number,
-    size?: string,
+    size: string,
   ) => Promise<void>
   clearCart: () => Promise<void>
   loadCart: () => Promise<void>

@@ -51,7 +51,7 @@ const Payment = () => {
     const success = await payment(currentOrder, data)
     if (success) {
       setCurrentOrder(success)
-      await clearCart()
+      clearCart()
       router.push(ROUTES.PAYMENT_SUCCESS)
     }
   }

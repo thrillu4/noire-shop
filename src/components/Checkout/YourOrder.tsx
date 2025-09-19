@@ -14,8 +14,8 @@ const YourOrder = ({ cod }: { cod?: boolean }) => {
         <div className="text-blue-700">({totalItems()})</div>
       </div>
       <div className="flex flex-col gap-5">
-        {items.map(item => (
-          <div className="flex gap-3 text-sm" key={item.productId}>
+        {items.map((item, i) => (
+          <div className="flex gap-3 text-sm" key={i}>
             <div className="min-w-[115px]">
               <Image
                 src={item.product.images[0].url}

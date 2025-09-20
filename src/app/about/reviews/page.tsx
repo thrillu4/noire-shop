@@ -2,11 +2,12 @@
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import AddReviewForm from '@/components/Reviews/AddReviewForm'
+import LoadingBlockSkeleton from '@/components/Skeletons/LoadingBlockSkeleton'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ROUTES } from '@/routes'
-import { ListRestart, Star } from 'lucide-react'
+import { ListRestart, LoaderCircle, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Review } from '../../../../prisma/generated/prisma'
 
@@ -14,8 +15,9 @@ export default function CustomerReviewsPage() {
   const [take, setTake] = useState(4)
   const [end, setEnd] = useState(false)
   const [reviews, setReviews] = useState<Omit<Review, 'id' | 'createdAt'>[]>([])
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
+    setLoading(true)
     const fetchReviews = async () => {
       const response = await fetch(`${ROUTES.GET_REVIEWS}?take=${take}`)
       if (!response.ok) throw new Error('Failed to load reviews')
@@ -24,6 +26,7 @@ export default function CustomerReviewsPage() {
       if (take > reviews.reviews.length) {
         setEnd(true)
       }
+      setLoading(false)
     }
     fetchReviews()
   }, [take])
@@ -36,6 +39,7 @@ export default function CustomerReviewsPage() {
       </h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {loading && <LoadingBlockSkeleton />}
         {reviews.map((review, index) => (
           <Card
             key={index}
@@ -74,7 +78,14 @@ export default function CustomerReviewsPage() {
           variant={'outline'}
           className="mt-4 w-full"
         >
-          <ListRestart /> Show More
+          {loading ? (
+            <LoaderCircle className="animate-spin" />
+          ) : (
+            <>
+              <ListRestart />
+              Show More
+            </>
+          )}
         </Button>
       )}
       <div className="mt-12 text-center">

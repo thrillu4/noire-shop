@@ -34,6 +34,8 @@ const Payment = () => {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(true)
   const { clearCart } = useCartStore()
+  const [loading, setLoading] = useState(false)
+
   const { setCurrentOrder } = useOrderStore()
   const { currentOrder } = useOrderStore()
   const form = useForm<CardType>({
@@ -43,16 +45,18 @@ const Payment = () => {
       cardNumber: '',
       expiry: '',
       cvv: '',
-      checkbox: undefined,
+      checkbox: false,
     },
   })
 
   const onSubmit = async (data: CardType) => {
+    setLoading(true)
     const success = await payment(currentOrder, data)
     if (success) {
       setCurrentOrder(success)
       clearCart()
       router.push(ROUTES.PAYMENT_SUCCESS)
+      setLoading(false)
     }
   }
 
@@ -302,7 +306,7 @@ const Payment = () => {
             )}
           />
           <Button type="submit" className="my-8 w-full">
-            Confirm Your Agreement
+            {loading ? 'Processing...' : 'Confirm Your Agreement'}
           </Button>
         </form>
       </Form>

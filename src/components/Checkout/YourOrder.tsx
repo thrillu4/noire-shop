@@ -1,5 +1,7 @@
+import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/cart'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const YourOrder = ({ cod }: { cod?: boolean }) => {
   const { totalItems, items, totalPrice } = useCartStore()
@@ -15,7 +17,11 @@ const YourOrder = ({ cod }: { cod?: boolean }) => {
       </div>
       <div className="flex flex-col gap-5">
         {items.map((item, i) => (
-          <div className="flex gap-3 text-sm" key={i}>
+          <Link
+            href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
+            className="flex gap-3 text-sm"
+            key={i}
+          >
             <div className="min-w-[115px]">
               <Image
                 src={item.product.images[0].url}
@@ -37,7 +43,7 @@ const YourOrder = ({ cod }: { cod?: boolean }) => {
                 <div>${item.product.price}</div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="mt-8 flex flex-col gap-3 border-t border-b py-3 font-bold">

@@ -18,6 +18,8 @@ import { toast } from 'sonner'
 
 const ChangePassword = () => {
   const [serverError, setServerError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<PasswordEditType>({
     resolver: zodResolver(PasswordEditSchema),
     defaultValues: {
@@ -28,15 +30,18 @@ const ChangePassword = () => {
   })
 
   async function onSubmit(values: PasswordEditType) {
+    setLoading(true)
     const response = await updatePassword(values)
 
     if (!response.success) {
       setServerError(response.error || 'Something went wrong')
+      setLoading(false)
       return
     }
 
     form.reset()
     setServerError(null)
+    setLoading(false)
     toast.success('Password successfully changed', {
       description: new Date().toLocaleString(),
     })
@@ -101,7 +106,7 @@ const ChangePassword = () => {
             className="w-full"
             disabled={!form.formState.isDirty}
           >
-            Change Password
+            {loading ? 'Processing...' : 'Change Password'}
           </Button>
         </form>
       </Form>

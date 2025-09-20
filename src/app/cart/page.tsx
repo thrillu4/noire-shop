@@ -16,17 +16,22 @@ import CartPageSkeleton from '@/components/Skeletons/LoadingSkeletonSpinner'
 
 const Cart = () => {
   const { items, totalPrice, totalItems, isLoading } = useCartStore()
+  const [loading, setLoading] = useState(false)
+
   const router = useRouter()
   const [isChecked, setIsChecked] = useState(false)
   const [showError, setShowError] = useState(false)
 
   const handleCheck = () => {
+    setLoading(true)
     if (!isChecked) {
       setShowError(true)
+      setLoading(false)
     } else {
       setIsChecked(false)
       setShowError(false)
       router.push(ROUTES.CHECKOUT)
+      setLoading(false)
     }
   }
   return (
@@ -92,7 +97,8 @@ const Cart = () => {
               </p>
             )}
             <Button onClick={handleCheck} className="flex items-center gap-3">
-              <LockKeyhole /> Continue to checkout
+              <LockKeyhole />
+              {loading ? 'Processing...' : 'Continue to checkout'}
             </Button>
           </div>
         </div>

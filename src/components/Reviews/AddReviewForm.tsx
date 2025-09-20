@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
 import { StarRating } from './StarRating'
+import { toast } from 'sonner'
 
 const AddReviewForm = ({
   setTake,
@@ -30,6 +31,8 @@ const AddReviewForm = ({
   setTake: React.Dispatch<React.SetStateAction<number>>
 }) => {
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<ReviewType>({
     resolver: zodResolver(ReviewFormSchema),
     defaultValues: {
@@ -41,6 +44,7 @@ const AddReviewForm = ({
   })
 
   async function onSubmit(values: ReviewType) {
+    setLoading(true)
     const response = await fetch(ROUTES.POST_REVIEWS_ADD, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
@@ -52,6 +56,8 @@ const AddReviewForm = ({
     setTake(state => state + 1)
     form.reset()
     setOpen(false)
+    setLoading(false)
+    toast.success('Thank for your feedback!')
   }
 
   return (
@@ -131,7 +137,9 @@ const AddReviewForm = ({
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Submit Review</Button>
+                <Button type="submit">
+                  {loading ? 'Submitting...' : 'Submit Review'}
+                </Button>
               </form>
             </Form>
           </div>

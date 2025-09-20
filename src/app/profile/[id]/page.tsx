@@ -1,7 +1,9 @@
 'use server'
 import { orderDetails } from '@/app/actions/orderDetails'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { ROUTES } from '@/routes'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const OrderDetails = async ({
   params,
@@ -55,7 +57,8 @@ const OrderDetails = async ({
         <div className="mt-5">
           <div className="mb-2 text-base font-bold">Products:</div>
           {orderItems.map(item => (
-            <div
+            <Link
+              href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
               key={item.id}
               className="flex gap-4 border bg-neutral-100 px-1 py-5"
             >
@@ -84,7 +87,7 @@ const OrderDetails = async ({
                   <div className="font-bold">${item.product.price}</div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

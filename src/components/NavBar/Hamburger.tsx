@@ -31,6 +31,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import ContactUsLink from '../ContactUsLink'
 import WishListDrawer from './WishListDrawer'
+import { toast } from 'sonner'
 
 const Hamburger = ({
   isAuth,
@@ -226,6 +227,7 @@ const Hamburger = ({
                     onClick={() => {
                       logout()
                       setIsOpen(false)
+                      toast.success('Logged out!')
                     }}
                     className="flex cursor-pointer items-center gap-2"
                   >

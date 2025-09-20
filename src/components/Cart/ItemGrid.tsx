@@ -25,11 +25,11 @@ const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
     <>
       {isLoading && <LoadingSkeletonSpinner />}
       <div
-        className="my-10 grid grid-cols-[1fr_auto] gap-3.5 text-sm"
+        className="my-10 grid grid-cols-[1fr_auto] gap-1.5 text-sm"
         key={cartItem.productId}
       >
         <div className="flex w-full flex-col">
-          <div className="relative min-w-[235px]">
+          <div className="relative min-w-[225px]">
             <Image
               src={cartItem.product.images[0].url}
               alt="product image"

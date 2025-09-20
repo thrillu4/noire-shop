@@ -5,14 +5,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { ArrowDownWideNarrow, ArrowUpNarrowWide, Plus } from "lucide-react";
+} from '@/components/ui/select'
+import { ArrowDownWideNarrow, ArrowUpNarrowWide, Plus } from 'lucide-react'
 
 export function SortSelector() {
   return (
     <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Sort by ..." />
+      <SelectTrigger className="px-2 py-0 text-xs">
+        <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
@@ -28,5 +28,5 @@ export function SortSelector() {
         </SelectGroup>
       </SelectContent>
     </Select>
-  );
+  )
 }

@@ -13,12 +13,12 @@ import { Input } from '@/components/ui/input'
 import { ProfileEditSchema, ProfileEditType } from '@/lib/types'
 import { useUserState } from '@/store/user'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 const EditProfile = () => {
   const { currentUser, getUser, setCurrentUser } = useUserState()
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     getUser()
   }, [getUser])
@@ -32,8 +32,10 @@ const EditProfile = () => {
   })
 
   async function onSubmit(values: ProfileEditType) {
+    setLoading(true)
     const updatedUser = await updateProfileInfo(currentUser, values)
     setCurrentUser(updatedUser)
+    setLoading(false)
     toast.success('User profile updated successfully', {
       description: new Date().toLocaleString(),
     })
@@ -79,7 +81,7 @@ const EditProfile = () => {
             type="submit"
             className="w-full"
           >
-            Edit Profile
+            {loading ? 'Processing...' : 'Edit Profile'}
           </Button>
         </form>
       </Form>

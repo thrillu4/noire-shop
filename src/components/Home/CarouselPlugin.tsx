@@ -1,52 +1,65 @@
-"use client";
-
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from '@/components/ui/card'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import Image from "next/image";
-import * as React from "react";
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import prisma from '@/lib/prisma'
+import Image from 'next/image'
 
-export function CarouselPlugin() {
-  const plugin = React.useRef(
-    Autoplay({
-      delay: 1000,
-      stopOnMouseEnter: true,
-    }),
-  );
-
+export async function CarouselPlugin({
+  skip,
+  nav,
+}: {
+  skip: number
+  nav?: boolean
+}) {
+  const newProducts = await prisma.product.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 8,
+    skip,
+    include: {
+      images: { take: 1 },
+    },
+  })
   return (
     <Carousel
-      plugins={[plugin.current]}
       opts={{
-        align: "start",
+        align: 'start',
       }}
       className="mx-auto w-full"
     >
-      <CarouselContent className="-ml-2">
-        {["/1.png", "/2.png", "/1.png", "/2.png", "/1.png"].map(
-          (src, index) => (
-            <CarouselItem key={index} className="w-[170px] flex-none pl-2">
-              <CardContent className="relative aspect-square">
+      <CarouselContent className="ml-0">
+        {newProducts.map((product, i) => (
+          <CarouselItem key={i} className="w-[180px] flex-none pl-2">
+            <CardContent className="relative aspect-square">
+              <div className="relative h-48 w-full">
                 <Image
-                  src={src}
-                  alt={`Slide ${index}`}
-                  width={170}
-                  height={170}
+                  src={product.images[0].url}
+                  alt={`Slide ${i}`}
+                  fill
+                  className="object-cover"
                 />
-                <div className="mt-2 text-xs opacity-40">Cotton T-Shirt</div>
-                <div className="flex items-center justify-between text-sm font-semibold">
-                  <div>Full Sleeve Zipper</div>
-                  <div>$ 199</div>
-                </div>
-              </CardContent>
-            </CarouselItem>
-          ),
-        )}
+              </div>
+              <div className="mt-2 text-xs opacity-40">{product.type}</div>
+              <div className="flex items-center justify-between text-xs font-semibold">
+                <div>{product.title}</div>
+                <div>${product.price}</div>
+              </div>
+            </CardContent>
+          </CarouselItem>
+        ))}
       </CarouselContent>
+      {nav && (
+        <div className="mt-6 flex justify-center gap-2">
+          <CarouselPrevious className="static rounded-none" />
+          <CarouselNext className="static rounded-none" />
+        </div>
+      )}
     </Carousel>
-  );
+  )
 }

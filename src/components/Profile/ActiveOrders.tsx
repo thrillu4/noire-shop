@@ -14,10 +14,14 @@ import { useEffect, useState } from 'react'
 import { Order } from '../../../prisma/generated/prisma'
 import { Button } from '../ui/button'
 import Link from 'next/link'
+import LoadingBlockSkeleton from '../Skeletons/LoadingBlockSkeleton'
 
 const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
   const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
+    setLoading(true)
     const fetchOrders = async () => {
       try {
         const response = await fetch(ROUTES.GET_ORDERS_ACTIVE)
@@ -26,12 +30,14 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
         setOrders(orders.activeOrders)
       } catch (error) {
         console.log('Error with fetching active orders', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchOrders()
   }, [userId])
 
-  if (orders.length < 1)
+  if (orders.length < 1 && !loading)
     return (
       <div className="flex items-center gap-2 bg-yellow-100 p-3">
         <TriangleAlert />
@@ -41,6 +47,7 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
 
   return (
     <>
+      {loading && <LoadingBlockSkeleton />}
       <div className="hidden sm:block">
         <Table>
           <TableCaption>A list of active orders.</TableCaption>

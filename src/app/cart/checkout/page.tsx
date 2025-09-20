@@ -19,6 +19,7 @@ import { useOrderStore } from '@/store/order'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreditCard } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -37,9 +38,11 @@ const Checkout = () => {
   })
 
   const { items, isAuthenticated, isLoading } = useCartStore()
+  const [loading, setLoading] = useState(false)
   const { setCurrentOrder } = useOrderStore()
 
   async function onSubmit(data: CheckoutDatatype) {
+    setLoading(true)
     try {
       const order = await checkout(data, items, isAuthenticated.userId)
       setCurrentOrder({
@@ -59,6 +62,8 @@ const Checkout = () => {
       router.push(ROUTES.PAYMENT)
     } catch (error) {
       console.log('Failed to submit data to database', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -144,7 +149,8 @@ const Checkout = () => {
 
           <YourOrder />
           <Button type="submit" className="mt-3 w-full gap-2">
-            <CreditCard /> Proceed to Payment
+            <CreditCard />
+            {loading ? 'Processing...' : 'Proceed to Payment'}
           </Button>
         </form>
       </Form>

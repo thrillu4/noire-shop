@@ -1,6 +1,8 @@
 'use client'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import LoadingBlockSkeleton from '@/components/Skeletons/LoadingBlockSkeleton'
+import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/cart'
@@ -10,14 +12,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const WishList = () => {
-  const { items, removeWishItem } = useWishListState()
+  const { items, removeWishItem, isLoading } = useWishListState()
   const { addItem } = useCartStore()
 
   return (
     <div className="min-h-screen px-3">
       <Breadcrumbs />
-
-      {items.length === 0 && (
+      {!isLoading && items.length === 0 && (
         <div className="mt-20 flex flex-col gap-1 text-center">
           <div className="flex flex-col items-center gap-7">
             <div>
@@ -42,6 +43,7 @@ const WishList = () => {
         <div>
           <h1 className="mt-3 text-2xl font-extrabold">Your Wish List</h1>
           <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5">
+            {isLoading && <LoadingBlockSkeleton />}
             {items.map(item => (
               <div key={item.productId}>
                 <div className="relative">

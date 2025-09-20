@@ -31,8 +31,10 @@ const Success = () => {
           height={120}
         />
       </div>
-      <h1 className="font-extrabold">🎉 Your payment was successful!</h1>
-      <h2 className="font-bold">We will contact you soon. 🤗</h2>
+      <h1 className="text-center font-extrabold">
+        🎉 Your payment was successful!
+      </h1>
+      <h2 className="text-center font-bold">We will contact you soon. 🤗</h2>
       <Link href={ROUTES.PRODUCTS}>
         <Button>
           <ShoppingBag /> Continue Shopping

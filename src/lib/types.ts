@@ -37,11 +37,13 @@ export const ReviewFormSchema = z.object({
   name: z
     .string()
     .min(2, 'Name must be at least 2 character')
-    .regex(/^[a-zA-Z]+$/, 'String must contain only latin letters.'),
+    .trim()
+    .regex(/^[a-zA-Z\s]+$/, 'String must contain only latin letters.'),
   country: z
     .string()
-    .min(2, 'Country must be at least 2 character')
-    .regex(/^[a-zA-Z]+$/, 'String must contain only latin letters.'),
+    .min(2, 'Country must be at least 2 characters')
+    .trim()
+    .regex(/^[a-zA-Z\s]+$/, 'String must contain only latin letters.'),
   rating: z
     .number()
     .min(1, 'Minimal value 1 star')
@@ -280,4 +282,8 @@ export interface FilteredProduct {
 export interface ProductType {
   type: string
   count: number
+}
+
+export interface ProductWithImage extends Product {
+  images: { url: string }[]
 }

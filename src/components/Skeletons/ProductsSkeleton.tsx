@@ -8,6 +8,7 @@ const ProductsSkeleton = () => {
       <Skeleton className="h-[240px] w-[144px]" />
       <Skeleton className="h-[240px] w-[144px]" />
       <Skeleton className="h-[240px] w-[144px]" />
+      <Skeleton className="h-[240px] w-[144px]" />
     </>
   )
 }

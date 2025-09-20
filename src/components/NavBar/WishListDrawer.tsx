@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import { Button } from '../ui/button'
 import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
+import { toast } from 'sonner'
 
 const WishListDrawer = ({
   open,
@@ -33,22 +34,28 @@ const WishListDrawer = ({
     removeWishItem,
     isLoading,
   } = useWishListState()
-  const { addItem } = useCartStore()
+  const cart = useCartStore()
   useEffect(() => {
     setAuthenticated(userId)
     loadWishList()
   }, [loadWishList, setAuthenticated, userId])
 
   if (!open) return null
+
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="rounded-full border bg-black p-2">
+        <div className="relative rounded-full border bg-black p-2">
           <Heart className="h-auto w-4 text-white" />
+          {totalItems() > 0 && (
+            <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
+              {totalItems()}
+            </div>
+          )}
         </div>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto px-1 pt-10 pb-5">
-        {isLoading && <LoadingSkeletonSpinner />}
+        {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
         {items.length === 0 && (
           <div className="flex flex-col gap-1 text-center">
             <SheetHeader className="flex flex-col items-center gap-7">
@@ -74,26 +81,29 @@ const WishListDrawer = ({
         {items.length > 0 && (
           <SheetHeader className="flex flex-col items-center gap-7">
             <SheetTitle>Wish List ({totalItems()})</SheetTitle>
-            <div className="mt-3 space-y-5">
+            <div className="mt-3 w-full space-y-5">
               {items.map(item => (
                 <div
                   key={item.productId}
                   className="flex justify-between gap-3"
                 >
-                  <div className="relative">
+                  <div className="relative h-28 w-full flex-1">
                     <Image
                       src={item.product.images[0].url}
                       alt="product"
-                      width={170}
-                      height={100}
+                      fill
+                      className="object-cover"
                     />
                     <HeartOff
                       size={24}
                       className="absolute top-1 left-1 rounded-2xl bg-white p-1"
-                      onClick={() => removeWishItem(item.productId)}
+                      onClick={() => {
+                        removeWishItem(item.productId)
+                        toast.message('Product removed from your wishlist!')
+                      }}
                     />
                   </div>
-                  <div className="flex flex-col justify-between text-xs">
+                  <div className="flex flex-1 flex-col justify-between text-xs">
                     <Link
                       href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
                       className="font-bold"
@@ -108,17 +118,26 @@ const WishListDrawer = ({
                     </div>
 
                     <Button
-                      onClick={() =>
-                        addItem(
+                      onClick={() => {
+                        cart.addItem(
                           item.productId,
                           1,
                           item.product.variants[0].size,
                         )
-                      }
+                        toast.success('Product added to shopping bag!')
+                      }}
                       variant="outline"
                       className="w-full text-xs"
                     >
-                      <BaggageClaim /> Add to Bag
+                      {cart.isLoading ? (
+                        <>
+                          <BaggageClaim /> Adding ...
+                        </>
+                      ) : (
+                        <>
+                          <BaggageClaim /> Add to Bag
+                        </>
+                      )}
                     </Button>
                   </div>
                 </div>

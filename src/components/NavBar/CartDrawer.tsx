@@ -55,8 +55,13 @@ const CartDrawer = ({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="rounded-full border bg-black p-2">
+        <div className="relative rounded-full border bg-black p-2">
           <Handbag className="h-auto w-4 text-white" />
+          {totalItems() > 0 && (
+            <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
+              {totalItems()}
+            </div>
+          )}
         </div>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto pt-10 pb-5">

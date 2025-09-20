@@ -7,7 +7,9 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import prisma from '@/lib/prisma'
+import { ROUTES } from '@/routes'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export async function CarouselPlugin({
   skip,
@@ -36,21 +38,25 @@ export async function CarouselPlugin({
       <CarouselContent className="ml-0">
         {newProducts.map((product, i) => (
           <CarouselItem key={i} className="w-[180px] flex-none pl-2">
-            <CardContent className="relative aspect-square">
-              <div className="relative h-48 w-full">
-                <Image
-                  src={product.images[0].url}
-                  alt={`Slide ${i}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="mt-2 text-xs opacity-40">{product.type}</div>
-              <div className="flex items-center justify-between text-xs font-semibold">
-                <div>{product.title}</div>
-                <div>${product.price}</div>
-              </div>
-            </CardContent>
+            <Link
+              href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
+            >
+              <CardContent className="relative aspect-square">
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={product.images[0].url}
+                    alt={`Slide ${i}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="mt-2 text-xs opacity-40">{product.type}</div>
+                <div className="flex items-center justify-between text-xs font-semibold">
+                  <div>{product.title}</div>
+                  <div>${product.price}</div>
+                </div>
+              </CardContent>
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>

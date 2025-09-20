@@ -30,8 +30,8 @@ const Cart = () => {
     } else {
       setIsChecked(false)
       setShowError(false)
-      router.push(ROUTES.CHECKOUT)
       setLoading(false)
+      router.push(ROUTES.CHECKOUT)
     }
   }
   return (

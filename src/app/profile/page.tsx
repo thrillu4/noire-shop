@@ -18,7 +18,6 @@ import { logout } from '../actions/auth'
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile')
-
   const tabs = [
     { title: 'Edit Profile', state: 'profile', icon: <UserRoundPen /> },
     { title: 'Password', state: 'password', icon: <KeyRound /> },

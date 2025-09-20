@@ -10,13 +10,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { useCartStore } from '@/store/cart'
 import { useWishListState } from '@/store/wishlist'
 import { Heart, Minus, Plus } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '../ui/button'
-import { AddToCartButton } from './AddToCartButton'
 
 interface PropProduct {
   id: number
@@ -41,6 +41,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
   const [error, setError] = useState<'size' | 'stock' | false>(false)
   const [stock, setStock] = useState(1)
   const { addWishItem, items, removeWishItem } = useWishListState()
+  const { addItem, isLoading } = useCartStore()
 
   const inWishList = items.some(item => item.productId === product.id)
 
@@ -151,11 +152,16 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
 
         {selectedSize ? (
           <div className="mt-10 flex w-full justify-center">
-            <AddToCartButton
-              productId={product.id}
-              quantity={quant}
-              size={selectedSize}
-            />
+            <Button
+              disabled={isLoading}
+              onClick={() => {
+                addItem(product.id, quant, selectedSize)
+                toast.success('Added to shopping bag!')
+              }}
+              className="w-full rounded bg-black px-4 py-2 text-white"
+            >
+              {isLoading ? 'Adding...' : 'Add to Cart'}
+            </Button>
           </div>
         ) : (
           <Tooltip>

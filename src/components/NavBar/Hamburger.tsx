@@ -32,6 +32,7 @@ import { useEffect, useState } from 'react'
 import ContactUsLink from '../ContactUsLink'
 import WishListDrawer from './WishListDrawer'
 import { toast } from 'sonner'
+import { useWishListState } from '@/store/wishlist'
 
 const Hamburger = ({
   isAuth,
@@ -45,6 +46,7 @@ const Hamburger = ({
   const [womenTypes, setWomenTypes] = useState<ProductType[]>([])
   const [collections, setCollections] = useState<string[]>([])
   const router = useRouter()
+  const { totalItems } = useWishListState()
 
   useEffect(() => {
     if (isOpen) {
@@ -71,7 +73,14 @@ const Hamburger = ({
 
   return (
     <>
-      {!isOpen && <Menu size={30} onClick={() => setIsOpen(true)} />}
+      {!isOpen && (
+        <div className="relative">
+          <Menu size={30} onClick={() => setIsOpen(true)} />
+          {totalItems() > 0 && (
+            <div className="absolute bottom-0 left-0 rounded-full border bg-orange-500 p-1 text-xs text-white"></div>
+          )}
+        </div>
+      )}
       {isOpen && (
         <div className="fixed inset-0 z-50 min-h-screen w-screen overflow-auto bg-white px-3 py-8">
           <div className="mb-4 flex items-center justify-between">

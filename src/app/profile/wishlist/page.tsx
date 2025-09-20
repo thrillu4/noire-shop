@@ -1,8 +1,7 @@
 'use client'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import LoadingBlockSkeleton from '@/components/Skeletons/LoadingBlockSkeleton'
-import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
+import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/cart'
@@ -10,10 +9,11 @@ import { useWishListState } from '@/store/wishlist'
 import { Heart, HeartOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 const WishList = () => {
   const { items, removeWishItem, isLoading } = useWishListState()
-  const { addItem } = useCartStore()
+  const cart = useCartStore()
 
   return (
     <div className="min-h-screen px-3">
@@ -43,7 +43,7 @@ const WishList = () => {
         <div>
           <h1 className="mt-3 text-2xl font-extrabold">Your Wish List</h1>
           <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5">
-            {isLoading && <LoadingBlockSkeleton />}
+            {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
             {items.map(item => (
               <div key={item.productId}>
                 <div className="relative">
@@ -56,7 +56,10 @@ const WishList = () => {
                   <HeartOff
                     size={24}
                     className="absolute top-1 right-1 rounded-2xl bg-white p-1"
-                    onClick={() => removeWishItem(item.productId)}
+                    onClick={() => {
+                      removeWishItem(item.productId)
+                      toast.message('Product removed from your wishlist!')
+                    }}
                   />
                 </div>
                 <div className="mt-1 space-y-3 text-sm">
@@ -69,12 +72,17 @@ const WishList = () => {
                     <div>${item.product.price}</div>{' '}
                   </div>
                   <Button
-                    onClick={() =>
-                      addItem(item.productId, 1, item.product.variants[0].size)
-                    }
+                    onClick={() => {
+                      cart.addItem(
+                        item.productId,
+                        1,
+                        item.product.variants[0].size,
+                      )
+                      toast.success('Product added to shopping bag!')
+                    }}
                     className="w-full"
                   >
-                    Add to Bag
+                    {cart.isLoading ? 'Adding...' : 'Add to Bag'}
                   </Button>
                 </div>
               </div>

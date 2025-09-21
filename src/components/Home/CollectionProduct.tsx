@@ -11,7 +11,7 @@ const CollectionProduct = ({ product }: { product: ProductWithImage }) => {
       href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
       className="mx-auto w-full text-xs"
     >
-      <div className="relative h-40 w-full">
+      <div className="relative h-60 w-full">
         <Image
           src={product.images[0].url}
           fill

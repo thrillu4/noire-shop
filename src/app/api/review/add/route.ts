@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
     const { name, country, rating, text } = values
 
-    if (!name || !text || !rating) {
+    if (!name || !country || !rating) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
     }
 

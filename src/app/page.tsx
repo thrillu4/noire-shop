@@ -76,42 +76,46 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="mb-24 flex h-[200px] gap-2 overflow-hidden">
+          <div className="mb-24 flex h-[300px] justify-center gap-2 overflow-hidden">
             <div className="flex">
-              <Image
-                src={'/z.png'}
-                width={120}
-                height={160}
-                alt=""
-                className="h-[160px] max-w-none"
-              />
+              <div className="relative h-50 w-40">
+                <Image
+                  src={'/z.png'}
+                  fill
+                  alt="image-1"
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div className="flex items-end">
-              <Image
-                src={'/x.png'}
-                width={120}
-                height={160}
-                alt=""
-                className="h-[160px] max-w-none"
-              />
+              <div className="relative h-50 w-40">
+                <Image
+                  src={'/x.png'}
+                  fill
+                  alt="image-2"
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div className="flex">
-              <Image
-                src={'/c.png'}
-                width={120}
-                height={160}
-                alt=""
-                className="h-[160px] max-w-none"
-              />
+              <div className="relative flex h-50 w-40">
+                <Image
+                  src={'/c.png'}
+                  fill
+                  alt="image-3"
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div className="flex items-end">
-              <Image
-                src={'/v.png'}
-                width={120}
-                height={160}
-                alt=""
-                className="h-[160px] max-w-none"
-              />
+              <div className="relative h-50 w-40">
+                <Image
+                  src={'/v.png'}
+                  fill
+                  alt="image-4"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

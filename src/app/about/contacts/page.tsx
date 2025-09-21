@@ -18,7 +18,7 @@ const Contacts = () => {
         <div>
           <ContactUsForm />
         </div>
-        <div className="relative">
+        <div className="relative mx-auto max-w-lg">
           <div className="my-5 font-bold">In Noiré you can find:</div>
           <ul className="space-y-3 text-sm">
             <li className="flex gap-2">

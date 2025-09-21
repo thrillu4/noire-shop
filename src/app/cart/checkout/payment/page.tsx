@@ -67,8 +67,11 @@ const Payment = () => {
 
       <h3 className="mt-5 mb-2 font-bold">Payment method</h3>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mt-4 mb-10">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mx-auto max-w-lg"
+        >
+          <div className="mx-auto mt-8 mb-10 max-w-lg">
             <RadioGroup
               defaultValue="card"
               onValueChange={(val: 'card' | 'delivery') =>
@@ -90,7 +93,7 @@ const Payment = () => {
                 </div>
               </Label>
               {isOpen && (
-                <Tabs defaultValue="master">
+                <Tabs defaultValue="master" className="max-w-sm">
                   <TabsList>
                     <TabsTrigger value="master">
                       <Image

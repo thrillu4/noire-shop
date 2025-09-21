@@ -16,7 +16,7 @@ const OrderDetails = async ({
     <div className="px-3">
       <Breadcrumbs />
       <h1 className="mt-2 text-2xl font-extrabold">Order Details</h1>
-      <div className="mt-4 mb-20 rounded-2xl border px-4 py-5 text-sm">
+      <div className="mx-auto mt-4 mb-20 max-w-lg rounded-2xl border px-4 py-5 text-sm">
         <div className="grid grid-cols-2 gap-x-3">
           <div className="grid gap-y-5">
             <div>Order №: </div>

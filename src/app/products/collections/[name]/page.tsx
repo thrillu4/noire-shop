@@ -84,12 +84,12 @@ const Collection = ({ params }: { params: Promise<{ name: string }> }) => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="flex justify-center">
+            <div className="relative h-60 w-full">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}
-                width={144}
-                height={240}
+                fill
+                className="object-cover"
               />
             </div>
             <div className="text-xs">{product.type.toUpperCase()}</div>

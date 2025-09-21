@@ -64,7 +64,7 @@ const CartDrawer = ({
           )}
         </div>
       </SheetTrigger>
-      <SheetContent className="overflow-y-auto pt-10 pb-5">
+      <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
         {items.length === 0 && (
           <div className="flex flex-col gap-1">
             <SheetHeader className="flex flex-col items-center gap-7">
@@ -91,19 +91,18 @@ const CartDrawer = ({
                 Shopping Bag ({totalItems()})
               </SheetTitle>
             </SheetHeader>
-            <div className="mt-3">
+            <div className="mt-3 w-full max-w-sm">
               {items.map((item, i) => (
                 <div
                   key={i}
                   className="flex gap-4 border bg-neutral-100 px-1 py-5"
                 >
-                  <div className="min-w-28">
+                  <div className="relative h-30 min-w-28">
                     <Image
                       src={item.product.images[0].url}
                       alt="product-image"
-                      width={112}
-                      height={155}
-                      className="h-full w-full"
+                      fill
+                      className="object-contain"
                     />
                   </div>
                   <div className="flex w-full flex-col justify-between text-xs">
@@ -134,7 +133,7 @@ const CartDrawer = ({
                 </div>
               ))}
             </div>
-            <div className="my-4 flex w-full justify-between px-3 font-bold">
+            <div className="my-4 flex w-full max-w-sm justify-between px-3 font-bold">
               <div>Total (USD)</div>
               <div>${totalPrice()}</div>
             </div>

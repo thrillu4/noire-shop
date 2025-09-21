@@ -22,13 +22,13 @@ const Success = () => {
     return null
   }
   return (
-    <div className="mt-10 mb-20 flex min-h-[80vh] flex-col items-center justify-center space-y-3 px-2">
-      <div className="max-w-[120px]">
+    <div className="mt-10 mb-20 flex min-h-[80vh] flex-col items-center justify-center space-y-4 px-2">
+      <div className="relative h-30 w-30">
         <Image
           src={'/successful.png'}
           alt="successful"
-          width={120}
-          height={120}
+          fill
+          className="object-contain"
         />
       </div>
       <h1 className="text-center font-extrabold">
@@ -40,7 +40,10 @@ const Success = () => {
           <ShoppingBag /> Continue Shopping
         </Button>
       </Link>
-      <div className="mt-3 space-y-2 rounded-2xl border-2 p-5 text-sm">
+      <Link
+        href={currentOrder.userId ? `${ROUTES.PROFILE}/${currentOrder.id}` : ''}
+        className="mx-auto mt-3 w-full max-w-lg space-y-2 rounded-2xl border-2 p-5 text-sm"
+      >
         <div className="flex items-center justify-between">
           <div className="font-bold">Details: </div>
           <div>
@@ -69,7 +72,7 @@ const Success = () => {
         <div>{currentOrder.country}</div>
         <div>{currentOrder.city}</div>
         <div>{currentOrder.address}</div>
-      </div>
+      </Link>
     </div>
   )
 }

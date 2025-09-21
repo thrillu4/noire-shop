@@ -57,7 +57,7 @@ const Cart = () => {
           {items.map((item, i) => (
             <ItemGrid key={i} cartItem={item} />
           ))}
-          <div className="flex flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold">
+          <div className="mx-auto flex max-w-lg flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold">
             <div>Order Summary</div>
             <div className="flex items-center justify-between text-sm">
               <div>Quantity of items:</div>

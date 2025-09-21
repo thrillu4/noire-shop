@@ -63,7 +63,7 @@ const New = async () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-48 w-full md:h-96 md:w-auto">
+            <div className="relative h-60 w-full md:h-96 md:w-auto">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

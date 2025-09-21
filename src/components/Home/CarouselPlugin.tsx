@@ -42,7 +42,7 @@ export async function CarouselPlugin({
               href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             >
               <CardContent className="relative aspect-square">
-                <div className="relative h-48 w-full">
+                <div className="relative h-60 w-full">
                   <Image
                     src={product.images[0].url}
                     alt={`Slide ${i}`}

@@ -1,6 +1,6 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+'use client'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -8,18 +8,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ROUTES } from "@/routes";
-import { Eye, EyeOff } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useActionState, useState } from "react";
-import { FormState, signup } from "../actions/auth";
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { ROUTES } from '@/routes'
+import { Eye, EyeOff } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useActionState, useState } from 'react'
+import { FormState, signup } from '../actions/auth'
 
 const SignUp = () => {
-  const [showPassword, setShoPassword] = useState(false);
-  const router = useRouter();
+  const [showPassword, setShoPassword] = useState(false)
+  const router = useRouter()
   const [state, formAction, isPending] = useActionState<FormState, FormData>(
     signup,
     {
@@ -27,9 +27,9 @@ const SignUp = () => {
       errors: {},
       fields: {},
     },
-  );
+  )
   return (
-    <div className="my-6 flex min-h-[80vh] flex-col justify-center gap-5 px-5">
+    <div className="mx-auto my-6 flex min-h-[80vh] max-w-lg flex-col justify-center gap-5 px-5">
       <h2 className="text-center text-2xl font-bold">Register</h2>
       <div className="text-center">
         Fill out the form to find out more and become one of the NOIRÉ trends.
@@ -42,7 +42,7 @@ const SignUp = () => {
             id="username"
             placeholder="Jane Doe"
             name="username"
-            defaultValue={state.fields?.username || ""}
+            defaultValue={state.fields?.username || ''}
           />
           {state?.errors?.name && (
             <p className="text-xs text-red-600">{state.errors.name}</p>
@@ -56,7 +56,7 @@ const SignUp = () => {
             id="sheet-demo-email"
             placeholder="yourmail@email.com"
             name="email"
-            defaultValue={state.fields?.email || ""}
+            defaultValue={state.fields?.email || ''}
           />
           {state?.errors?.email && (
             <p className="text-xs text-red-600">{state.errors.email}</p>
@@ -68,11 +68,11 @@ const SignUp = () => {
           <div className="relative mt-2">
             <Input
               id="sheet-demo-password"
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               placeholder="*******"
               className="relative"
               name="password"
-              defaultValue={state.fields?.password || ""}
+              defaultValue={state.fields?.password || ''}
             />
             {showPassword ? (
               <EyeOff
@@ -96,14 +96,14 @@ const SignUp = () => {
           <Checkbox
             id="terms-2"
             name="checkbox"
-            defaultChecked={state?.fields?.checkbox === "on" ? true : false}
+            defaultChecked={state?.fields?.checkbox === 'on' ? true : false}
           />
           <div className="grid gap-2">
             <Label htmlFor="terms-2" className="text-xs">
               Accept terms and conditions
             </Label>
             <p className="text-muted-foreground text-[10px]">
-              By clicking this checkbox, you agree to the{" "}
+              By clicking this checkbox, you agree to the{' '}
               <Dialog>
                 <DialogTrigger asChild>
                   <span className="cursor-pointer underline">
@@ -188,7 +188,7 @@ const SignUp = () => {
         </div>
 
         <Button disabled={isPending} type="submit" className="cursor-pointer">
-          {isPending ? "Signing up..." : "Create Account"}
+          {isPending ? 'Signing up...' : 'Create Account'}
         </Button>
         {state?.errors?.server && (
           <p className="text-xs text-red-600">{state.errors.server}</p>
@@ -203,7 +203,7 @@ const SignUp = () => {
         Sign In
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

@@ -7,7 +7,7 @@ const YourInfo = () => {
   const order = useOrderStore(state => state.currentOrder)
   const router = useRouter()
   return (
-    <div className="rounded-2xl border px-5 py-8">
+    <div className="mx-auto max-w-lg rounded-2xl border px-5 py-8">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-bold">Your Contact Information</h2>
         <SquarePen onClick={() => router.push(ROUTES.CHECKOUT)} />

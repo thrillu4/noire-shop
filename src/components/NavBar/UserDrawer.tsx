@@ -1,15 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -29,6 +20,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useActionState, useState } from 'react'
 import TermsConditionsDialog from '../TermsConditionsDialog'
 import { Checkbox } from '../ui/checkbox'
+import ForgotPasswordDialog from './ForgotPasswordDialog'
 
 const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
   const pathname = usePathname()
@@ -69,7 +61,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </button>
           </SheetTrigger>
-          <SheetContent className="overflow-y-auto pt-10 pb-5">
+          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
             <div className="flex w-full flex-col items-center justify-center gap-4">
               <SheetHeader>
                 <SheetTitle className="text-center">Register</SheetTitle>
@@ -79,7 +71,10 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                 </SheetDescription>
               </SheetHeader>
 
-              <form action={formAction} className="flex flex-col gap-4 px-4">
+              <form
+                action={formAction}
+                className="flex w-full max-w-sm flex-col gap-4 px-4 sm:max-w-md"
+              >
                 <div className="w-full">
                   <Label htmlFor="username">Name</Label>
                   <Input
@@ -195,14 +190,17 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </div>
           </SheetTrigger>
-          <SheetContent className="overflow-y-auto pt-10 pb-5">
+          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
             <div className="flex w-full flex-col items-center justify-center gap-6">
               <SheetHeader>
                 <SheetTitle className="text-center">Sign In</SheetTitle>
                 <SheetDescription>Explore fashion with NOIRÉ</SheetDescription>
               </SheetHeader>
 
-              <form action={signIn[1]} className="flex flex-col gap-4">
+              <form
+                action={signIn[1]}
+                className="flex w-full max-w-sm flex-col gap-4 sm:max-w-md"
+              >
                 <div className="w-full px-4">
                   <Label htmlFor="sheet-demo-email">Email</Label>
                   <Input
@@ -250,44 +248,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     </p>
                   )}
                 </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="mt-2 cursor-pointer px-4 text-xs underline opacity-60">
-                      Forgot your password?
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle>Reset password</DialogTitle>
-                      <DialogDescription>
-                        We’ll send you an email with a link to create a new
-                        password
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex items-center gap-2">
-                      <div className="grid flex-1 gap-2">
-                        <Label htmlFor="Email" className="sr-only">
-                          Email
-                        </Label>
-                        <Input
-                          id="Email"
-                          placeholder="Enter your email address"
-                          name="email"
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter className="sm:justify-start">
-                      <Button type="button" className="cursor-pointer">
-                        Send reset link
-                      </Button>
-                    </DialogFooter>
-                    <DialogClose asChild>
-                      <span className="cursor-pointer text-center underline">
-                        Back to Sign in
-                      </span>
-                    </DialogClose>
-                  </DialogContent>
-                </Dialog>
+                <ForgotPasswordDialog />
 
                 <SheetFooter>
                   <Button

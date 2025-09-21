@@ -46,12 +46,12 @@ const WishList = () => {
             {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
             {items.map(item => (
               <div key={item.productId}>
-                <div className="relative">
+                <div className="relative h-60 w-full">
                   <Image
                     src={item.product.images[0].url}
                     alt="product"
-                    width={300}
-                    height={240}
+                    fill
+                    className="object-contain"
                   />
                   <HeartOff
                     size={24}

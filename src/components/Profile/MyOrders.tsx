@@ -13,7 +13,7 @@ const MyOrders = () => {
   }, [currentUser?.id, getUser])
 
   return (
-    <div className="mt-10 mb-20 px-3">
+    <div className="mx-auto mt-10 mb-20 max-w-lg px-3">
       <h1 className="font-extrabold">Your Orders</h1>
       <h2 className="my-3 flex items-center gap-2 font-bold">
         <PackageCheck />- Active orders

@@ -54,7 +54,7 @@ const WishListDrawer = ({
           )}
         </div>
       </SheetTrigger>
-      <SheetContent className="overflow-y-auto px-1 pt-10 pb-5">
+      <SheetContent className="max-w-md overflow-y-auto px-1 pt-10 pb-5">
         {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
         {items.length === 0 && (
           <div className="flex flex-col gap-1 text-center">
@@ -81,7 +81,7 @@ const WishListDrawer = ({
         {items.length > 0 && (
           <SheetHeader className="flex flex-col items-center gap-7">
             <SheetTitle>Wish List ({totalItems()})</SheetTitle>
-            <div className="mt-3 w-full space-y-5">
+            <div className="mt-3 w-full max-w-sm space-y-5">
               {items.map(item => (
                 <div
                   key={item.productId}
@@ -92,7 +92,7 @@ const WishListDrawer = ({
                       src={item.product.images[0].url}
                       alt="product"
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                     <HeartOff
                       size={24}

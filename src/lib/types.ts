@@ -1,6 +1,12 @@
 import { z } from 'zod'
 import { Product } from '../../prisma/generated/prisma'
 
+export const ForgotPasswordSchema = z.object({
+  email: z.email('Please enter a valid email.'),
+})
+
+export type ForgotPasswordType = z.infer<typeof ForgotPasswordSchema>
+
 export const SignupFormSchema = z.object({
   name: z
     .string()

@@ -56,34 +56,38 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
   }
   return (
     <div className="mt-5">
-      <div>
+      <div className="relative mx-auto h-80 w-full">
         <Image
           src={mainImageUrl}
           alt={product.title}
-          width={305}
-          height={305}
+          fill
+          className="object-contain"
         />
       </div>
-      <Carousel className="mt-7">
-        <CarouselContent className="mx-1">
-          {product.images.map(img => (
-            <CarouselItem
-              onClick={() => setMainImageUrl(img.url)}
-              key={img.url}
-              className={`${img.url === mainImageUrl ? '' : 'opacity-45'} basis-1/4 pl-4`}
-            >
-              <Image
-                src={img.url}
-                alt={product.title}
-                width={200}
-                height={240}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {product.images.length > 1 && (
+        <Carousel className="mt-7">
+          <CarouselContent className="mx-1">
+            {product.images.map(img => (
+              <CarouselItem
+                onClick={() => setMainImageUrl(img.url)}
+                key={img.url}
+                className={`${img.url === mainImageUrl ? '' : 'opacity-45'} basis-1/5 pl-4`}
+              >
+                <div className="relative h-30 w-full">
+                  <Image
+                    src={img.url}
+                    alt={product.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      )}
 
-      <div className="mt-8 px-3">
+      <div className="mx-auto mt-8 max-w-lg px-3">
         <div className="flex items-center justify-between gap-5">
           <h1 className="font-bold tracking-widest">{product.title}</h1>
           <Heart

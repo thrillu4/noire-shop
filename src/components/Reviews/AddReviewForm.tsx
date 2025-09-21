@@ -65,7 +65,7 @@ const AddReviewForm = ({
       <DialogTrigger className="rounded-xl bg-black px-6 py-3 text-white shadow transition hover:bg-gray-800">
         Leave a Review
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="mx-auto max-w-lg">
         <DialogHeader>
           <DialogTitle>Write a review</DialogTitle>
           <div className="mt-7">

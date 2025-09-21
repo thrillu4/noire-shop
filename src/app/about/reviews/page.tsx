@@ -38,7 +38,7 @@ export default function CustomerReviewsPage() {
         Customer Reviews
       </h1>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-lg gap-6 md:grid-cols-2 lg:grid-cols-3">
         {loading && <LoadingBlockSkeleton />}
         {reviews.map((review, index) => (
           <Card
@@ -76,7 +76,7 @@ export default function CustomerReviewsPage() {
         <Button
           onClick={() => setTake(state => state + 4)}
           variant={'outline'}
-          className="mt-4 w-full"
+          className="mx-auto mt-4 flex w-full max-w-lg justify-center"
         >
           {loading ? (
             <LoaderCircle className="animate-spin" />

@@ -76,7 +76,7 @@ const Checkout = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mt-3 mb-30 space-y-6"
+          className="mx-auto mt-8 mb-30 max-w-lg space-y-6"
         >
           <div className="font-bold">Contact Information</div>
           <FormField

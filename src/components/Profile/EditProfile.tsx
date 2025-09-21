@@ -42,7 +42,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="mt-10 mb-20 px-3">
+    <div className="mx-auto mt-10 mb-20 max-w-lg px-3">
       <Form {...form}>
         <div className="mt-4 font-bold">Profile Edit</div>
         <div className="mb-5 text-sm opacity-65">

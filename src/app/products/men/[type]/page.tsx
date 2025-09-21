@@ -63,7 +63,7 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
-      <div className="mt-5 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
+      <div className="mt-5 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 font-bold">
@@ -81,7 +81,7 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full">
+            <div className="relative h-60 w-full sm:h-80">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

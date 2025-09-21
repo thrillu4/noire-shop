@@ -62,7 +62,7 @@ const FilterByTypeProduct = ({
                 setIsActive(type.type)
               }
             }}
-            className="basis-1/3 pl-4"
+            className="basis-1/3 pl-4 md:basis-1/4"
           >
             <div
               className={`${isActive === type.type ? 'border-2 border-black' : ''} flex items-center justify-center border py-1 text-xs opacity-70`}

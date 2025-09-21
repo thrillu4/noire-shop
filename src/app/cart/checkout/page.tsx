@@ -2,7 +2,6 @@
 import { checkout } from '@/app/actions/checkout'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import YourOrder from '@/components/Checkout/YourOrder'
-import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -37,7 +36,7 @@ const Checkout = () => {
     },
   })
 
-  const { items, isAuthenticated, isLoading } = useCartStore()
+  const { items, isAuthenticated } = useCartStore()
   const [loading, setLoading] = useState(false)
   const { setCurrentOrder } = useOrderStore()
 
@@ -71,12 +70,11 @@ const Checkout = () => {
     <div className="px-2">
       <Breadcrumbs />
       <h2 className="mt-4 text-2xl font-extrabold">Checkout</h2>
-      {isLoading && <LoadingSkeletonSpinner />}
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto mt-8 mb-30 max-w-lg space-y-6"
+          className="mx-auto mt-8 mb-30 max-w-lg space-y-6 sm:max-w-xl md:max-w-4xl"
         >
           <div className="font-bold">Contact Information</div>
           <FormField

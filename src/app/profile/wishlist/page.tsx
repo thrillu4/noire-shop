@@ -1,7 +1,6 @@
 'use client'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/routes'
 import { useCartStore } from '@/store/cart'
@@ -16,7 +15,7 @@ const WishList = () => {
   const cart = useCartStore()
 
   return (
-    <div className="min-h-screen px-3">
+    <div className="mb-20 min-h-screen px-3">
       <Breadcrumbs />
       {!isLoading && items.length === 0 && (
         <div className="mt-20 flex flex-col gap-1 text-center">
@@ -42,8 +41,7 @@ const WishList = () => {
       {items.length > 0 && (
         <div>
           <h1 className="mt-3 text-2xl font-extrabold">Your Wish List</h1>
-          <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5">
-            {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
+          <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
             {items.map(item => (
               <div key={item.productId}>
                 <div className="relative h-60 w-full">
@@ -63,7 +61,12 @@ const WishList = () => {
                   />
                 </div>
                 <div className="mt-1 space-y-3 text-sm">
-                  <div className="font-bold">{item.product.title}</div>
+                  <Link
+                    href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
+                    className="font-bold"
+                  >
+                    {item.product.title}
+                  </Link>
                   <div className="opacity-65">
                     {item.product.type.toUpperCase()}
                   </div>

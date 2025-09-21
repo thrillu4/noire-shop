@@ -50,7 +50,7 @@ const ArchiveOrders = ({ userId }: { userId: string | undefined }) => {
     <>
       {loading && <LoadingBlockSkeleton />}
 
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Table>
           <TableCaption>A list of archive orders.</TableCaption>
           <TableHeader className="">
@@ -58,24 +58,38 @@ const ArchiveOrders = ({ userId }: { userId: string | undefined }) => {
               <TableHead> №</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="w-full">
             {orders.map(order => (
               <TableRow className="text-xs" key={order.id}>
-                <TableCell className="overflow-scroll font-medium">
-                  {order.id}
+                <TableCell className="font-medium">{order.id}</TableCell>
+                <TableCell
+                  className={
+                    order.status === 'cancelled'
+                      ? 'text-red-600'
+                      : 'text-cyan-500'
+                  }
+                >
+                  {order.status.toUpperCase()}
                 </TableCell>
-                <TableCell>{order.status.toUpperCase()}</TableCell>
                 <TableCell>{order.paymentMethod.toUpperCase()}</TableCell>
-                <TableCell className="text-right">${order.total}</TableCell>
+                <TableCell>${order.total.toFixed(2)}</TableCell>
+                <TableCell>
+                  <Link href={ROUTES.PROFILE + `/${order.id}`}>
+                    <Button className="cursor-pointer px-2 text-xs">
+                      Show Details
+                    </Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <div className="flex flex-col space-y-7">
           {orders.map(order => (
             <div key={order.id} className="border-y">

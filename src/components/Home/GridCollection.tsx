@@ -24,7 +24,7 @@ import CollectionProduct from './CollectionProduct'
 const GridCollection = () => {
   const [products, setProducts] = useState<ProductWithImage[]>([])
   const [skip, setSkip] = useState(0)
-  const [take] = useState(4)
+  const [take] = useState(6)
   const [end, setEnd] = useState(false)
   const [gender, setGender] = useState<undefined | 'male' | 'female'>(undefined)
   const [sort, setSort] = useState<undefined | string>(undefined)
@@ -110,7 +110,7 @@ const GridCollection = () => {
         </div>
       </div>
       <div className="mt-3 mb-7 w-full border"></div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
         {loading && <ProductsSkeleton />}
         {products.map(product => (
           <CollectionProduct key={product.id} product={product} />

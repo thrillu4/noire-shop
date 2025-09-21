@@ -61,7 +61,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </button>
           </SheetTrigger>
-          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
+          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
             <div className="flex w-full flex-col items-center justify-center gap-4">
               <SheetHeader>
                 <SheetTitle className="text-center">Register</SheetTitle>
@@ -73,7 +73,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
 
               <form
                 action={formAction}
-                className="flex w-full max-w-sm flex-col gap-4 px-4 sm:max-w-md"
+                className="flex w-full max-w-sm flex-col gap-4 px-4"
               >
                 <div className="w-full">
                   <Label htmlFor="username">Name</Label>
@@ -190,7 +190,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
               <User className="h-auto w-4 text-white" />
             </div>
           </SheetTrigger>
-          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
+          <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
             <div className="flex w-full flex-col items-center justify-center gap-6">
               <SheetHeader>
                 <SheetTitle className="text-center">Sign In</SheetTitle>
@@ -199,7 +199,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
 
               <form
                 action={signIn[1]}
-                className="flex w-full max-w-sm flex-col gap-4 sm:max-w-md"
+                className="flex w-full max-w-sm flex-col gap-4"
               >
                 <div className="w-full px-4">
                   <Label htmlFor="sheet-demo-email">Email</Label>

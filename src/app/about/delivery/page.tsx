@@ -6,11 +6,13 @@ export default function DeliveryReturnsPage() {
   return (
     <div className="px-3">
       <Breadcrumbs />
-      <h1 className="mt-3 text-2xl font-bold">Delivery & Returns</h1>
-      <h2 className="mt-1 mb-8 text-xs opacity-45">
-        Brief information about payment methods, delivery and returns.
-      </h2>
-      <div className="mb-20 max-w-lg space-y-10">
+      <div className="md:text-center">
+        <h1 className="mt-3 text-2xl font-bold">Delivery & Returns</h1>
+        <h2 className="mt-1 mb-8 text-xs opacity-45">
+          Brief information about payment methods, delivery and returns.
+        </h2>
+      </div>
+      <div className="mb-20 max-w-lg space-y-10 md:mx-auto">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-3">

@@ -37,12 +37,12 @@ export async function CarouselPlugin({
     >
       <CarouselContent className="ml-0">
         {newProducts.map((product, i) => (
-          <CarouselItem key={i} className="w-[180px] flex-none pl-2">
+          <CarouselItem key={i} className="w-45 flex-none pl-2 sm:w-55">
             <Link
               href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             >
               <CardContent className="relative aspect-square">
-                <div className="relative h-60 w-full">
+                <div className="relative h-60 w-full sm:h-70">
                   <Image
                     src={product.images[0].url}
                     alt={`Slide ${i}`}

@@ -16,7 +16,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { useEffect, useState } from 'react'
-import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
 
 const CartDrawer = ({
   isAuth,
@@ -83,7 +82,6 @@ const CartDrawer = ({
             </Link>
           </div>
         )}
-        {isLoading && <LoadingSkeletonSpinner />}
         {items.length > 0 && (
           <div className="flex w-full flex-col items-center justify-center">
             <SheetHeader>

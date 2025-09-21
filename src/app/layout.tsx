@@ -3,6 +3,7 @@ import NavBar from '@/components/NavBar/NavBar'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import './globals.css'
+import LoadingState from '@/components/LoadingState'
 
 export const metadata: Metadata = {
   title: 'Noiré',
@@ -17,7 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="mx-auto max-w-[600px]">
+      <body className="mx-auto max-w-[600px] sm:max-w-[710px] md:max-w-[968px]">
+        <LoadingState />
         <NavBar />
         {children}
         <Toaster position="top-center" closeButton richColors />

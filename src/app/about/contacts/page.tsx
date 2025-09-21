@@ -8,7 +8,7 @@ const Contacts = () => {
   return (
     <div className="mb-20 overflow-hidden px-3">
       <Breadcrumbs />
-      <div className="my-5 space-y-2 text-center font-bold">
+      <div className="my-10 space-y-2 text-center font-bold">
         <h2 className="text-2xl">Get in touch with us</h2>
         <h3 className="text-xs opacity-65">
           We’d love to hear from you. Fill out the form below or reach us at…

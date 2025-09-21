@@ -56,7 +56,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
   }
   return (
     <div className="mt-5">
-      <div className="relative mx-auto h-80 w-full">
+      <div className="relative mx-auto h-80 w-full md:h-100">
         <Image
           src={mainImageUrl}
           alt={product.title}
@@ -65,15 +65,15 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
         />
       </div>
       {product.images.length > 1 && (
-        <Carousel className="mt-7">
+        <Carousel className="mx-auto mt-7 md:max-w-3xl">
           <CarouselContent className="mx-1">
             {product.images.map(img => (
               <CarouselItem
                 onClick={() => setMainImageUrl(img.url)}
                 key={img.url}
-                className={`${img.url === mainImageUrl ? '' : 'opacity-45'} basis-1/5 pl-4`}
+                className={`${img.url === mainImageUrl ? '' : 'opacity-45'} basis-1/4 pl-4 sm:basis-1/6`}
               >
-                <div className="relative h-30 w-full">
+                <div className="relative h-20 w-full">
                   <Image
                     src={img.url}
                     alt={product.title}
@@ -87,7 +87,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
         </Carousel>
       )}
 
-      <div className="mx-auto mt-8 max-w-lg px-3">
+      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl">
         <div className="flex items-center justify-between gap-5">
           <h1 className="font-bold tracking-widest">{product.title}</h1>
           <Heart

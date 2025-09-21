@@ -15,7 +15,7 @@ export default function AboutUsPage() {
         <h1 className="relative z-10 text-3xl font-bold">About Noiré</h1>
       </div>
 
-      <div className="container mx-auto max-w-lg space-y-12 px-4 py-12">
+      <div className="container mx-auto max-w-lg space-y-12 px-4 py-12 sm:max-w-xl">
         <div>
           <h2 className="mb-4 text-xl font-semibold">Who We Are</h2>
           <p className="text-sm leading-relaxed text-gray-700">

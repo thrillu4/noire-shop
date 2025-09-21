@@ -14,7 +14,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { Button } from '../ui/button'
-import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
 import { toast } from 'sonner'
 
 const WishListDrawer = ({
@@ -26,14 +25,8 @@ const WishListDrawer = ({
   userId: string | null
   setIsOpen?: (open: boolean) => void
 }) => {
-  const {
-    items,
-    setAuthenticated,
-    loadWishList,
-    totalItems,
-    removeWishItem,
-    isLoading,
-  } = useWishListState()
+  const { items, setAuthenticated, loadWishList, totalItems, removeWishItem } =
+    useWishListState()
   const cart = useCartStore()
   useEffect(() => {
     setAuthenticated(userId)
@@ -55,7 +48,6 @@ const WishListDrawer = ({
         </div>
       </SheetTrigger>
       <SheetContent className="max-w-md overflow-y-auto px-1 pt-10 pb-5">
-        {isLoading || (cart.isLoading && <LoadingSkeletonSpinner />)}
         {items.length === 0 && (
           <div className="flex flex-col gap-1 text-center">
             <SheetHeader className="flex flex-col items-center gap-7">

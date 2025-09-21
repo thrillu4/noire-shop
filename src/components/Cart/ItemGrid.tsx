@@ -6,11 +6,10 @@ import { Heart, Minus, Plus, RefreshCcw, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import LoadingSkeletonSpinner from '../Skeletons/LoadingSkeletonSpinner'
 
 const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
   const { updateQuantity, removeItem } = useCartStore()
-  const { addWishItem, items, removeWishItem, isLoading } = useWishListState()
+  const { addWishItem, items, removeWishItem } = useWishListState()
   const inWishList = items.find(item => item.productId === cartItem.product.id)
   const handleToggleWishList = () => {
     if (inWishList) {
@@ -23,9 +22,8 @@ const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
   }
   return (
     <>
-      {isLoading && <LoadingSkeletonSpinner />}
       <div
-        className="mx-auto my-10 grid max-w-xs grid-cols-[1fr_auto] gap-1.5 text-sm"
+        className="my-10 grid grid-cols-[1fr_auto] gap-1.5 text-sm"
         key={cartItem.productId}
       >
         <div className="flex w-full flex-col">

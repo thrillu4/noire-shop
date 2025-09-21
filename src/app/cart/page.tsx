@@ -12,7 +12,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import CartPageSkeleton from '@/components/Skeletons/LoadingSkeletonSpinner'
 
 const Cart = () => {
   const { items, totalPrice, totalItems, isLoading } = useCartStore()
@@ -36,7 +35,6 @@ const Cart = () => {
   }
   return (
     <div className="min-h-[60vh]">
-      {isLoading && <CartPageSkeleton />}
       {!isLoading && items.length === 0 && (
         <div className="mt-30 flex flex-col gap-3">
           <div className="flex flex-col items-center gap-7">
@@ -54,10 +52,12 @@ const Cart = () => {
         <div className="mb-20 px-2">
           <Breadcrumbs />
           <h2 className="mt-4 text-2xl font-extrabold">Shopping Bag</h2>
-          {items.map((item, i) => (
-            <ItemGrid key={i} cartItem={item} />
-          ))}
-          <div className="mx-auto flex max-w-lg flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold">
+          <div className="mx-auto grid max-w-xs grid-cols-1 gap-5 sm:max-w-xl sm:grid-cols-2 md:max-w-4xl md:grid-cols-3">
+            {items.map((item, i) => (
+              <ItemGrid key={i} cartItem={item} />
+            ))}
+          </div>
+          <div className="mx-auto flex max-w-lg flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold sm:max-w-xl md:max-w-4xl">
             <div>Order Summary</div>
             <div className="flex items-center justify-between text-sm">
               <div>Quantity of items:</div>

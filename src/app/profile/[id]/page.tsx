@@ -1,6 +1,8 @@
 'use server'
 import { orderDetails } from '@/app/actions/orderDetails'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import ContactUsLink from '@/components/ContactUsLink'
+import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/routes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -91,6 +93,10 @@ const OrderDetails = async ({
           ))}
         </div>
       </div>
+      <Button className="mx-auto flex" variant="link">
+        <Link href={ROUTES.PROFILE}>Back to Profile</Link>
+      </Button>
+      <ContactUsLink>Contact Us / Help</ContactUsLink>
     </div>
   )
 }

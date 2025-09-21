@@ -3,7 +3,6 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import ContactUsLink from '@/components/ContactUsLink'
 import SearchBar from '@/components/Home/SearchBar'
-import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { ROUTES } from '@/routes'
 import Image from 'next/image'
@@ -41,8 +40,7 @@ const Collections = () => {
         fits your lifestyle.
       </h3>
       <SearchBar />
-      {loading && <LoadingSkeletonSpinner />}
-      <div className="mt-7 mb-20 grid grid-cols-2 gap-x-2 gap-y-5">
+      <div className="mt-7 mb-20 grid grid-cols-2 gap-x-2 gap-y-5 md:grid-cols-3">
         {loading && <ProductsSkeleton />}
         {collections.map(col => (
           <Link
@@ -50,7 +48,7 @@ const Collections = () => {
             key={col.collections}
             className="relative transition duration-200 hover:scale-105"
           >
-            <div className="relative h-60 w-full">
+            <div className="relative h-60 w-full sm:h-80">
               <Image
                 src={col.images[0].url}
                 alt={col.collections}

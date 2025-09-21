@@ -10,11 +10,11 @@ import {
 } from '@/components/ui/table'
 import { ROUTES } from '@/routes'
 import { TriangleAlert } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Order } from '../../../prisma/generated/prisma'
-import { Button } from '../ui/button'
-import Link from 'next/link'
 import LoadingBlockSkeleton from '../Skeletons/LoadingBlockSkeleton'
+import { Button } from '../ui/button'
 
 const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
   const [orders, setOrders] = useState<Order[]>([])
@@ -48,7 +48,7 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
   return (
     <>
       {loading && <LoadingBlockSkeleton />}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Table>
           <TableCaption>A list of active orders.</TableCaption>
           <TableHeader className="">
@@ -56,24 +56,32 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
               <TableHead> №</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="w-full">
             {orders.map(order => (
               <TableRow className="text-xs" key={order.id}>
-                <TableCell className="overflow-scroll font-medium">
-                  {order.id}
+                <TableCell className="font-medium">{order.id}</TableCell>
+                <TableCell className="text-green-600">
+                  {order.status.toUpperCase()}
                 </TableCell>
-                <TableCell>{order.status.toUpperCase()}</TableCell>
                 <TableCell>{order.paymentMethod.toUpperCase()}</TableCell>
-                <TableCell className="text-right">${order.total}</TableCell>
+                <TableCell>${order.total.toFixed(2)}</TableCell>
+                <TableCell>
+                  <Link href={ROUTES.PROFILE + `/${order.id}`}>
+                    <Button className="cursor-pointer px-2 text-xs">
+                      Show Details
+                    </Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <div className="flex flex-col space-y-7">
           {orders.map(order => (
             <div key={order.id} className="border-y">

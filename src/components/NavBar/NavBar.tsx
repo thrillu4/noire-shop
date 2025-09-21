@@ -22,7 +22,7 @@ export default async function NavBar() {
   return (
     <>
       {/* mobile  */}
-      <div className="flex items-center justify-between px-3 py-8 sm:hidden">
+      <div className="flex w-full items-center justify-between px-3 py-8 lg:hidden">
         <div className="flex-1">
           <Hamburger isAuth={session.isAuth} userId={session.userId} />
         </div>
@@ -39,7 +39,7 @@ export default async function NavBar() {
       </div>
       {/* mobile  */}
 
-      <div className="hidden sm:block">
+      <div className="hidden lg:block">
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>

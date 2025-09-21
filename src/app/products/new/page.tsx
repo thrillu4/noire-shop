@@ -46,7 +46,7 @@ const New = async () => {
           </span>
         )}
       </h2>
-      <div className="mt-10 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
+      <div className="mt-10 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
         {newProducts.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 text-center font-bold">
             New In is empty check out all our{' '}
@@ -63,7 +63,7 @@ const New = async () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full md:h-96 md:w-auto">
+            <div className="relative h-60 w-full sm:h-80 md:h-96 md:w-auto">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

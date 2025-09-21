@@ -10,12 +10,12 @@ const YourOrder = ({ cod }: { cod?: boolean }) => {
   const totalOrderPriceWithCod = (+totalOrderPrice + 2.5).toFixed(2)
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border px-5 py-8">
+    <div className="mx-auto max-w-lg rounded-2xl border px-5 py-8 sm:max-w-xl md:max-w-3xl">
       <div className="mb-7 flex items-center justify-between font-bold">
         <div>YOUR ORDER</div>
         <div className="text-blue-700">({totalItems()})</div>
       </div>
-      <div className="mx-auto flex max-w-xs flex-col gap-5">
+      <div className="mx-auto flex max-w-xs flex-col gap-5 sm:max-w-md md:grid md:max-w-xl md:grid-cols-2">
         {items.map((item, i) => (
           <Link
             href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}

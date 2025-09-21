@@ -61,7 +61,7 @@ const Payment = () => {
   }
 
   return (
-    <div className="px-2">
+    <div className="mb-20 px-2">
       <Breadcrumbs />
       <h2 className="mt-4 text-2xl font-extrabold">Payment & Delivery</h2>
 
@@ -69,9 +69,9 @@ const Payment = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto max-w-lg"
+          className="mx-auto max-w-lg sm:max-w-xl md:max-w-4xl"
         >
-          <div className="mx-auto mt-8 mb-10 max-w-lg">
+          <div className="mx-auto mt-8 mb-10 max-w-lg sm:max-w-xl md:max-w-4xl">
             <RadioGroup
               defaultValue="card"
               onValueChange={(val: 'card' | 'delivery') =>
@@ -280,8 +280,10 @@ const Payment = () => {
               </Label>
             </RadioGroup>
           </div>
-          <YourInfo />
-          <YourOrder cod={!isOpen} />
+          <div className="space-y-3">
+            <YourInfo />
+            <YourOrder cod={!isOpen} />
+          </div>
           <FormField
             control={form.control}
             name="checkbox"

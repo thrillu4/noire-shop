@@ -3,7 +3,6 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import SearchBar from '@/components/Home/SearchBar'
 import FilterByTypeProduct from '@/components/Products/FilterByTypeProduct'
 import FilterDrawer from '@/components/Products/FilterDrawer'
-import LoadingSkeletonSpinner from '@/components/Skeletons/LoadingSkeletonSpinner'
 import ProductsSkeleton from '@/components/Skeletons/ProductsSkeleton'
 import { Button } from '@/components/ui/button'
 import { FilteredProduct } from '@/lib/types'
@@ -83,11 +82,10 @@ const Products = () => {
         </div>
       </div>
       <FilterByTypeProduct setPage={setPage} propGender="all" />
-      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5">
-        {loading && <LoadingSkeletonSpinner />}
+      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
-          <div className="col-start-1 col-end-10 mt-10 font-bold">
+          <div className="col-start-1 col-end-10 mt-10 text-center font-bold">
             <div>😕 Nothing found matching your request.</div>
             <Button
               onClick={() => clearFilter()}
@@ -102,7 +100,7 @@ const Products = () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full">
+            <div className="relative h-60 w-full sm:h-80">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

@@ -48,7 +48,7 @@ const ChangePassword = () => {
   }
 
   return (
-    <div className="mx-auto mt-10 mb-20 max-w-lg px-3">
+    <div className="mx-auto mt-10 mb-20 max-w-lg px-3 sm:max-w-xl">
       <Form {...form}>
         <div className="mt-4 font-bold">Change Password</div>
         <div className="mb-5 text-sm opacity-65">

@@ -80,7 +80,7 @@ const SearchBar = () => {
         setIsOpen(!isOpen)
       }}
     >
-      <DrawerTrigger className="w-full">
+      <DrawerTrigger className="w-full lg:w-1/3">
         <div className="flex h-10 items-center justify-between bg-[#d9d9d9] px-3 text-sm opacity-60">
           <Search className="w-4" />
           <div>Search</div>

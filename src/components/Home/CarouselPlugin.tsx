@@ -37,24 +37,24 @@ export async function CarouselPlugin({
     >
       <CarouselContent className="ml-0">
         {newProducts.map((product, i) => (
-          <CarouselItem key={i} className="w-45 flex-none pl-2 sm:w-55">
+          <CarouselItem key={i} className="w-45 flex-none pl-2 sm:w-55 lg:w-70">
             <Link
               href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             >
               <CardContent className="relative aspect-square">
-                <div className="relative h-60 w-full sm:h-70">
+                <div className="relative h-60 w-full sm:h-70 lg:h-80">
                   <Image
                     src={product.images[0].url}
                     alt={`Slide ${i}`}
                     fill
-                    className="object-cover"
+                    className="rounded-xl object-cover"
                   />
                 </div>
-                <div className="mt-2 text-xs opacity-40">
+                <div className="mt-2 text-xs opacity-40 lg:text-sm">
                   {product.type.charAt(0).toUpperCase() +
                     product.type.slice(1).toLowerCase()}
                 </div>
-                <div className="flex items-center justify-between text-xs font-semibold">
+                <div className="flex items-center justify-between text-xs font-semibold lg:items-baseline-last lg:text-base">
                   <div>{product.title}</div>
                   <div>${product.price}</div>
                 </div>
@@ -64,9 +64,9 @@ export async function CarouselPlugin({
         ))}
       </CarouselContent>
       {nav && (
-        <div className="mt-6 flex justify-center gap-2">
-          <CarouselPrevious className="static rounded-none" />
-          <CarouselNext className="static rounded-none" />
+        <div className="mt-6 flex justify-center gap-2 lg:mt-10 lg:gap-5">
+          <CarouselPrevious className="static rounded-none lg:size-12" />
+          <CarouselNext className="static rounded-none lg:size-12" />
         </div>
       )}
     </Carousel>

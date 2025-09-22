@@ -54,7 +54,7 @@ const CartDrawer = ({
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <div className="group flex items-center">
-          <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-200 lg:group-hover:inline-block">
+          <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-200 lg:group-hover:inline-block">
             Shopping Bag
           </span>
           <div className="relative cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-200 hover:bg-white hover:text-black">

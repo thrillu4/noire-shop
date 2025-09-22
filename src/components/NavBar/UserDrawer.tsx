@@ -43,9 +43,15 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       <button
         disabled={pathname === ROUTES.SIGNIN}
         onClick={() => router.push(ROUTES.PROFILE)}
-        className="cursor-pointer rounded-full border bg-black p-2"
       >
-        <User className="h-auto w-4 text-white" />
+        <div className="group flex items-center">
+          <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
+            Profile
+          </span>
+          <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
+            <User className="h-auto w-4 hover:text-black lg:w-5" />
+          </div>
+        </div>
       </button>
     )
   }
@@ -58,7 +64,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
         <Sheet>
           <SheetTrigger asChild>
             <div className="group flex items-center">
-              <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-300 lg:group-hover:inline-block">
+              <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
                 Profile
               </span>
               <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
@@ -196,7 +202,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
         <Sheet>
           <SheetTrigger asChild>
             <div className="group flex items-center">
-              <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-300 lg:group-hover:inline-block">
+              <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
                 Profile
               </span>
               <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">

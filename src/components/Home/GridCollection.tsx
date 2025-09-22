@@ -64,7 +64,7 @@ const GridCollection = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between text-sm opacity-70">
+      <div className="flex items-center justify-between text-sm opacity-70 lg:text-base">
         <ul className="flex items-center gap-4">
           <li
             onClick={() => handleFilterGenderChange(undefined)}
@@ -87,10 +87,10 @@ const GridCollection = () => {
         </ul>
         <div className="flex items-center gap-1">
           <Select onValueChange={e => setSort(e)}>
-            <SelectTrigger className="px-2 py-0 text-xs">
+            <SelectTrigger className="px-2 py-0 text-xs lg:text-base">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
-            <SelectContent className="sm:mr-2 md:mr-10">
+            <SelectContent className="sm:mr-2 md:mr-10 lg:mr-2">
               <SelectGroup>
                 <SelectLabel>Sort by:</SelectLabel>
                 <SelectItem value="new" className="flex items-center gap-1">
@@ -122,8 +122,10 @@ const GridCollection = () => {
             <LoaderCircle className="animate-spin" />
           ) : (
             <>
-              <div className="text-sm leading-1 opacity-65">More</div>
-              <ChevronDown className="mx-auto" />
+              <div className="text-sm leading-1 opacity-65 lg:text-lg">
+                More
+              </div>
+              <ChevronDown className="mx-auto lg:size-7" />
             </>
           )}
         </button>

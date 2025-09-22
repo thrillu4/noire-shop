@@ -57,15 +57,20 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       {!isSignIn ? (
         <Sheet>
           <SheetTrigger asChild>
-            <button className="cursor-pointer rounded-full border bg-black p-2">
-              <User className="h-auto w-4 text-white" />
-            </button>
+            <div className="group flex items-center">
+              <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-300 lg:group-hover:inline-block">
+                Profile
+              </span>
+              <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
+                <User className="h-auto w-4 hover:text-black lg:w-5" />
+              </div>
+            </div>
           </SheetTrigger>
           <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
             <div className="flex w-full flex-col items-center justify-center gap-4">
               <SheetHeader>
                 <SheetTitle className="text-center">Register</SheetTitle>
-                <SheetDescription className="text-xs">
+                <SheetDescription className="text-xs lg:text-sm">
                   Fill out the form to find out more and become one of the NOIRÉ
                   trends.
                 </SheetDescription>
@@ -85,7 +90,9 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     defaultValue={state.fields?.username || ''}
                   />
                   {state?.errors?.name && (
-                    <p className="text-xs text-red-600">{state.errors.name}</p>
+                    <p className="text-xs text-red-600 lg:text-sm">
+                      {state.errors.name}
+                    </p>
                   )}
                 </div>
                 <div className="w-full">
@@ -98,7 +105,9 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     defaultValue={state.fields?.email || ''}
                   />
                   {state?.errors?.email && (
-                    <p className="text-xs text-red-600">{state.errors.email}</p>
+                    <p className="text-xs text-red-600 lg:text-sm">
+                      {state.errors.email}
+                    </p>
                   )}
                 </div>
                 <div className="w-full">
@@ -128,7 +137,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     )}
                   </div>
                   {state?.errors?.password && (
-                    <p className="text-xs text-red-600">
+                    <p className="text-xs text-red-600 lg:text-sm">
                       {state.errors.password}
                     </p>
                   )}
@@ -151,7 +160,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                       <TermsConditionsDialog />
                     </p>
                     {state?.errors?.checkbox && (
-                      <p className="text-xs text-red-600">
+                      <p className="text-xs text-red-600 lg:text-sm">
                         {state.errors.checkbox}
                       </p>
                     )}
@@ -166,7 +175,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     {isPending ? 'Signing up...' : 'Create Account'}
                   </Button>
                   {state?.errors?.server && (
-                    <p className="text-xs text-red-600">
+                    <p className="text-xs text-red-600 lg:text-sm">
                       {state.errors.server}
                     </p>
                   )}
@@ -186,8 +195,13 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       ) : (
         <Sheet>
           <SheetTrigger asChild>
-            <div className="cursor-pointer rounded-full border bg-black p-2">
-              <User className="h-auto w-4 text-white" />
+            <div className="group flex items-center">
+              <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-300 lg:group-hover:inline-block">
+                Profile
+              </span>
+              <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
+                <User className="h-auto w-4 hover:text-black lg:w-5" />
+              </div>
             </div>
           </SheetTrigger>
           <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
@@ -211,7 +225,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     defaultValue={signIn[0].fields?.email || ''}
                   />
                   {signIn[0]?.errors?.email && (
-                    <p className="text-xs text-red-600">
+                    <p className="text-xs text-red-600 lg:text-sm">
                       {signIn[0].errors.email}
                     </p>
                   )}
@@ -243,7 +257,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     )}
                   </div>
                   {signIn[0]?.errors?.password && (
-                    <p className="text-xs text-red-600">
+                    <p className="text-xs text-red-600 lg:text-sm">
                       {signIn[0].errors.password}
                     </p>
                   )}
@@ -259,7 +273,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
                     {signIn[2] ? 'Signing up...' : 'Sign In'}
                   </Button>
                   {signIn[0].errors?.server && (
-                    <p className="text-xs text-red-600">
+                    <p className="text-xs text-red-600 lg:text-sm">
                       {signIn[0].errors.server}
                     </p>
                   )}

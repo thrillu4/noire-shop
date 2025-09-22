@@ -20,33 +20,33 @@ async function seeds() {
     })
     users.push(user)
   }
-
-  // 2️⃣ Products
   const products = []
-  const genders = ['male', 'female']
-  const types = ['t-shirt', 'dress', 'hoodie', 'jeans']
-  const sizes = ['S', 'M', 'L', 'XL']
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 50; i++) {
     const product = await prisma.product.create({
       data: {
-        gender: faker.helpers.arrayElement(genders),
-        type: faker.helpers.arrayElement(types),
         title: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        price: parseFloat(faker.commerce.price({ min: 10, max: 100, dec: 2 })),
-        collection: faker.commerce.department(),
+        price: parseFloat(faker.commerce.price({ min: 10, max: 300 })),
+        gender: faker.helpers.arrayElement(['male', 'female']),
+        type: faker.helpers.arrayElement(['shirt', 'pants', 'shoes', 'hat']),
+        collection: faker.helpers.arrayElement([
+          'summer',
+          'winter',
+          'spring',
+          'fall',
+        ]),
         images: {
           create: [
-            {
-              url: faker.image.personPortrait({ sex: 'male' }),
-            },
-            { url: faker.image.personPortrait({ sex: 'female' }) },
+            { url: `https://picsum.photos/seed/${i}/400/400` },
+            { url: `https://picsum.photos/seed/${i + 100}/400/400` },
+            { url: `https://picsum.photos/seed/${i + 200}/400/400` },
+            { url: `https://picsum.photos/seed/${i + 300}/400/400` },
           ],
         },
         variants: {
-          create: sizes.map(size => ({
+          create: ['S', 'M', 'L', 'XL'].map(size => ({
             size,
-            stock: faker.number.float({ min: 5, max: 20 }),
+            stock: faker.number.int({ min: 1, max: 50 }),
           })),
         },
       },
@@ -54,84 +54,94 @@ async function seeds() {
     products.push(product)
   }
 
-  // 3️⃣ Carts
-  const carts = []
+  // Заказы и OrderItems
   for (const user of users) {
-    const cart = await prisma.cart.create({
-      data: {
-        userId: user.id,
-        items: {
-          create: [
-            {
-              productId: products[0].id,
-              quantity: 2,
-              size: 'M',
-            },
-            {
-              productId: products[1].id,
-              quantity: 1,
-              size: 'S',
-            },
-          ],
+    const numOrders = faker.number.int({ min: 1, max: 5 })
+    for (let i = 0; i < numOrders; i++) {
+      const order = await prisma.order.create({
+        data: {
+          userId: user.id,
+          total: 0, // потом пересчитаем
+          paymentMethod: faker.helpers.arrayElement(['card', 'paypal', 'cash']),
+          status: faker.helpers.arrayElement([
+            'pending',
+            'paid',
+            'shipped',
+            'delivered',
+          ]),
+          fullName: user.name,
+          phone: faker.phone.number(),
+          country: faker.location.country(),
+          city: faker.location.city(),
+          address: faker.location.streetAddress(),
         },
-      },
-    })
-    carts.push(cart)
+      })
+
+      const numItems = faker.number.int({ min: 1, max: 5 })
+      let total = 0
+      for (let j = 0; j < numItems; j++) {
+        const product = faker.helpers.arrayElement(products)
+        const price = product.price
+        const quantity = faker.number.int({ min: 1, max: 3 })
+        total += price * quantity
+
+        await prisma.orderItem.create({
+          data: {
+            orderId: order.id,
+            productId: product.id,
+            quantity,
+            size: faker.helpers.arrayElement(['S', 'M', 'L', 'XL']),
+            price,
+          },
+        })
+      }
+
+      await prisma.order.update({
+        where: { id: order.id },
+        data: { total },
+      })
+    }
   }
 
-  // 4️⃣ Wishlists
-  const wishlists = []
+  // Корзины и Wishlist (по аналогии)
   for (const user of users) {
-    const wishlist = await prisma.wishlist.create({
-      data: {
-        userId: user.id,
-        items: {
-          create: [
-            { productId: products[2].id },
-            { productId: products[3].id },
-          ],
+    const cart = await prisma.cart.create({ data: { userId: user.id } })
+    const wishlist = await prisma.wishlist.create({ data: { userId: user.id } })
+
+    for (let i = 0; i < faker.number.int({ min: 1, max: 5 }); i++) {
+      const product = faker.helpers.arrayElement(products)
+
+      await prisma.cartItem.create({
+        data: {
+          cartId: cart.id,
+          productId: product.id,
+          quantity: faker.number.int({ min: 1, max: 3 }),
+          size: faker.helpers.arrayElement(['S', 'M', 'L', 'XL']),
         },
-      },
-    })
-    wishlists.push(wishlist)
+      })
+
+      await prisma.wishlistItem.create({
+        data: {
+          wishlistId: wishlist.id,
+          productId: product.id,
+        },
+      })
+    }
   }
 
-  // 5️⃣ Orders
-  const orders = []
-  for (const user of users) {
-    const order = await prisma.order.create({
+  // Отзывы
+  for (let i = 0; i < 100; i++) {
+    await prisma.review.create({
       data: {
-        userId: user.id,
-        total: 99.99,
-        status: 'pending',
-        paymentMethod: 'card',
-        fullName: user.name,
-        phone: faker.phone.number(),
+        name: faker.person.fullName(),
         country: faker.location.country(),
-        city: faker.location.city(),
-        address: faker.location.streetAddress(),
-        orderItems: {
-          create: [
-            {
-              productId: products[0].id,
-              quantity: 1,
-              size: 'M',
-              price: products[0].price,
-            },
-            {
-              productId: products[1].id,
-              quantity: 2,
-              size: 'L',
-              price: products[1].price,
-            },
-          ],
-        },
+        rating: faker.number.int({ min: 1, max: 5 }),
+        text: faker.lorem.sentences(2),
       },
     })
-    orders.push(order)
   }
 
-  console.log('Seeding finished!')
+  console.log('Seed completed!')
 }
 
 seeds()

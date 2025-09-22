@@ -10,7 +10,6 @@ export async function fetchProducts(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const where: any = {}
   const { available, collections, gender, priceRange, sizes, types } = filter
-
   if (gender !== 'all') where.gender = { equals: gender, mode: 'insensitive' }
   if (types?.length) where.type = { in: types, mode: 'insensitive' }
   if (priceRange?.length === 2) {
@@ -45,7 +44,6 @@ export async function fetchProducts(
         where,
       }),
     ])
-
     return { products, total: total.length }
   } catch (error) {
     console.log('Server error', error)

@@ -50,7 +50,10 @@ export async function CarouselPlugin({
                     className="object-cover"
                   />
                 </div>
-                <div className="mt-2 text-xs opacity-40">{product.type}</div>
+                <div className="mt-2 text-xs opacity-40">
+                  {product.type.charAt(0).toUpperCase() +
+                    product.type.slice(1).toLowerCase()}
+                </div>
                 <div className="flex items-center justify-between text-xs font-semibold">
                   <div>{product.title}</div>
                   <div>${product.price}</div>

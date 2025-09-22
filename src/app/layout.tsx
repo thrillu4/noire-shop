@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="mx-auto max-w-[600px] sm:max-w-[710px] md:max-w-[968px]">
+      <body>
         <LoadingState />
-        <NavBar />
-        {children}
+        <div className="mx-auto max-w-[600px] sm:max-w-[710px] md:max-w-[968px] lg:max-w-[1220px]">
+          <NavBar />
+          {children}
+        </div>
         <Toaster position="top-center" closeButton richColors />
         <Footer />
       </body>

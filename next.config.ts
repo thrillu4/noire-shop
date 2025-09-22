@@ -1,9 +1,14 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    remotePatterns: [new URL('https://cdn.jsdelivr.net/**')],
+    domains: [
+      'cdn.jsdelivr.net',
+      'picsum.photos',
+      'images.pexels.com',
+      'static.staff-clothes.com',
+      'static.zara.net',
+    ],
   },
 }
 

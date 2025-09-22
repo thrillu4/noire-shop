@@ -13,7 +13,7 @@ const SingleProduct = async ({
   const product = await prisma.product.findUnique({
     where: { id: Number(productId) },
     include: {
-      images: { select: { url: true } },
+      images: true,
       variants: true,
     },
   })

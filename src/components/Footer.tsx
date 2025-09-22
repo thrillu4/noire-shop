@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f5f5f5] pt-14 pb-3">
+    <footer className="overflow-hidden bg-[#f5f5f5] pt-14 pb-3">
       <Image
         src={'/logo.png'}
         width={40}

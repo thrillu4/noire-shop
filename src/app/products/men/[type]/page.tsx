@@ -55,7 +55,9 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="my-3 text-2xl font-bold">{type}</h1>
+      <h1 className="my-3 text-2xl font-bold">
+        {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
+      </h1>
       <SearchBar />
       <div className="mt-5 flex items-center justify-between">
         <FilterDrawer propType={type} propGender="male" setPage={setPage} />

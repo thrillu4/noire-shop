@@ -70,8 +70,8 @@ const ForgotPasswordDialog = () => {
                 </FormItem>
               )}
             />
-            <DialogFooter className="sm:justify-start">
-              <Button type="submit" className="cursor-pointer">
+            <DialogFooter>
+              <Button type="submit" className="cursor-pointer lg:mx-auto">
                 Send reset link
               </Button>
             </DialogFooter>

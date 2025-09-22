@@ -28,11 +28,10 @@ const Products = () => {
     gender: 'all',
     types: [],
     sizes: [],
-    priceRange: [0, 100],
+    priceRange: [0, 1000],
     collections: [],
     available: 'all',
   }
-
   useEffect(() => {
     const loadProducts = async () => {
       const newProducts = await fetchProducts(page * 8, 8, filter)

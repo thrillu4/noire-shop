@@ -31,7 +31,6 @@ const CartDrawer = ({
     removeItem,
     totalPrice,
     totalItems,
-    isLoading,
   } = useCartStore()
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -54,16 +53,21 @@ const CartDrawer = ({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="relative rounded-full border bg-black p-2">
-          <Handbag className="h-auto w-4 text-white" />
-          {totalItems() > 0 && (
-            <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
-              {totalItems()}
-            </div>
-          )}
+        <div className="group flex items-center">
+          <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-200 lg:group-hover:inline-block">
+            Shopping Bag
+          </span>
+          <div className="relative cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-200 hover:bg-white hover:text-black">
+            <Handbag className="h-auto w-4 lg:w-5" />
+            {totalItems() > 0 && (
+              <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
+                {totalItems()}
+              </div>
+            )}
+          </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5">
+      <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 lg:max-w-lg">
         {items.length === 0 && (
           <div className="flex flex-col gap-1">
             <SheetHeader className="flex flex-col items-center gap-7">
@@ -93,9 +97,9 @@ const CartDrawer = ({
               {items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex gap-4 border bg-neutral-100 px-1 py-5"
+                  className="flex gap-4 border bg-neutral-100 px-1 py-5 lg:p-2"
                 >
-                  <div className="relative h-30 min-w-28">
+                  <div className="relative h-30 min-w-28 lg:h-40">
                     <Image
                       src={item.product.images[0].url}
                       alt="product-image"
@@ -103,7 +107,7 @@ const CartDrawer = ({
                       className="object-contain"
                     />
                   </div>
-                  <div className="flex w-full flex-col justify-between text-xs">
+                  <div className="flex w-full flex-col justify-between text-xs lg:justify-evenly">
                     <Link
                       href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
                       className="font-bold"

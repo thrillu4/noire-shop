@@ -6,7 +6,7 @@ export const useFilterState = create<FilterState>(set => ({
     gender: 'all',
     types: [],
     sizes: [],
-    priceRange: [0, 100],
+    priceRange: [0, 1000],
     collections: [],
     available: 'all',
   },

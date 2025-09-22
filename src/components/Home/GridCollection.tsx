@@ -5,6 +5,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -18,7 +19,6 @@ import {
   Plus,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import ProductsSkeleton from '../Skeletons/ProductsSkeleton'
 import CollectionProduct from './CollectionProduct'
 
 const GridCollection = () => {
@@ -90,8 +90,9 @@ const GridCollection = () => {
             <SelectTrigger className="px-2 py-0 text-xs">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="sm:mr-2 md:mr-10">
               <SelectGroup>
+                <SelectLabel>Sort by:</SelectLabel>
                 <SelectItem value="new" className="flex items-center gap-1">
                   <Plus /> Newest
                 </SelectItem>
@@ -111,7 +112,6 @@ const GridCollection = () => {
       </div>
       <div className="mt-3 mb-7 w-full border"></div>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-        {loading && <ProductsSkeleton />}
         {products.map(product => (
           <CollectionProduct key={product.id} product={product} />
         ))}

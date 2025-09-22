@@ -29,13 +29,15 @@ interface PropProduct {
   createdAt: Date
   updatedAt: Date
   images: {
+    id: number
+    productId: number
     url: string
   }[]
   variants: { id: number; size: string; stock: number; productId: number }[]
 }
 
 const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
-  const [mainImageUrl, setMainImageUrl] = useState(product.images[0].url)
+  const [mainImageIndex, setMainImageIndex] = useState(0)
   const [quant, setQuant] = useState(1)
   const [selectedSize, setSelectedSize] = useState('')
   const [error, setError] = useState<'size' | 'stock' | false>(false)
@@ -58,7 +60,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
     <div className="mt-5">
       <div className="relative mx-auto h-80 w-full md:h-100">
         <Image
-          src={mainImageUrl}
+          src={product.images[mainImageIndex].url}
           alt={product.title}
           fill
           className="object-contain"
@@ -67,11 +69,11 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
       {product.images.length > 1 && (
         <Carousel className="mx-auto mt-7 md:max-w-3xl">
           <CarouselContent className="mx-1">
-            {product.images.map(img => (
+            {product.images.map((img, i) => (
               <CarouselItem
-                onClick={() => setMainImageUrl(img.url)}
-                key={img.url}
-                className={`${img.url === mainImageUrl ? '' : 'opacity-45'} basis-1/4 pl-4 sm:basis-1/6`}
+                onClick={() => setMainImageIndex(i)}
+                key={img.id}
+                className={`${i === mainImageIndex ? '' : 'opacity-45'} basis-1/3 pl-4 sm:basis-1/4`}
               >
                 <div className="relative h-20 w-full">
                   <Image
@@ -97,13 +99,19 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
           />
         </div>
         <div className="mt-3 flex items-center justify-between gap-5">
-          <h2 className="opacity-60">{product.type}</h2>
+          <h2 className="opacity-60">
+            {product.type.charAt(0).toUpperCase() +
+              product.type.slice(1).toLowerCase()}
+          </h2>
           <div className="font-bold">${product.price}</div>
         </div>
         <div className="mt-10">{product.description}</div>
         <div className="my-6 space-y-2">
           <div className="opacity-55">Size :</div>
           <div className="flex gap-2">
+            {product.variants.length === 0 && (
+              <div className="font-bold">Unavailable</div>
+            )}
             {product.variants.map(size => (
               <div
                 onClick={() => {

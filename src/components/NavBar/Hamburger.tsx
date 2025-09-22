@@ -117,7 +117,10 @@ const Hamburger = ({
                       onClick={() => setIsOpen(false)}
                       href={`${ROUTES.MEN}/${res.type}`}
                     >
-                      <AccordionContent>{res.type}</AccordionContent>
+                      <AccordionContent>
+                        {res.type.charAt(0).toUpperCase() +
+                          res.type.slice(1).toLowerCase()}
+                      </AccordionContent>
                     </Link>
                   ))}
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.MEN}>
@@ -140,7 +143,10 @@ const Hamburger = ({
                       onClick={() => setIsOpen(false)}
                       href={`${ROUTES.WOMEN}/${res.type}`}
                     >
-                      <AccordionContent>{res.type}</AccordionContent>
+                      <AccordionContent>
+                        {res.type.charAt(0).toUpperCase() +
+                          res.type.slice(1).toLowerCase()}
+                      </AccordionContent>
                     </Link>
                   ))}
                   <Link onClick={() => setIsOpen(false)} href={ROUTES.WOMEN}>

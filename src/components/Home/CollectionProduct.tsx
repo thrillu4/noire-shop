@@ -19,7 +19,10 @@ const CollectionProduct = ({ product }: { product: ProductWithImage }) => {
           className="object-cover"
         />
       </div>
-      <div className="mb-1 opacity-50">{product.type}</div>
+      <div className="mb-1 opacity-50">
+        {product.type.charAt(0).toUpperCase() +
+          product.type.slice(1).toLowerCase()}
+      </div>
       <div className="flex items-center justify-between font-bold">
         <div>{product.title}</div>
         <div>${product.price}</div>

@@ -1,6 +1,7 @@
 'use client'
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -13,8 +14,8 @@ import { BaggageClaim, Heart, HeartOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { Button } from '../ui/button'
 import { toast } from 'sonner'
+import { Button } from '../ui/button'
 
 const WishListDrawer = ({
   open,
@@ -34,20 +35,24 @@ const WishListDrawer = ({
   }, [loadWishList, setAuthenticated, userId])
 
   if (!open) return null
-
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="relative rounded-full border bg-black p-2">
-          <Heart className="h-auto w-4 text-white" />
-          {totalItems() > 0 && (
-            <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
-              {totalItems()}
-            </div>
-          )}
+        <div className="group flex items-center">
+          <span className="hidden cursor-pointer rounded-full border-4 border-black p-2 text-sm font-bold text-gray-600 transition-all duration-200 lg:group-hover:inline-block">
+            Wish List
+          </span>
+          <div className="relative cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-200 hover:bg-white hover:text-black">
+            <Heart className="h-auto w-4 lg:w-5" />
+            {totalItems() > 0 && (
+              <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
+                {totalItems()}
+              </div>
+            )}
+          </div>
         </div>
       </SheetTrigger>
-      <SheetContent className="max-w-md overflow-y-auto px-1 pt-10 pb-5">
+      <SheetContent className="max-w-md overflow-y-auto px-1 pt-10 pb-5 lg:max-w-lg">
         {items.length === 0 && (
           <div className="flex flex-col gap-1 text-center">
             <SheetHeader className="flex flex-col items-center gap-7">
@@ -79,12 +84,12 @@ const WishListDrawer = ({
                   key={item.productId}
                   className="flex justify-between gap-3"
                 >
-                  <div className="relative h-28 w-full flex-1">
+                  <div className="relative h-28 w-full flex-1 lg:h-50">
                     <Image
                       src={item.product.images[0].url}
                       alt="product"
                       fill
-                      className="object-contain"
+                      className="object-contain lg:object-cover"
                     />
                     <HeartOff
                       size={24}
@@ -95,7 +100,7 @@ const WishListDrawer = ({
                       }}
                     />
                   </div>
-                  <div className="flex flex-1 flex-col justify-between text-xs">
+                  <div className="flex flex-1 flex-col justify-between text-xs lg:justify-evenly">
                     <Link
                       href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
                       className="font-bold"
@@ -135,12 +140,15 @@ const WishListDrawer = ({
                 </div>
               ))}
             </div>
-            <Button
-              onClick={() => setIsOpen && setIsOpen(false)}
-              className="mx-auto"
-            >
-              <Link href={ROUTES.WISHLIST}>View Wish List</Link>
-            </Button>
+            <SheetClose asChild>
+              <Link
+                onClick={() => setIsOpen && setIsOpen(false)}
+                href={ROUTES.WISHLIST}
+                className="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 has-[>svg]:px-3 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+              >
+                View Wish List
+              </Link>
+            </SheetClose>
           </SheetHeader>
         )}
       </SheetContent>

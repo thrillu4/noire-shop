@@ -48,7 +48,7 @@ const Collections = () => {
             key={col.collections}
             className="relative transition duration-200 hover:scale-105"
           >
-            <div className="relative h-60 w-full sm:h-80">
+            <div className="relative h-60 w-full sm:h-80 lg:h-120">
               <Image
                 src={col.images[0].url}
                 alt={col.collections}
@@ -56,7 +56,7 @@ const Collections = () => {
                 className="object-cover opacity-40"
               />
             </div>
-            <div className="absolute top-1/2 right-1/2 z-10 translate-x-1/2 -translate-y-1/2 text-xl font-bold tracking-widest">
+            <div className="absolute top-1/2 right-1/2 z-10 translate-x-1/2 -translate-y-1/2 text-xl font-bold tracking-widest lg:text-2xl">
               {col.collections}
             </div>
           </Link>

@@ -42,10 +42,10 @@ const Profile = () => {
     <div className="mb-20 px-3">
       <Breadcrumbs />
       <h1 className="mt-3 text-2xl font-extrabold">My Profile</h1>
-      <div className="mx-auto mt-8 mb-4 grid max-w-lg grid-cols-2 gap-2 sm:max-w-xl sm:grid-cols-3">
+      <div className="mx-auto mt-8 mb-4 grid max-w-lg grid-cols-2 gap-2 sm:max-w-xl sm:grid-cols-3 lg:max-w-3xl">
         {tabs.map(tab => (
           <div
-            className={`${tab.state === activeTab && 'border-black'} flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 p-3 text-center transition duration-150 hover:scale-105`}
+            className={`${tab.state === activeTab && 'border-black'} flex cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 p-3 text-center transition duration-150 hover:scale-105 lg:p-5`}
             key={tab.state}
             onClick={() => handleClick(tab.state)}
           >

@@ -10,27 +10,27 @@ const YourOrder = ({ cod }: { cod?: boolean }) => {
   const totalOrderPriceWithCod = (+totalOrderPrice + 2.5).toFixed(2)
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border px-5 py-8 sm:max-w-xl md:max-w-3xl">
+    <div className="mx-auto max-w-lg rounded-2xl border px-5 py-8 sm:max-w-xl md:max-w-3xl lg:max-w-full">
       <div className="mb-7 flex items-center justify-between font-bold">
         <div>YOUR ORDER</div>
         <div className="text-blue-700">({totalItems()})</div>
       </div>
-      <div className="mx-auto flex max-w-xs flex-col gap-5 sm:max-w-md md:grid md:max-w-xl md:grid-cols-2">
+      <div className="mx-auto flex max-w-xs flex-col gap-5 sm:max-w-md md:grid md:max-w-xl md:grid-cols-2 lg:gap-x-10">
         {items.map((item, i) => (
           <Link
             href={`${ROUTES.PRODUCTS}/${item.product.title}?productId=${item.product.id}`}
             className="flex gap-3 text-sm"
             key={i}
           >
-            <div className="min-w-[115px]">
+            <div className="relative h-40 w-full lg:h-60">
               <Image
                 src={item.product.images[0].url}
                 alt="product image"
-                width={113}
-                height={134}
+                fill
+                className="object-contain"
               />
             </div>
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-evenly">
               <div>
                 <div className="mb-1 font-bold">{item.product.title}</div>
                 <div>

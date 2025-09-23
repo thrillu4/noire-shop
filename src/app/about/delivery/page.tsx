@@ -7,12 +7,14 @@ export default function DeliveryReturnsPage() {
     <div className="px-3">
       <Breadcrumbs />
       <div className="md:text-center">
-        <h1 className="mt-3 text-2xl font-bold">Delivery & Returns</h1>
-        <h2 className="mt-1 mb-8 text-xs opacity-45">
+        <h1 className="mt-3 text-2xl font-bold lg:text-3xl">
+          Delivery & Returns
+        </h1>
+        <h2 className="mt-1 mb-8 text-xs opacity-45 lg:text-sm">
           Brief information about payment methods, delivery and returns.
         </h2>
       </div>
-      <div className="mb-20 max-w-lg space-y-10 md:mx-auto">
+      <div className="mb-20 max-w-lg space-y-10 md:mx-auto lg:max-w-3xl">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-3">

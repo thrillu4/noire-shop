@@ -57,39 +57,70 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
     }
   }
   return (
-    <div className="mt-5">
-      <div className="relative mx-auto h-80 w-full md:h-100">
-        <Image
-          src={product.images[mainImageIndex].url}
-          alt={product.title}
-          fill
-          className="object-contain"
-        />
-      </div>
-      {product.images.length > 1 && (
-        <Carousel className="mx-auto mt-7 md:max-w-3xl">
-          <CarouselContent className="mx-1">
-            {product.images.map((img, i) => (
-              <CarouselItem
-                onClick={() => setMainImageIndex(i)}
-                key={img.id}
-                className={`${i === mainImageIndex ? '' : 'opacity-45'} basis-1/3 pl-4 sm:basis-1/4`}
-              >
-                <div className="relative h-20 w-full">
-                  <Image
-                    src={img.url}
-                    alt={product.title}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      )}
+    <div className="mt-5 justify-center lg:flex lg:min-h-[70vh] lg:w-full lg:items-center lg:gap-5">
+      <div className="lg:flex">
+        <div className="relative mx-auto h-80 w-full md:h-100 lg:h-120 lg:min-w-[350px]">
+          <Image
+            src={product.images[mainImageIndex].url}
+            alt={product.title}
+            fill
+            className="object-contain lg:object-cover"
+          />
+        </div>
+        {product.images.length > 1 && (
+          <>
+            <Carousel
+              orientation="horizontal"
+              className="mx-auto mt-7 md:max-w-3xl lg:hidden lg:min-w-40 lg:flex-col"
+            >
+              <CarouselContent className="mx-1">
+                {product.images.map((img, i) => (
+                  <CarouselItem
+                    onClick={() => setMainImageIndex(i)}
+                    key={img.id}
+                    className={`${i === mainImageIndex ? '' : 'opacity-45'} basis-1/3 pl-4 sm:basis-1/4`}
+                  >
+                    <div className="relative h-20 w-full">
+                      <Image
+                        src={img.url}
+                        alt={product.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
 
-      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl">
+            <Carousel
+              orientation="vertical"
+              className="mx-auto mt-7 hidden md:max-w-3xl lg:block lg:min-w-30"
+            >
+              <CarouselContent className="mx-1">
+                {product.images.map((img, i) => (
+                  <CarouselItem
+                    onClick={() => setMainImageIndex(i)}
+                    key={img.id}
+                    className={`${i === mainImageIndex ? '' : 'opacity-45'} basis-1/3 pl-4 sm:basis-1/4`}
+                  >
+                    <div className="relative h-20 w-full">
+                      <Image
+                        src={img.url}
+                        alt={product.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </>
+        )}
+      </div>
+
+      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl lg:mx-0 lg:max-w-none">
         <div className="flex items-center justify-between gap-5">
           <h1 className="font-bold tracking-widest">{product.title}</h1>
           <Heart

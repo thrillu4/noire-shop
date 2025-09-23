@@ -25,7 +25,9 @@ const New = async () => {
       <div className="my-5">
         <SearchBar />
       </div>
-      <h1 className="mt-3 mb-2 text-center text-2xl font-bold">New In</h1>
+      <h1 className="mt-3 mb-2 text-center text-2xl font-bold lg:text-3xl">
+        New In
+      </h1>
       <h2 className="text-center text-sm opacity-65">
         Discover the latest and greatest arrivals,{' '}
         <Link href={ROUTES.COLLECTIONS} className="underline opacity-100">
@@ -63,7 +65,7 @@ const New = async () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full sm:h-80 md:h-96 md:w-auto">
+            <div className="relative h-60 w-full sm:h-80 md:h-96 md:w-auto lg:h-120">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}
@@ -71,8 +73,10 @@ const New = async () => {
                 className="object-cover"
               />
             </div>
-            <div className="text-xs">{product.type.toUpperCase()}</div>
-            <div className="flex items-center justify-between text-xs font-bold">
+            <div className="text-xs lg:text-sm">
+              {product.type.toUpperCase()}
+            </div>
+            <div className="flex items-center justify-between text-xs font-bold lg:text-lg">
               <h3>{product.title}</h3>
               <p> ${product.price}</p>
             </div>

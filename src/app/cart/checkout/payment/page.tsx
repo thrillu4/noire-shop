@@ -63,7 +63,9 @@ const Payment = () => {
   return (
     <div className="mb-20 px-2">
       <Breadcrumbs />
-      <h2 className="mt-4 text-2xl font-extrabold">Payment & Delivery</h2>
+      <h2 className="mt-4 text-2xl font-extrabold lg:text-3xl">
+        Payment & Delivery
+      </h2>
 
       <h3 className="mt-5 mb-2 font-bold">Payment method</h3>
       <Form {...form}>

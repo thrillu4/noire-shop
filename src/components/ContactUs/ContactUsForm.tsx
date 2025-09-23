@@ -36,7 +36,7 @@ const ContactUsForm = () => {
     )
   }
   return (
-    <div className="mx-auto max-w-lg">
+    <div className="mx-auto max-w-lg lg:max-w-2xl">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

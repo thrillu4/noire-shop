@@ -69,7 +69,7 @@ const Checkout = () => {
   return (
     <div className="px-2">
       <Breadcrumbs />
-      <h2 className="mt-4 text-2xl font-extrabold">Checkout</h2>
+      <h2 className="mt-4 text-2xl font-extrabold lg:text-3xl">Checkout</h2>
 
       <Form {...form}>
         <form

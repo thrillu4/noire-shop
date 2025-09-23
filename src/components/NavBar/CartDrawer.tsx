@@ -93,13 +93,13 @@ const CartDrawer = ({
                 Shopping Bag ({totalItems()})
               </SheetTitle>
             </SheetHeader>
-            <div className="mt-3 w-full max-w-sm">
+            <div className="mt-3 w-full max-w-sm lg:max-w-full lg:px-3">
               {items.map((item, i) => (
                 <div
                   key={i}
                   className="flex gap-4 border bg-neutral-100 px-1 py-5 lg:p-2"
                 >
-                  <div className="relative h-30 min-w-28 lg:h-40">
+                  <div className="relative h-30 min-w-28 lg:h-45">
                     <Image
                       src={item.product.images[0].url}
                       alt="product-image"

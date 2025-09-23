@@ -11,11 +11,15 @@ export default function FAQPage() {
   return (
     <div className="px-3">
       <Breadcrumbs />
-      <h1 className="mt-5 mb-8 text-center text-2xl font-bold">
+      <h1 className="mt-5 mb-8 text-center text-2xl font-bold lg:text-3xl">
         Frequently Asked Questions
       </h1>
 
-      <Accordion type="single" collapsible className="mb-20 w-full space-y-2">
+      <Accordion
+        type="single"
+        collapsible
+        className="mb-20 w-full space-y-2 lg:mx-auto lg:max-w-3xl"
+      >
         <AccordionItem value="item-1">
           <AccordionTrigger>How long does shipping take?</AccordionTrigger>
           <AccordionContent>

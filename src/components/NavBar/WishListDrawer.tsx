@@ -78,7 +78,7 @@ const WishListDrawer = ({
         {items.length > 0 && (
           <SheetHeader className="flex flex-col items-center gap-7">
             <SheetTitle>Wish List ({totalItems()})</SheetTitle>
-            <div className="mt-3 w-full max-w-sm space-y-5">
+            <div className="mt-3 w-full max-w-sm space-y-5 lg:max-w-full lg:px-3">
               {items.map(item => (
                 <div
                   key={item.productId}
@@ -89,7 +89,7 @@ const WishListDrawer = ({
                       src={item.product.images[0].url}
                       alt="product"
                       fill
-                      className="object-contain lg:object-cover"
+                      className="object-contain"
                     />
                     <HeartOff
                       size={24}

@@ -16,7 +16,7 @@ const TermsConditionsDialog = () => {
           Terms & Conditions and Privacy Policy
         </span>
       </DialogTrigger>
-      <DialogContent className="max-h-[80vh] max-w-lg overflow-y-auto sm:max-w-xl">
+      <DialogContent className="max-h-[80vh] max-w-lg overflow-y-auto sm:max-w-xl lg:max-w-4xl">
         <DialogHeader>
           <DialogTitle>Terms & Conditions</DialogTitle>
           <DialogDescription className="text-xs">

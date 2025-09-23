@@ -9,8 +9,8 @@ const Contacts = () => {
     <div className="mb-20 overflow-hidden px-3">
       <Breadcrumbs />
       <div className="my-10 space-y-2 text-center font-bold">
-        <h2 className="text-2xl">Get in touch with us</h2>
-        <h3 className="text-xs opacity-65">
+        <h2 className="text-2xl lg:text-3xl">Get in touch with us</h2>
+        <h3 className="text-xs opacity-65 lg:text-sm">
           We’d love to hear from you. Fill out the form below or reach us at…
         </h3>
       </div>
@@ -18,7 +18,7 @@ const Contacts = () => {
         <div>
           <ContactUsForm />
         </div>
-        <div className="relative mx-auto max-w-lg">
+        <div className="relative mx-auto max-w-lg lg:max-w-full">
           <div className="my-5 font-bold">In Noiré you can find:</div>
           <ul className="space-y-3 text-sm">
             <li className="flex gap-2">

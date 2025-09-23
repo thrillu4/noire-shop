@@ -2,7 +2,6 @@
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import AddReviewForm from '@/components/Reviews/AddReviewForm'
-import LoadingBlockSkeleton from '@/components/Skeletons/LoadingBlockSkeleton'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -34,12 +33,11 @@ export default function CustomerReviewsPage() {
   return (
     <div className="mb-20 px-2">
       <Breadcrumbs />
-      <h1 className="mt-5 mb-5 text-center text-2xl font-bold">
+      <h1 className="mt-5 mb-5 text-center text-2xl font-bold lg:text-3xl">
         Customer Reviews
       </h1>
 
-      <div className="mx-auto grid max-w-lg gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {loading && <LoadingBlockSkeleton />}
+      <div className="mx-auto grid max-w-xl gap-6 md:grid-cols-2 lg:max-w-5xl lg:grid-cols-3">
         {reviews.map((review, index) => (
           <Card
             key={index}

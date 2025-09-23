@@ -27,7 +27,7 @@ const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
         key={cartItem.productId}
       >
         <div className="flex w-full flex-col">
-          <div className="relative h-70 w-full">
+          <div className="relative h-70 w-full lg:h-100">
             <Image
               src={cartItem.product.images[0].url}
               alt="product image"
@@ -54,7 +54,7 @@ const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
             <div>${cartItem.product.price}</div>
           </div>
         </div>
-        <div className="flex w-7 flex-col items-center text-lg">
+        <div className="flex w-7 flex-col items-center text-lg lg:space-y-5">
           <X onClick={() => removeItem(cartItem.productId, cartItem.size)} />
           <div className="mt-10 font-bold">{cartItem.size}</div>
           <div className="my-6 flex flex-col items-center border border-zinc-500">

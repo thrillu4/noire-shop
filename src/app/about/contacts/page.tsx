@@ -43,13 +43,7 @@ const Contacts = () => {
             </li>
           </ul>
           <div className="absolute top-0 -right-20 opacity-25">
-            <Image
-              src={'/model.png'}
-              alt="model"
-              className=""
-              width={250}
-              height={330}
-            />
+            <Image src={'/model.png'} alt="model" width={250} height={330} />
           </div>
           <div className="mt-15 grid grid-cols-2 gap-3 text-xs break-all">
             <div className="flex gap-2">

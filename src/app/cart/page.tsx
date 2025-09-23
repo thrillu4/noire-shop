@@ -51,7 +51,7 @@ const Cart = () => {
       {items.length > 0 && (
         <div className="mb-20 px-2">
           <Breadcrumbs />
-          <h2 className="mt-4 text-2xl font-extrabold lg:text-3xl">
+          <h2 className="mt-4 text-2xl font-extrabold lg:text-3xl xl:text-4xl">
             Shopping Bag
           </h2>
           <div className="mx-auto grid max-w-xs grid-cols-1 gap-5 sm:max-w-xl sm:grid-cols-2 md:max-w-4xl md:grid-cols-3 lg:max-w-full">
@@ -59,7 +59,7 @@ const Cart = () => {
               <ItemGrid key={i} cartItem={item} />
             ))}
           </div>
-          <div className="mx-auto flex max-w-lg flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold sm:max-w-xl md:max-w-4xl">
+          <div className="mx-auto flex max-w-lg flex-col gap-8 rounded-2xl border-2 px-5 py-9 font-semibold sm:max-w-xl md:max-w-4xl xl:max-w-5xl">
             <div>Order Summary</div>
             <div className="flex items-center justify-between text-sm">
               <div>Quantity of items:</div>

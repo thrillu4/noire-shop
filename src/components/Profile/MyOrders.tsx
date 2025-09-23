@@ -17,13 +17,13 @@ const MyOrders = () => {
   }, [currentUser?.id, getUser])
 
   return (
-    <div className="mx-auto mt-10 mb-20 max-w-lg px-3 sm:max-w-xl md:max-w-4xl">
-      <h1 className="font-extrabold">Your Orders</h1>
-      <h2 className="my-3 flex items-center gap-2 font-bold">
+    <div className="mx-auto mt-10 mb-20 max-w-lg px-3 sm:max-w-xl md:max-w-4xl xl:max-w-none">
+      <h1 className="font-extrabold xl:mb-5 xl:text-2xl">Your Orders</h1>
+      <h2 className="my-3 flex items-center gap-2 font-bold xl:text-xl">
         <PackageCheck />- Active orders
       </h2>
       <ActiveOrders userId={currentUser?.id} />
-      <h2 className="mt-10 mb-3 flex items-center gap-2 font-bold">
+      <h2 className="mt-10 mb-3 flex items-center gap-2 font-bold xl:text-xl">
         <Archive />- Archive orders
       </h2>
       <ArchiveOrders userId={currentUser?.id} />

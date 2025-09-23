@@ -25,7 +25,7 @@ const New = async () => {
       <div className="my-5">
         <SearchBar />
       </div>
-      <h1 className="mt-3 mb-2 text-center text-2xl font-bold lg:text-3xl">
+      <h1 className="mt-3 mb-2 text-center text-2xl font-bold lg:text-3xl xl:text-4xl">
         New In
       </h1>
       <h2 className="text-center text-sm opacity-65">

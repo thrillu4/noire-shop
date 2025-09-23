@@ -57,9 +57,9 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
     }
   }
   return (
-    <div className="mt-5 justify-center lg:flex lg:min-h-[70vh] lg:w-full lg:items-center lg:gap-5">
+    <div className="mt-5 justify-center lg:flex lg:min-h-[70vh] lg:w-full lg:items-center lg:gap-5 xl:items-start">
       <div className="lg:flex">
-        <div className="relative mx-auto h-80 w-full md:h-100 lg:h-120 lg:min-w-[350px]">
+        <div className="relative mx-auto h-80 w-full md:h-100 lg:h-120 lg:min-w-[350px] xl:h-150 xl:min-w-[500px]">
           <Image
             src={product.images[mainImageIndex].url}
             alt={product.title}
@@ -120,7 +120,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
         )}
       </div>
 
-      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl lg:mx-0 lg:max-w-none">
+      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl lg:mx-0 lg:max-w-none xl:flex xl:flex-col">
         <div className="flex items-center justify-between gap-5">
           <h1 className="font-bold tracking-widest">{product.title}</h1>
           <Heart

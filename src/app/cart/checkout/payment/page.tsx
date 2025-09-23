@@ -71,9 +71,9 @@ const Payment = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto max-w-lg sm:max-w-xl md:max-w-4xl"
+          className="mx-auto max-w-lg sm:max-w-xl md:max-w-4xl xl:mx-10 xl:max-w-none"
         >
-          <div className="mx-auto mt-8 mb-10 max-w-lg sm:max-w-xl md:max-w-4xl">
+          <div className="mx-auto mt-8 mb-10 max-w-lg sm:max-w-xl md:max-w-4xl xl:max-w-none">
             <RadioGroup
               defaultValue="card"
               onValueChange={(val: 'card' | 'delivery') =>

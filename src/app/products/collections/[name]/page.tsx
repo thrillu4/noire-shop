@@ -54,7 +54,7 @@ const Collection = ({ params }: { params: Promise<{ name: string }> }) => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="my-3 text-2xl font-bold">
+      <h1 className="my-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
         {name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}
       </h1>
       <SearchBar />
@@ -86,7 +86,7 @@ const Collection = ({ params }: { params: Promise<{ name: string }> }) => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full sm:h-80 lg:h-120">
+            <div className="relative h-60 w-full sm:h-80 lg:h-120 xl:h-150">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

@@ -57,7 +57,7 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
               <TableHead>Status</TableHead>
               <TableHead>Method</TableHead>
               <TableHead>Amount</TableHead>
-              <TableHead>Details</TableHead>
+              <TableHead className="text-center">Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="w-full">
@@ -69,7 +69,7 @@ const ActiveOrders = ({ userId }: { userId: string | undefined }) => {
                 </TableCell>
                 <TableCell>{order.paymentMethod.toUpperCase()}</TableCell>
                 <TableCell>${order.total.toFixed(2)}</TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   <Link href={ROUTES.PROFILE + `/${order.id}`}>
                     <Button className="cursor-pointer px-2 text-xs">
                       Show Details

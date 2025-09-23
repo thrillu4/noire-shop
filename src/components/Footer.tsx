@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="mb-4 flex items-center justify-center gap-1 text-sm opacity-65 lg:text-base">
             <Library size={15} /> Catalog
           </div>
-          <ul className="space-y-2 text-sm md:grid md:grid-cols-2 md:gap-x-10 lg:text-lg">
+          <ul className="space-y-2 text-sm md:grid md:grid-cols-2 md:gap-x-10 lg:text-lg xl:grid-cols-3">
             <li>
               <Link href={ROUTES.MEN}>Men</Link>
             </li>
@@ -41,7 +41,7 @@ const Footer = () => {
           <div className="mb-4 flex items-center justify-center gap-1 text-sm opacity-65 lg:text-base">
             <Info size={14} /> Info
           </div>
-          <ul className="space-y-2 text-sm md:grid md:grid-cols-2 md:gap-x-10 lg:text-lg">
+          <ul className="space-y-2 text-sm md:grid md:grid-cols-2 md:gap-x-10 lg:text-lg xl:grid-cols-3">
             <li>
               <Link href={ROUTES.ABOUT}>About Us</Link>
             </li>

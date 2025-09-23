@@ -54,7 +54,7 @@ const Women = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="my-3 text-2xl font-bold">For Women</h1>
+      <h1 className="my-3 text-2xl font-bold xl:text-4xl">For Women</h1>
       <SearchBar />
       <div className="mt-5 flex items-center justify-between">
         <FilterDrawer propGender="female" setPage={setPage} />
@@ -81,7 +81,7 @@ const Women = () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full sm:h-80 lg:h-120">
+            <div className="relative h-60 w-full sm:h-80 lg:h-120 xl:h-150">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

@@ -58,7 +58,9 @@ const Products = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="mt-3 text-2xl font-bold">Products</h1>
+      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
+        Products
+      </h1>
       <h2 className="mt-3 mb-5 text-xs opacity-90">
         From accent accessories to wardrobe heroes – these are the most-wanted
         pieces you can’t get enough of.
@@ -99,7 +101,7 @@ const Products = () => {
             href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             key={product.id}
           >
-            <div className="relative h-60 w-full sm:h-80 lg:h-120">
+            <div className="relative h-60 w-full sm:h-80 lg:h-120 xl:h-150">
               <Image
                 src={product.images[0]?.url}
                 alt={product.title}

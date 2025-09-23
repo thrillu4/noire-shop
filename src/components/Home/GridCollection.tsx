@@ -111,7 +111,7 @@ const GridCollection = () => {
         </div>
       </div>
       <div className="mt-3 mb-7 w-full border"></div>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:gap-y-10">
         {products.map(product => (
           <CollectionProduct key={product.id} product={product} />
         ))}

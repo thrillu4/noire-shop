@@ -18,7 +18,9 @@ export default async function Home() {
             <div>
               <SearchBar />
             </div>
-            <h1 className={`${bagel.className} mt-12 text-5xl lg:text-7xl`}>
+            <h1
+              className={`${bagel.className} mt-12 text-5xl lg:text-7xl xl:text-8xl`}
+            >
               <div>New</div> Collection
             </h1>
             <div className="mt-5 mb-12 flex w-full items-center justify-between rounded-2xl bg-black px-4 py-2 text-sm text-white">
@@ -57,7 +59,7 @@ export default async function Home() {
               </Button>
             </Link>
           </div>
-          <CarouselPlugin skip={8} nav={true} />
+          <CarouselPlugin skip={10} nav={true} />
         </div>
 
         <div className="mb-25 px-2">
@@ -82,7 +84,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="mb-24 flex h-[300px] justify-center gap-2 overflow-hidden lg:h-[420px]">
+          <div className="mb-24 flex h-[300px] justify-center gap-2 overflow-hidden lg:h-[420px] xl:gap-10">
             <div className="flex">
               <div className="relative h-50 w-40 lg:h-70 lg:w-60">
                 <Image

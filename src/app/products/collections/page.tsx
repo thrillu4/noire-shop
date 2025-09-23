@@ -34,7 +34,9 @@ const Collections = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="mt-3 text-2xl font-bold">Explore Collections</h1>
+      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
+        Explore Collections
+      </h1>
       <h3 className="mt-3 mb-5 text-xs opacity-70">
         From timeless classics to modern essentials — find the collection that
         fits your lifestyle.
@@ -48,7 +50,7 @@ const Collections = () => {
             key={col.collections}
             className="relative transition duration-200 hover:scale-105"
           >
-            <div className="relative h-60 w-full sm:h-80 lg:h-120">
+            <div className="relative h-60 w-full sm:h-80 lg:h-120 xl:h-150">
               <Image
                 src={col.images[0].url}
                 alt={col.collections}

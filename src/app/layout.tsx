@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LoadingState />
-        <div className="mx-auto max-w-[600px] sm:max-w-[710px] md:max-w-[968px] lg:max-w-[1220px]">
+        <div className="mx-auto max-w-[600px] sm:max-w-[710px] md:max-w-[968px] lg:max-w-[1220px] xl:mx-5 xl:max-w-none 2xl:mx-auto 2xl:max-w-[2000px] 2xl:px-5">
           <NavBar />
           {children}
         </div>

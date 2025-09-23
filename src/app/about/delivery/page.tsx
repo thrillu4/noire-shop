@@ -14,7 +14,7 @@ export default function DeliveryReturnsPage() {
           Brief information about payment methods, delivery and returns.
         </h2>
       </div>
-      <div className="mb-20 max-w-lg space-y-10 md:mx-auto lg:max-w-3xl">
+      <div className="mb-20 max-w-lg space-y-10 md:mx-auto lg:max-w-3xl xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-10">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-3">

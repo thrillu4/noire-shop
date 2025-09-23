@@ -133,7 +133,7 @@ const SearchBar = () => {
                     <Link
                       href={`${ROUTES.COLLECTIONS}/${col.collection.charAt(0).toLowerCase() + col.collection.slice(1)}`}
                       key={col.collection + i}
-                      className="rounded-sm border px-3 py-1 text-sm"
+                      className="rounded-sm border px-3 py-1 text-sm xl:py-2"
                     >
                       <span className="opacity-70">{col.collection}</span> /{' '}
                       {col.type.toUpperCase()}
@@ -145,33 +145,35 @@ const SearchBar = () => {
             {!isLoading && results.length > 0 && (
               <div className="space-y-3 border-b bg-white px-5 py-6 text-black">
                 <h3 className="tracking-widest opacity-80">Products</h3>
-                {results.map(product => (
-                  <Link
-                    key={product.id}
-                    href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
-                    className="flex items-center gap-3 px-3 py-2 text-sm hover:bg-gray-100"
-                  >
-                    {product.images[0] && (
-                      <div className="relative h-25 w-25">
-                        <Image
-                          src={product.images[0].url}
-                          alt={product.title}
-                          fill
-                          className="rounded object-cover"
-                        />
+                <div className="xl:grid xl:grid-cols-3 xl:gap-5">
+                  {results.map(product => (
+                    <Link
+                      key={product.id}
+                      href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
+                      className="flex items-center gap-3 px-3 py-2 text-sm hover:bg-gray-100 xl:text-lg"
+                    >
+                      {product.images[0] && (
+                        <div className="relative h-25 w-25 xl:h-40 xl:w-40">
+                          <Image
+                            src={product.images[0].url}
+                            alt={product.title}
+                            fill
+                            className="rounded-xl object-cover xl:object-contain"
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-col justify-between gap-2">
+                        <div className="font-medium">{product.title}</div>
+                        <div className="text-xs text-gray-500 xl:text-base">
+                          {product.collection || 'No collection'}
+                        </div>
+                        <div className="text-xs font-semibold xl:text-base">
+                          ${product.price}
+                        </div>
                       </div>
-                    )}
-                    <div className="flex flex-col justify-between gap-2">
-                      <div className="font-medium">{product.title}</div>
-                      <div className="text-xs text-gray-500">
-                        {product.collection || 'No collection'}
-                      </div>
-                      <div className="text-xs font-semibold">
-                        ${product.price}
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </>

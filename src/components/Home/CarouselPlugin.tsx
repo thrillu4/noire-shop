@@ -22,7 +22,7 @@ export async function CarouselPlugin({
     orderBy: {
       createdAt: 'desc',
     },
-    take: 8,
+    take: 10,
     skip,
     include: {
       images: { take: 1 },
@@ -42,7 +42,7 @@ export async function CarouselPlugin({
               href={`${ROUTES.PRODUCTS}/${product.title}?productId=${product.id}`}
             >
               <CardContent className="relative aspect-square">
-                <div className="relative h-60 w-full sm:h-70 lg:h-80">
+                <div className="relative h-60 w-full sm:h-70 lg:h-80 xl:h-100">
                   <Image
                     src={product.images[0].url}
                     alt={`Slide ${i}`}

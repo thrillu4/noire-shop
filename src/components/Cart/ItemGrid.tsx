@@ -27,7 +27,7 @@ const ItemGrid = ({ cartItem }: { cartItem: CartItemData }) => {
         key={cartItem.productId}
       >
         <div className="flex w-full flex-col">
-          <div className="relative h-70 w-full lg:h-100">
+          <div className="relative h-70 w-full lg:h-100 xl:h-120">
             <Image
               src={cartItem.product.images[0].url}
               alt="product image"

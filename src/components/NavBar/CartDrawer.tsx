@@ -135,7 +135,7 @@ const CartDrawer = ({
                 </div>
               ))}
             </div>
-            <div className="my-4 flex w-full max-w-sm justify-between px-3 font-bold">
+            <div className="my-4 flex w-full justify-between px-3 font-bold">
               <div>Total (USD)</div>
               <div>${totalPrice()}</div>
             </div>

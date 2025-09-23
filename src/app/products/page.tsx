@@ -58,10 +58,10 @@ const Products = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
+      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl 2xl:text-5xl">
         Products
       </h1>
-      <h2 className="mt-3 mb-5 text-xs opacity-90">
+      <h2 className="mt-3 mb-5 text-xs opacity-90 2xl:text-base">
         From accent accessories to wardrobe heroes – these are the most-wanted
         pieces you can’t get enough of.
       </h2>
@@ -72,18 +72,18 @@ const Products = () => {
           {JSON.stringify(filter) != JSON.stringify(defaultFilter) && (
             <div
               onClick={() => clearFilter()}
-              className="flex items-center gap-1 border-2 p-1 text-sm"
+              className="flex cursor-pointer items-center gap-1 border-2 p-1 text-sm hover:bg-gray-200"
             >
               Clear filter <X className="size-4" />
             </div>
           )}
         </div>
-        <div className="text-sm">
+        <div className="text-sm 2xl:text-lg">
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
       <FilterByTypeProduct setPage={setPage} propGender="all" />
-      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
+      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 2xl:grid-cols-4">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 text-center font-bold">
@@ -109,7 +109,7 @@ const Products = () => {
                 className="rounded-xl object-cover"
               />
             </div>
-            <div className="text-xs lg:text-sm">
+            <div className="mt-2 text-xs lg:text-sm">
               {product.type.toUpperCase()}
             </div>
             <div className="flex items-center justify-between text-xs font-bold lg:text-lg">

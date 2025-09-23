@@ -300,10 +300,10 @@ const Payment = () => {
                   />
                 </FormControl>
                 <div className="grid gap-2">
-                  <Label htmlFor="terms-2" className="text-xs">
+                  <Label htmlFor="terms-2" className="text-xs xl:text-sm">
                     Accept terms and conditions
                   </Label>
-                  <p className="text-muted-foreground text-[10px]">
+                  <p className="text-muted-foreground text-[10px] xl:text-sm">
                     By clicking this checkbox, you agree to the{' '}
                     <TermsConditionsDialog />
                   </p>

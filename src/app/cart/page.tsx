@@ -54,7 +54,7 @@ const Cart = () => {
           <h2 className="mt-4 text-2xl font-extrabold lg:text-3xl xl:text-4xl">
             Shopping Bag
           </h2>
-          <div className="mx-auto grid max-w-xs grid-cols-1 gap-5 sm:max-w-xl sm:grid-cols-2 md:max-w-4xl md:grid-cols-3 lg:max-w-full">
+          <div className="mx-auto grid max-w-xs grid-cols-1 gap-5 sm:max-w-xl sm:grid-cols-2 md:max-w-4xl md:grid-cols-3 lg:max-w-full 2xl:grid-cols-4">
             {items.map((item, i) => (
               <ItemGrid key={i} cartItem={item} />
             ))}

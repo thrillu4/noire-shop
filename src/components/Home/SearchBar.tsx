@@ -98,7 +98,7 @@ const SearchBar = () => {
             <Search className="w-4" />
           </Label>
           <input
-            className="w-full border-none shadow-none focus:outline-none"
+            className="w-full border-none shadow-none focus:outline-none 2xl:max-w-4xl"
             placeholder="Search Noiré"
             autoFocus
             id="search"
@@ -114,13 +114,13 @@ const SearchBar = () => {
         {query.length > 1 && (
           <>
             {isLoading && (
-              <p className="flex animate-pulse items-center gap-2 px-5 pb-10">
+              <p className="flex animate-pulse items-center gap-2 px-5 pb-10 2xl:justify-center">
                 <Search className="size-3 animate-ping" />
                 Searching . . .
               </p>
             )}
             {!isLoading && notFound && results.length === 0 && (
-              <div className="px-5 pb-10">
+              <div className="px-5 pb-10 2xl:text-center">
                 No results found for{' '}
                 <span className="font-bold">{`"${query}"`}</span>
               </div>
@@ -133,7 +133,7 @@ const SearchBar = () => {
                     <Link
                       href={`${ROUTES.COLLECTIONS}/${col.collection.charAt(0).toLowerCase() + col.collection.slice(1)}`}
                       key={col.collection + i}
-                      className="rounded-sm border px-3 py-1 text-sm xl:py-2"
+                      className="rounded-sm border px-3 py-1 text-sm xl:py-2 2xl:text-base"
                     >
                       <span className="opacity-70">{col.collection}</span> /{' '}
                       {col.type.toUpperCase()}

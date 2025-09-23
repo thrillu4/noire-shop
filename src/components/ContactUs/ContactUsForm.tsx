@@ -96,10 +96,10 @@ const ContactUsForm = () => {
                   />
                 </FormControl>
                 <div className="grid gap-2">
-                  <Label htmlFor="terms-2" className="text-xs">
+                  <Label htmlFor="terms-2" className="text-xs xl:text-sm">
                     Accept terms and conditions
                   </Label>
-                  <p className="text-muted-foreground text-[10px]">
+                  <p className="text-muted-foreground text-[10px] xl:text-sm">
                     By clicking this checkbox, you agree to the{' '}
                     <TermsConditionsDialog />
                   </p>
@@ -117,7 +117,7 @@ const ContactUsForm = () => {
         <div className="mt-10 mb-4 font-bold">
           You can also Contact Us via:{' '}
         </div>
-        <div className="flex flex-col justify-between gap-2 text-sm">
+        <div className="flex flex-col justify-between gap-2 text-sm 2xl:text-base">
           <div className="flex items-center gap-3">
             <div className="rounded-full border p-2 font-bold">
               <Mail className="w-4" />

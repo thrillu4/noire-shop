@@ -25,7 +25,7 @@ const WishList = () => {
             </div>
             <div>
               <div className="font-bold">Your Wish List is currently empty</div>
-              <div className="mt-3 text-xs opacity-60">
+              <div className="mt-3 text-xs opacity-60 2xl:text-base">
                 Add all your favorites to this Wish List
               </div>
             </div>
@@ -40,20 +40,21 @@ const WishList = () => {
       )}
       {items.length > 0 && (
         <div>
-          <h1 className="mt-3 text-2xl font-extrabold">Your Wish List</h1>
-          <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
+          <h1 className="mt-3 text-2xl font-extrabold xl:text-4xl 2xl:text-5xl">
+            Your Wish List
+          </h1>
+          <div className="mt-6 mb-20 grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 xl:grid-cols-5">
             {items.map(item => (
               <div key={item.productId}>
-                <div className="relative h-60 w-full">
+                <div className="relative h-60 2xl:h-120">
                   <Image
                     src={item.product.images[0].url}
                     alt="product"
                     fill
-                    className="object-contain"
+                    className="object-contain 2xl:object-cover"
                   />
                   <HeartOff
-                    size={24}
-                    className="absolute top-1 right-1 rounded-2xl bg-white p-1"
+                    className="absolute top-1 right-1 rounded-2xl bg-white p-1 xl:size-8"
                     onClick={() => {
                       removeWishItem(item.productId)
                       toast.message('Product removed from your wishlist!')
@@ -93,6 +94,9 @@ const WishList = () => {
           </div>
         </div>
       )}
+      <Button className="mx-auto mt-20 flex" variant="link">
+        <Link href={ROUTES.PROFILE}>Back to Profile</Link>
+      </Button>
     </div>
   )
 }

@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 import { Review } from '../../../../prisma/generated/prisma'
 
 export default function CustomerReviewsPage() {
-  const [take, setTake] = useState(4)
+  const [take, setTake] = useState(8)
   const [end, setEnd] = useState(false)
   const [reviews, setReviews] = useState<Omit<Review, 'id' | 'createdAt'>[]>([])
   const [loading, setLoading] = useState(false)
@@ -37,7 +37,7 @@ export default function CustomerReviewsPage() {
         Customer Reviews
       </h1>
 
-      <div className="mx-auto grid max-w-xl gap-6 md:grid-cols-2 lg:max-w-5xl lg:grid-cols-3">
+      <div className="mx-auto grid max-w-xl gap-6 md:grid-cols-2 lg:max-w-5xl lg:grid-cols-3 2xl:max-w-none 2xl:grid-cols-4">
         {reviews.map((review, index) => (
           <Card
             key={index}
@@ -72,7 +72,7 @@ export default function CustomerReviewsPage() {
       </div>
       {!end && (
         <Button
-          onClick={() => setTake(state => state + 4)}
+          onClick={() => setTake(state => state + 8)}
           variant={'outline'}
           className="mx-auto mt-4 flex w-full max-w-lg justify-center"
         >

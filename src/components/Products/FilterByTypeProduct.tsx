@@ -62,10 +62,10 @@ const FilterByTypeProduct = ({
                 setIsActive(type.type)
               }
             }}
-            className="basis-1/3 pl-4 md:basis-1/4"
+            className="basis-1/3 pl-4 md:basis-1/4 2xl:basis-1/6"
           >
             <div
-              className={`${isActive === type.type ? 'border-2 border-black' : ''} flex items-center justify-center border py-1 text-xs opacity-70`}
+              className={`${isActive === type.type ? 'border-2 border-black' : ''} flex items-center justify-center border py-1 text-xs opacity-70 2xl:py-3`}
             >
               {type.type.toUpperCase()}
             </div>

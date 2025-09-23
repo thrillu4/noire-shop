@@ -34,10 +34,10 @@ const Collections = () => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
+      <h1 className="mt-3 text-2xl font-bold lg:text-3xl xl:text-4xl 2xl:text-5xl">
         Explore Collections
       </h1>
-      <h3 className="mt-3 mb-5 text-xs opacity-70">
+      <h3 className="mt-3 mb-5 text-xs opacity-70 2xl:text-base">
         From timeless classics to modern essentials — find the collection that
         fits your lifestyle.
       </h3>
@@ -48,18 +48,19 @@ const Collections = () => {
           <Link
             href={`${ROUTES.COLLECTIONS}/${col.collections.charAt(0).toLowerCase() + col.collections.slice(1)}`}
             key={col.collections}
-            className="relative transition duration-200 hover:scale-105"
+            className="relative transition duration-300 hover:scale-105 hover:text-white"
           >
             <div className="relative h-60 w-full sm:h-80 lg:h-120 xl:h-150">
               <Image
                 src={col.images[0].url}
                 alt={col.collections}
                 fill
-                className="object-cover opacity-40"
+                className="object-cover opacity-40 transition duration-300 hover:opacity-100"
               />
             </div>
             <div className="absolute top-1/2 right-1/2 z-10 translate-x-1/2 -translate-y-1/2 text-xl font-bold tracking-widest lg:text-2xl">
-              {col.collections}
+              {col.collections.charAt(0).toUpperCase() +
+                col.collections.slice(1)}
             </div>
           </Link>
         ))}

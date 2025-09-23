@@ -123,7 +123,7 @@ const FilterDrawer = ({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <div className="inline-flex items-center gap-1 text-lg font-bold">
+        <div className="inline-flex items-center gap-1 text-lg font-bold 2xl:text-2xl">
           Filters{' '}
           {open ? (
             <ChevronLeft className="size-4" />

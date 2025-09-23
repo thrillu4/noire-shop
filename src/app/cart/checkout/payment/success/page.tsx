@@ -22,8 +22,8 @@ const Success = () => {
     return null
   }
   return (
-    <div className="mt-10 mb-20 flex min-h-[80vh] flex-col items-center justify-center space-y-4 px-2">
-      <div className="relative h-30 w-30">
+    <div className="mt-10 mb-20 flex min-h-[80vh] flex-col items-center justify-center space-y-4 px-2 2xl:space-y-6 2xl:text-2xl">
+      <div className="relative h-30 w-30 2xl:h-50 2xl:w-50">
         <Image
           src={'/successful.png'}
           alt="successful"
@@ -36,13 +36,13 @@ const Success = () => {
       </h1>
       <h2 className="text-center font-bold">We will contact you soon. 🤗</h2>
       <Link href={ROUTES.PRODUCTS}>
-        <Button>
+        <Button className="py-5 2xl:text-xl">
           <ShoppingBag /> Continue Shopping
         </Button>
       </Link>
       <Link
         href={currentOrder.userId ? `${ROUTES.PROFILE}/${currentOrder.id}` : ''}
-        className="mx-auto mt-3 w-full max-w-lg space-y-2 rounded-2xl border-2 p-5 text-sm"
+        className="mx-auto mt-3 w-full max-w-lg space-y-2 rounded-2xl border-2 p-5 text-sm 2xl:max-w-3xl"
       >
         <div className="flex items-center justify-between">
           <div className="font-bold">Details: </div>

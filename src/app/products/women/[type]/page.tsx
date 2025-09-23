@@ -55,17 +55,17 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
   return (
     <div className="mb-20 px-3">
       <Breadcrumbs />
-      <h1 className="my-3 text-2xl font-bold lg:text-3xl xl:text-4xl">
+      <h1 className="my-3 text-2xl font-bold lg:text-3xl xl:text-4xl 2xl:text-5xl">
         {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
       </h1>
       <SearchBar />
       <div className="my-5 flex items-center justify-between">
         <FilterDrawer propType={type} propGender="female" setPage={setPage} />
-        <div className="text-sm">
+        <div className="text-sm 2xl:text-lg">
           Total items: <span className="font-bold">({totalProducts})</span>
         </div>
       </div>
-      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
+      <div className="grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 2xl:grid-cols-4">
         {loading && <ProductsSkeleton />}
         {!loading && products.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 font-bold">
@@ -91,7 +91,7 @@ const Types = ({ params }: { params: Promise<{ type: string }> }) => {
                 className="rounded-xl object-cover"
               />
             </div>
-            <div className="text-xs lg:text-sm">
+            <div className="mt-2 text-xs lg:text-sm">
               {product.type.toUpperCase()}
             </div>
             <div className="flex items-center justify-between text-xs font-bold lg:text-lg">

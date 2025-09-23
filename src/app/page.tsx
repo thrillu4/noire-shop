@@ -59,7 +59,7 @@ export default async function Home() {
               </Button>
             </Link>
           </div>
-          <CarouselPlugin skip={10} nav={true} />
+          <CarouselPlugin skip={20} nav={true} />
         </div>
 
         <div className="mb-25 px-2">
@@ -84,9 +84,9 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="mb-24 flex h-[300px] justify-center gap-2 overflow-hidden lg:h-[420px] xl:gap-10">
+          <div className="mb-24 flex h-[300px] justify-center gap-2 overflow-hidden lg:h-[420px] xl:gap-10 2xl:h-150">
             <div className="flex">
-              <div className="relative h-50 w-40 lg:h-70 lg:w-60">
+              <div className="relative h-50 w-40 lg:h-70 lg:w-60 2xl:h-100 2xl:w-80">
                 <Image
                   src={'/z.png'}
                   fill
@@ -96,7 +96,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="flex items-end">
-              <div className="relative h-50 w-40 lg:h-70 lg:w-60">
+              <div className="relative h-50 w-40 lg:h-70 lg:w-60 2xl:h-100 2xl:w-80">
                 <Image
                   src={'/x.png'}
                   fill
@@ -106,7 +106,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="flex">
-              <div className="relative flex h-50 w-40 lg:h-70 lg:w-60">
+              <div className="relative flex h-50 w-40 lg:h-70 lg:w-60 2xl:h-100 2xl:w-80">
                 <Image
                   src={'/c.png'}
                   fill
@@ -116,7 +116,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="flex items-end">
-              <div className="relative h-50 w-40 lg:h-70 lg:w-60">
+              <div className="relative h-50 w-40 lg:h-70 lg:w-60 2xl:h-100 2xl:w-80">
                 <Image
                   src={'/v.png'}
                   fill

@@ -22,7 +22,7 @@ export async function CarouselPlugin({
     orderBy: {
       createdAt: 'desc',
     },
-    take: 10,
+    take: 16,
     skip,
     include: {
       images: { take: 1 },

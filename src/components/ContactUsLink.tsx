@@ -11,13 +11,13 @@ const ContactUsLink = ({
       <div className="my-4 w-full border"></div>
 
       <div className="my-7">
-        <div className="text-center text-sm font-semibold text-neutral-500">
+        <div className="text-center text-sm font-semibold text-neutral-500 xl:text-base">
           {children}
         </div>
         <div className="my-5">
           <a
             href="mailto:noire.shop.help@gmail.com"
-            className="flex items-center justify-center gap-3"
+            className="flex items-center justify-center gap-3 2xl:text-2xl"
           >
             <Mail />
             noire.shop.help@gmail.com

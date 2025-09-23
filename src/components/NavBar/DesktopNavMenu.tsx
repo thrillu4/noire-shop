@@ -38,7 +38,7 @@ const DesktopNavMenu = () => {
   }, [])
   return (
     <NavigationMenu viewport={false}>
-      <NavigationMenuList className="text-lg">
+      <NavigationMenuList className="text-lg 2xl:text-xl">
         {/*  */}
 
         {/*  */}
@@ -59,7 +59,7 @@ const DesktopNavMenu = () => {
           <NavigationMenuContent className="z-150 flex gap-15 px-10 py-5">
             <div>
               <div className="opacity-50">For Men</div>
-              <div className="mt-4 grid min-w-max grid-cols-3 gap-x-8">
+              <div className="mt-4 grid min-w-max grid-cols-3 gap-x-8 2xl:text-lg">
                 {menTypes.map(type => (
                   <NavigationMenuLink
                     key={type.type}
@@ -72,7 +72,7 @@ const DesktopNavMenu = () => {
               </div>
               <NavigationMenuLink
                 href={ROUTES.MEN}
-                className="mt-20 flex justify-end text-right text-sm underline opacity-55"
+                className="mt-20 flex justify-end text-right text-sm underline opacity-55 2xl:text-base"
               >
                 View All Products
               </NavigationMenuLink>

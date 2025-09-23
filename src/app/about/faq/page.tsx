@@ -9,9 +9,9 @@ import {
 
 export default function FAQPage() {
   return (
-    <div className="px-3">
+    <div className="min-h-[80vh] px-3">
       <Breadcrumbs />
-      <h1 className="mt-5 mb-8 text-center text-2xl font-bold lg:text-3xl">
+      <h1 className="mt-5 mb-8 text-center text-2xl font-bold lg:text-3xl xl:text-4xl">
         Frequently Asked Questions
       </h1>
 

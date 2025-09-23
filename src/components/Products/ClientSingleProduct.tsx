@@ -57,9 +57,9 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
     }
   }
   return (
-    <div className="mt-5 justify-center lg:flex lg:min-h-[70vh] lg:w-full lg:items-center lg:gap-5 xl:items-start">
+    <div className="mt-5 justify-center lg:flex lg:min-h-[70vh] lg:w-full lg:items-center lg:gap-5 xl:items-start 2xl:min-h-[90vh] 2xl:items-center 2xl:gap-15">
       <div className="lg:flex">
-        <div className="relative mx-auto h-80 w-full md:h-100 lg:h-120 lg:min-w-[350px] xl:h-150 xl:min-w-[500px]">
+        <div className="relative mx-auto h-80 w-full md:h-100 lg:h-120 lg:min-w-[350px] xl:h-150 xl:min-w-[500px] 2xl:h-180">
           <Image
             src={product.images[mainImageIndex].url}
             alt={product.title}
@@ -120,7 +120,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
         )}
       </div>
 
-      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl lg:mx-0 lg:max-w-none xl:flex xl:flex-col">
+      <div className="mx-auto mt-8 max-w-lg px-3 sm:max-w-xl md:max-w-3xl lg:mx-0 lg:max-w-none xl:flex xl:flex-col 2xl:text-xl">
         <div className="flex items-center justify-between gap-5">
           <h1 className="font-bold tracking-widest">{product.title}</h1>
           <Heart
@@ -155,7 +155,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
                   }
                 }}
                 key={size.id}
-                className={`cursor-pointer border-2 px-3 py-2 text-xs ${size.size === selectedSize && 'border-black'}`}
+                className={`cursor-pointer border-2 px-3 py-2 text-xs 2xl:text-base ${size.size === selectedSize && 'border-black'}`}
               >
                 {size.size}
               </div>
@@ -172,7 +172,9 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
             >
               <Minus />
             </button>
-            <div className="border-2 px-4 py-1 font-extrabold">{quant}</div>
+            <div className="border-2 px-4 py-1 text-base font-extrabold">
+              {quant}
+            </div>
             <button
               className="rounded-r-xl border-2 p-1"
               onClick={() =>

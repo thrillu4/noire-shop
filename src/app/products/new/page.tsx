@@ -10,7 +10,7 @@ import Link from 'next/link'
 const New = async () => {
   const session = await verifySession()
   const newProducts = await prisma.product.findMany({
-    take: 16,
+    take: 28,
     orderBy: {
       updatedAt: 'desc',
     },
@@ -25,10 +25,10 @@ const New = async () => {
       <div className="my-5">
         <SearchBar />
       </div>
-      <h1 className="mt-3 mb-2 text-center text-2xl font-bold lg:text-3xl xl:text-4xl">
+      <h1 className="mt-3 mb-2 text-center text-2xl font-bold lg:text-3xl xl:text-4xl 2xl:text-5xl">
         New In
       </h1>
-      <h2 className="text-center text-sm opacity-65">
+      <h2 className="text-center text-sm opacity-65 2xl:text-base">
         Discover the latest and greatest arrivals,{' '}
         <Link href={ROUTES.COLLECTIONS} className="underline opacity-100">
           new collections
@@ -48,7 +48,7 @@ const New = async () => {
           </span>
         )}
       </h2>
-      <div className="mt-10 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3">
+      <div className="mt-10 grid min-h-[50vh] grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 2xl:grid-cols-4">
         {newProducts.length === 0 && (
           <div className="col-start-1 col-end-10 mt-10 text-center font-bold">
             New In is empty check out all our{' '}
@@ -73,7 +73,7 @@ const New = async () => {
                 className="object-cover"
               />
             </div>
-            <div className="text-xs lg:text-sm">
+            <div className="mt-2 text-xs lg:text-sm">
               {product.type.toUpperCase()}
             </div>
             <div className="flex items-center justify-between text-xs font-bold lg:text-lg">

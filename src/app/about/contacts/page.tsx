@@ -9,8 +9,10 @@ const Contacts = () => {
     <div className="mb-20 overflow-hidden px-3">
       <Breadcrumbs />
       <div className="my-10 space-y-2 text-center font-bold">
-        <h2 className="text-2xl lg:text-3xl">Get in touch with us</h2>
-        <h3 className="text-xs opacity-65 lg:text-sm">
+        <h2 className="text-2xl lg:text-3xl 2xl:text-5xl">
+          Get in touch with us
+        </h2>
+        <h3 className="text-xs opacity-65 lg:text-sm 2xl:text-base">
           We’d love to hear from you. Fill out the form below or reach us at…
         </h3>
       </div>
@@ -20,7 +22,7 @@ const Contacts = () => {
         </div>
         <div className="relative mx-auto max-w-lg lg:max-w-full">
           <div className="my-5 font-bold">In Noiré you can find:</div>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-sm 2xl:text-base">
             <li className="flex gap-2">
               <CircleCheckBig className="w-6" /> Wide product selection – From
               daily essentials to exclusive items.
@@ -45,7 +47,7 @@ const Contacts = () => {
           <div className="absolute top-0 -right-20 opacity-25">
             <Image src={'/model.png'} alt="model" width={250} height={330} />
           </div>
-          <div className="mt-15 grid grid-cols-2 gap-3 text-xs break-all">
+          <div className="mt-15 grid grid-cols-2 gap-3 text-xs break-all 2xl:text-sm">
             <div className="flex gap-2">
               <MapPin className="w-10" />
               <div>Schallmooser Hauptstraße 24,5020 Salzburg, Österreich</div>

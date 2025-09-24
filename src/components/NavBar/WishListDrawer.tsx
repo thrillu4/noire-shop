@@ -37,19 +37,17 @@ const WishListDrawer = ({
   if (!open) return null
   return (
     <Sheet>
-      <SheetTrigger>
-        <div className="group flex items-center">
-          <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-200 lg:group-hover:inline-block">
-            Wish List
-          </span>
-          <div className="relative cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-200 hover:bg-white hover:text-black">
-            <Heart className="h-auto w-4 lg:w-5" />
-            {totalItems() > 0 && (
-              <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
-                {totalItems()}
-              </div>
-            )}
-          </div>
+      <SheetTrigger className="group flex items-center" aria-label="Wishlist">
+        <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-200 lg:group-hover:inline-block">
+          Wish List
+        </span>
+        <div className="relative cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-200 hover:bg-white hover:text-black">
+          <Heart className="h-auto w-4 lg:w-5" />
+          {totalItems() > 0 && (
+            <div className="absolute -right-1 -bottom-2 rounded-full border bg-orange-500 px-1 text-xs text-white">
+              {totalItems()}
+            </div>
+          )}
         </div>
       </SheetTrigger>
       <SheetContent className="max-w-md overflow-y-auto px-1 pt-10 pb-5 lg:max-w-lg">

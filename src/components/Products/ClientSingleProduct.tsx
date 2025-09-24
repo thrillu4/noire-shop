@@ -65,6 +65,7 @@ const ClientSingleProduct = ({ product }: { product: PropProduct }) => {
             alt={product.title}
             fill
             className="object-contain lg:object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw,(max-width: 1280px) 45vw, 40vw"
           />
         </div>
         {product.images.length > 1 && (

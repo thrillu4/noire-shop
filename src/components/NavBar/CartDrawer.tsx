@@ -53,7 +53,7 @@ const CartDrawer = ({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="group flex items-center">
+        <button className="group flex items-center" aria-label="Shopping Bag">
           <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-200 lg:group-hover:inline-block">
             Shopping Bag
           </span>
@@ -65,7 +65,7 @@ const CartDrawer = ({
               </div>
             )}
           </div>
-        </div>
+        </button>
       </SheetTrigger>
       <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 lg:max-w-lg">
         {items.length === 0 && (

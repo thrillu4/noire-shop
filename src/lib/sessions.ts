@@ -24,6 +24,7 @@ export async function decrypt(session: string | undefined = '') {
     })
     return payload
   } catch (error) {
+    console.log(error)
     return
   }
 }
@@ -44,6 +45,9 @@ export async function createSession(userId: string) {
 
 export const verifySession = cache(async () => {
   const cookie = (await cookies()).get('session')?.value
+  if (!cookie) {
+    return { isAuth: false, userId: null }
+  }
   const session = await decrypt(cookie)
 
   if (!session || !session.userId) {

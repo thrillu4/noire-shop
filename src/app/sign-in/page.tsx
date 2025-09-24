@@ -1,23 +1,13 @@
 'use client'
+import ForgotPasswordDialog from '@/components/NavBar/ForgotPasswordDialog'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ROUTES } from '@/routes'
 import { Eye, EyeOff } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useActionState, useState } from 'react'
 import { FormState, signin } from '../actions/auth'
-import { ROUTES } from '@/routes'
-import { useRouter } from 'next/navigation'
-import ForgotPasswordDialog from '@/components/NavBar/ForgotPasswordDialog'
 
 const SignIn = () => {
   const [showPassword, setShoPassword] = useState(false)

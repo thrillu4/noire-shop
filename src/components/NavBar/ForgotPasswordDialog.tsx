@@ -39,10 +39,8 @@ const ForgotPasswordDialog = () => {
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <div className="mt-2 cursor-pointer px-4 text-xs underline opacity-60">
-          Forgot your password?
-        </div>
+      <DialogTrigger className="mt-2 cursor-pointer px-4 text-xs underline opacity-60">
+        Forgot your password?
       </DialogTrigger>
 
       <DialogContent className="max-w-sm sm:max-w-md">

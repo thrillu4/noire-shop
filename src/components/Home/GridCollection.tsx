@@ -87,7 +87,10 @@ const GridCollection = () => {
         </ul>
         <div className="flex items-center gap-1">
           <Select onValueChange={e => setSort(e)}>
-            <SelectTrigger className="px-2 py-0 text-xs lg:text-base">
+            <SelectTrigger
+              className="px-2 py-0 text-xs lg:text-base"
+              aria-label="Sort products by"
+            >
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent className="sm:mr-2 md:mr-10 lg:mr-2">

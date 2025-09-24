@@ -56,6 +56,7 @@ const Collections = () => {
                 alt={col.collections}
                 fill
                 className="object-cover opacity-40 transition duration-300 hover:opacity-100"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw,(max-width: 1280px) 33vw, 25vw"
               />
             </div>
             <div className="absolute top-1/2 right-1/2 z-10 translate-x-1/2 -translate-y-1/2 text-xl font-bold tracking-widest lg:text-2xl">

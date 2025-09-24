@@ -92,6 +92,7 @@ const Collection = ({ params }: { params: Promise<{ name: string }> }) => {
                 alt={product.title}
                 fill
                 className="rounded-xl object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw,(max-width: 1280px) 33vw, 25vw"
               />
             </div>
             <div className="mt-2 text-xs lg:text-sm">

@@ -45,4 +45,5 @@ export const ROUTES = {
   GET_PRODUCTS_TYPE_WOMEN: '/api/products/women/type',
   GET_PRODUCTS_COLLECTION_WOMEN: '/api/products/women/collection',
   GET_SEARCH: '/api/search',
+  GET_SESSION: '/api/session',
 }

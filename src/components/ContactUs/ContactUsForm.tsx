@@ -11,13 +11,13 @@ import {
 import { Input } from '@/components/ui/input'
 import { ContactUsFormSchema, ContactUsType } from '@/lib/types'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Mail, Phone } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import TermsConditionsDialog from '../TermsConditionsDialog'
 import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
 import { Textarea } from '../ui/textarea'
-import { Mail, Phone } from 'lucide-react'
-import { toast } from 'sonner'
 const ContactUsForm = () => {
   const form = useForm<ContactUsType>({
     resolver: zodResolver(ContactUsFormSchema),
@@ -29,7 +29,7 @@ const ContactUsForm = () => {
     },
   })
 
-  function onSubmit(values: ContactUsType) {
+  function onSubmit() {
     form.reset()
     toast.success(
       'Message sent successfully! Thank you. we will answer you soon.',

@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma'
 import { verifySession } from '@/lib/sessions'
 import { NextResponse } from 'next/server'
 
-export async function DELETE(req: Request) {
+export async function DELETE() {
   const session = await verifySession()
   if (!session.userId) {
     return NextResponse.json({ error: 'Unauthorized!' }, { status: 401 })

@@ -22,16 +22,14 @@ const Cart = () => {
   const [showError, setShowError] = useState(false)
 
   const handleCheck = () => {
-    setLoading(true)
     if (!isChecked) {
       setShowError(true)
-      setLoading(false)
-    } else {
-      setIsChecked(false)
-      setShowError(false)
-      setLoading(false)
-      router.push(ROUTES.CHECKOUT)
+      return
     }
+    setIsChecked(false)
+    setShowError(false)
+    setLoading(true)
+    router.push(ROUTES.CHECKOUT)
   }
   return (
     <div className="min-h-[60vh]">

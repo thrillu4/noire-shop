@@ -17,9 +17,10 @@ const CollectionProduct = ({ product }: { product: ProductWithImage }) => {
           fill
           alt={product.title}
           className="rounded-xl object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
-      <div className="mb-1 opacity-50">
+      <div className="mb-1">
         {product.type.charAt(0).toUpperCase() +
           product.type.slice(1).toLowerCase()}
       </div>

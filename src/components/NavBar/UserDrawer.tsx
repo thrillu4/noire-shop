@@ -16,7 +16,8 @@ import {
 import { FormState, signin, signup } from '@/app/actions/auth'
 import { ROUTES } from '@/routes'
 import { Eye, EyeOff, User } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useActionState, useState } from 'react'
 import TermsConditionsDialog from '../TermsConditionsDialog'
 import { Checkbox } from '../ui/checkbox'
@@ -24,7 +25,6 @@ import ForgotPasswordDialog from './ForgotPasswordDialog'
 
 const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
   const pathname = usePathname()
-  const router = useRouter()
   const [showPassword, setShoPassword] = useState(false)
 
   const [isSignIn, setIsSignIn] = useState(true)
@@ -40,10 +40,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
 
   if (isAuth) {
     return (
-      <button
-        disabled={pathname === ROUTES.SIGNIN}
-        onClick={() => router.push(ROUTES.PROFILE)}
-      >
+      <Link href={ROUTES.PROFILE} aria-label="Profile">
         <div className="group flex items-center">
           <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
             Profile
@@ -52,7 +49,7 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
             <User className="h-auto w-4 hover:text-black lg:w-5" />
           </div>
         </div>
-      </button>
+      </Link>
     )
   }
 
@@ -63,14 +60,14 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       {!isSignIn ? (
         <Sheet>
           <SheetTrigger asChild>
-            <div className="group flex items-center">
+            <button className="group flex items-center" aria-label="Profile">
               <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
                 Profile
               </span>
               <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
                 <User className="h-auto w-4 hover:text-black lg:w-5" />
               </div>
-            </div>
+            </button>
           </SheetTrigger>
           <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
             <div className="flex w-full flex-col items-center justify-center gap-4">
@@ -201,14 +198,14 @@ const UserDrawer = ({ isAuth }: { isAuth: boolean }) => {
       ) : (
         <Sheet>
           <SheetTrigger asChild>
-            <div className="group flex items-center">
+            <button className="group flex items-center" aria-label="Profile">
               <span className="hidden cursor-pointer rounded-full border-4 border-black bg-white px-4 py-2 text-sm font-bold text-black transition-all duration-300 lg:group-hover:inline-block">
                 Profile
               </span>
               <div className="cursor-pointer rounded-full border-4 border-black bg-black p-2 text-white transition-all duration-300 hover:bg-white hover:text-black">
                 <User className="h-auto w-4 hover:text-black lg:w-5" />
               </div>
-            </div>
+            </button>
           </SheetTrigger>
           <SheetContent className="max-w-md overflow-y-auto pt-10 pb-5 sm:max-w-lg">
             <div className="flex w-full flex-col items-center justify-center gap-6">

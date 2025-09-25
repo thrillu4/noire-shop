@@ -46,7 +46,7 @@ const FilterDrawer = ({
     filter.types || [],
   )
   const [priceRange, setPriceRange] = useState<number[]>(
-    filter.priceRange || [0, 100],
+    filter.priceRange || [0, 1000],
   )
   const [selectedCollections, setSelectedCollections] = useState<string[]>(
     filter.collections || [],
@@ -113,7 +113,7 @@ const FilterDrawer = ({
     clearFilter()
     setGender('all')
     setSelectedTypes([])
-    setPriceRange([0, 100])
+    setPriceRange([0, 1000])
     setSelectedCollections([])
     setSizes([])
     setAvailable('all')
@@ -180,7 +180,7 @@ const FilterDrawer = ({
               <AccordionContent>
                 <Slider
                   min={0}
-                  max={100}
+                  max={1000}
                   step={1}
                   value={priceRange}
                   onValueChange={val => setPriceRange(val)}

@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🛍️ E-Commerce Next.js + Prisma
 
-## Getting Started
+🚀 A full-featured e-commerce application with authentication, shopping cart, wishlist, and product management system.
+Built with Next.js 15, Prisma, Tailwind CSS and deployed on Vercel.
 
-First, run the development server:
+## 🔗 Live Demo: [noire-pearl.vercel.app](https://noire-pearl.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Screenshot](/public/thumbnail.jpg)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔑 User authentication (JWT + bcrypt)
 
-## Learn More
+🛒 Shopping cart & wishlist
 
-To learn more about Next.js, take a look at the following resources:
+👤 User profile & account management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📦 Product catalog with categories & filters
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🎨 Modern UI using Tailwind CSS, Radix UI & shadcn/ui
 
-## Deploy on Vercel
+🌗 Dark / Light theme support (next-themes)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📱 Fully responsive design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+🛠️ Tech Stack
+
+Next.js 15 (App Router, Server Components)
+
+React 19
+
+TypeScript
+
+Prisma ORM + Accelerate
+
+PostgreSQL (or any database supported by Prisma)
+
+Tailwind CSS 4
+
+Radix UI / shadcn/ui
+
+Zustand (state management)
+
+React Hook Form + Zod (form validation)
+
+bcrypt, jose (authentication)
+
+Vercel (deployment)
